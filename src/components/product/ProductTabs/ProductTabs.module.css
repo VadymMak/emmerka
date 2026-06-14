@@ -1,0 +1,127 @@
+.tabs {
+  margin-top: 40px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.tablist {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 22px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
+}
+
+.tab:hover {
+  color: var(--color-text);
+}
+
+.tabActive {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--color-bg-subtle);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tabActive .badge {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.panel {
+  padding: 26px 24px;
+}
+
+/* ── Specs table ──────────────────────────────────── */
+.specsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.specsTable tr {
+  border-bottom: 1px solid var(--color-bg-subtle);
+}
+
+.rowAlt {
+  background: var(--color-bg-subtle);
+}
+
+.specLabel {
+  text-align: left;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  padding: 12px 16px;
+  width: 45%;
+}
+
+.specValue {
+  font-weight: 600;
+  color: var(--color-text);
+  padding: 12px 16px;
+}
+
+/* ── Description ──────────────────────────────────── */
+.desc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  max-width: 760px;
+}
+
+/* ── Reviews ──────────────────────────────────────── */
+.reviews {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reviewsNum {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--color-primary);
+}
+
+.reviewsCount {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}

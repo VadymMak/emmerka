@@ -1,0 +1,180 @@
+import type { Metadata } from 'next';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
+import CatalogPage, {
+  type CatalogProduct,
+  type CatalogFacets,
+} from '@/components/catalog/CatalogPage/CatalogPage';
+import { db } from '@/lib/db';
+import { getBaseUrl } from '@/lib/url';
+import { routing } from '@/i18n/routing';
+import { getStoreConfig } from '@/lib/store-config';
+import JsonLd from '@/components/seo/JsonLd';
+import { buildBreadcrumbSchema } from '@/lib/breadcrumbs';
+
+export const revalidate = 60;
+
+const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const PAGE_SIZE = 12;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
+  const config = await getStoreConfig();
+
+  const languages: Record<string, string> = {};
+  for (const loc of routing.locales) {
+    languages[loc] = `${baseUrl}/${loc}/catalog`;
+  }
+
+  return {
+    title: 'Catalog',
+    description: `${config.name} — full product catalog`,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/catalog`,
+      languages,
+    },
+    openGraph: {
+      type: 'website',
+      title: `Catalog — ${config.name}`,
+      url: `${baseUrl}/${locale}/catalog`,
+      siteName: config.name,
+    },
+  };
+}
+
+const BRAND_DISPLAY: Record<string, string> = {
+  MAKITA: 'Makita', BOSCH: 'Bosch', DEWALT: 'DeWalt',
+  MILWAUKEE: 'Milwaukee', METABO: 'Metabo',
+};
+
+export default async function CatalogRoute({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const { locale } = await params;
+  const sp = await searchParams;
+  setRequestLocale(locale);
+
+  const store = await db.store.findUniqueOrThrow({ where: { slug: STORE_SLUG } });
+  const isRestaurant = store.vertical === 'RESTAURANT';
+
+  const t = await getTranslations('sampleProducts');
+
+  // Initial category from URL (for restaurant category tabs)
+  const initialCategory = typeof sp.category === 'string' ? sp.category : '';
+  const searchQuery = typeof sp.q === 'string' ? sp.q.trim() : '';
+  const isNewFilter = sp.new === 'true';
+  const isSaleFilter = sp.sale === 'true';
+  const genderFilter = typeof sp.gender === 'string' ? sp.gender.trim() : '';
+
+  const categoryFilter = initialCategory
+    ? { category: { slug: initialCategory } }
+    : {};
+
+  const searchFilter = searchQuery
+    ? {
+        OR: [
+          { nameKey: { contains: searchQuery, mode: 'insensitive' as const } },
+          { brand: { contains: searchQuery, mode: 'insensitive' as const } },
+        ],
+      }
+    : {};
+
+  const newFilter = isNewFilter ? { isNew: true } : {};
+  const saleFilter = isSaleFilter ? { oldPrice: { not: null, gt: 0 } } : {};
+  const genderWhere = genderFilter
+    ? {
+        AND: [
+          {
+            OR: [
+              { metadata: { path: ['gender'], equals: genderFilter.charAt(0).toUpperCase() + genderFilter.slice(1).toLowerCase() } },
+              { metadata: { path: ['gender'], equals: 'Unisex' } },
+            ],
+          },
+        ],
+      }
+    : {};
+
+  const baseWhere = { storeId: store.id, ...categoryFilter, ...searchFilter, ...newFilter, ...saleFilter, ...genderWhere };
+
+  const [dbProducts, total, categoryFacets, brandGroups] = await Promise.all([
+    db.product.findMany({
+      where: baseWhere,
+      orderBy: { reviewCount: 'desc' },
+      take: PAGE_SIZE,
+    }),
+    db.product.count({ where: baseWhere }),
+    db.category.findMany({
+      where: { storeId: store.id },
+      include: { _count: { select: { products: true } } },
+      orderBy: { sortOrder: 'asc' },
+    }),
+    db.product.groupBy({
+      by: ['brand'],
+      where: { storeId: store.id },
+      _count: { id: true },
+    }),
+  ]);
+
+  const initialProducts: CatalogProduct[] = dbProducts.map((p) => ({
+    id: p.id,
+    slug: p.slug,
+    brand: p.brand ?? '',
+    name: t.has(p.nameKey) ? t(p.nameKey) : p.nameKey,
+    image: p.image ?? '/placeholder-product.svg',
+    price: p.price,
+    oldPrice: p.oldPrice ?? undefined,
+    currency: p.currency,
+    rating: p.rating,
+    reviewCount: p.reviewCount,
+    inStock: p.inStock,
+    isHit: p.isHit,
+    isNew: p.isNew,
+  }));
+
+  const facets: CatalogFacets = {
+    categories: categoryFacets
+      .filter((c) => c._count.products > 0)
+      .map((c) => ({ slug: c.slug, count: c._count.products })),
+    brands: isRestaurant
+      ? []
+      : brandGroups
+          .filter((b) => b.brand !== null)
+          .sort((a, b) => (b._count?.id ?? 0) - (a._count?.id ?? 0))
+          .map((b) => ({
+            name: BRAND_DISPLAY[b.brand!.toUpperCase()] ?? b.brand!,
+            count: b._count?.id ?? 0,
+          })),
+  };
+
+  const config = await getStoreConfig();
+  const breadcrumbs = buildBreadcrumbSchema(locale, [
+    { name: config.name, url: `/${locale}` },
+    { name: 'Catalog' },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={breadcrumbs} />
+      <CatalogPage
+        initialProducts={initialProducts}
+        initialTotal={total}
+        initialTotalPages={Math.ceil(total / PAGE_SIZE)}
+        facets={facets}
+        vertical={store.vertical}
+        initialCategory={initialCategory}
+        initialQuery={searchQuery}
+        initialNewFilter={isNewFilter}
+        initialSaleFilter={isSaleFilter}
+        initialGender={genderFilter}
+      />
+    </>
+  );
+}

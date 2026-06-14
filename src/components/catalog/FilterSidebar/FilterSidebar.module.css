@@ -1,0 +1,351 @@
+/* Filter sidebar — 280px, sticky. */
+.fil {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 20px;
+  position: sticky;
+  top: 20px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title svg {
+  color: var(--color-primary);
+}
+
+.reset {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 2px;
+  transition: color 150ms ease;
+}
+
+.reset:hover {
+  color: var(--color-primary-dark);
+}
+
+/* ── Groups ───────────────────────────────────────── */
+.group {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.group:last-of-type {
+  border-bottom: none;
+}
+
+.groupTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 13px;
+}
+
+/* ── Checkboxes ───────────────────────────────────── */
+.chk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chk input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.chkBox {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-border);
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-bg);
+  transition:
+    background 120ms ease,
+    border-color 120ms ease;
+}
+
+.chk:hover .chkBox {
+  border-color: var(--color-primary);
+}
+
+.chk input:checked + .chkBox {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.chkBox svg {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.chk input:checked + .chkBox svg {
+  opacity: 1;
+}
+
+.chkLabel {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+
+.chkNum {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.chk input:checked ~ .chkLabel {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* ── Price range ──────────────────────────────────── */
+.priceInputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.priceField {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  transition: border-color 150ms ease;
+}
+
+.priceField:focus-within {
+  border-color: var(--color-primary);
+}
+
+.priceField span {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.priceField input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  background: none;
+  min-width: 0;
+}
+
+.priceDash {
+  color: var(--color-text-secondary);
+}
+
+.range {
+  position: relative;
+  height: 28px;
+}
+
+.rangeTrack {
+  position: absolute;
+  top: 11px;
+  left: 0;
+  right: 0;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--color-border);
+}
+
+.rangeFill {
+  position: absolute;
+  top: 11px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--color-primary);
+}
+
+.range input[type='range'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.range input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 3px solid var(--color-primary);
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 2px 5px rgba(17, 24, 39, 0.18);
+}
+
+.range input[type='range']::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 3px solid var(--color-primary);
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 2px 5px rgba(17, 24, 39, 0.18);
+}
+
+.range input[type='range']::-webkit-slider-runnable-track {
+  background: none;
+}
+
+/* ── Toggle ───────────────────────────────────────── */
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggleLabel {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.toggleTrack {
+  width: 44px;
+  height: 25px;
+  border-radius: 999px;
+  background: var(--color-border);
+  position: relative;
+  transition: background 150ms ease;
+  flex-shrink: 0;
+}
+
+.toggleTrack::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  transition: transform 150ms ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle input:checked + .toggleTrack {
+  background: var(--color-success);
+}
+
+.toggle input:checked + .toggleTrack::after {
+  transform: translateX(19px);
+}
+
+/* ── Apply ────────────────────────────────────────── */
+.apply {
+  width: 100%;
+  height: 46px;
+  margin-top: 18px;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    transform 80ms ease,
+    box-shadow 150ms ease;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.22);
+}
+
+.apply:hover {
+  background: var(--color-primary-dark);
+  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
+}
+
+.apply:active {
+  transform: translateY(0.5px);
+}
+
+/* ── Gender chips ───────────────────────────────────────────── */
+.genderChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.genderChip {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.genderChip:hover {
+  border-color: var(--color-primary);
+}
+
+.genderChipActive {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-contrast, #fff);
+}

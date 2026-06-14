@@ -1,0 +1,400 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============ STORE CONFIG ============
+
+model Store {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  description  String?
+  vertical     Vertical @default(RESTAURANT)
+  regionBundle String   @default("EU")
+
+  // ── Store Presence ──
+  primaryMode  StoreMode @default(ONLINE)
+  address      String?
+  city         String?
+  openingHours String?
+  phone        String?
+  email        String?
+  mapLat       Float?
+  mapLng       Float?
+
+  themeConfig Json?
+  metadata    Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products         Product[]
+  categories       Category[]
+  orders           Order[]
+  customers        Customer[]
+  promotions       Promotion[]
+  knowledgeBase    KnowledgeEntry[]
+  deliveryZones    DeliveryZone[]
+  reservations     Reservation[]
+  restaurantTables RestaurantTable[]
+  galleryImages    GalleryImage[]
+  testimonials     Testimonial[]
+}
+
+enum Vertical {
+  RESTAURANT
+}
+
+enum StoreMode {
+  PHYSICAL
+  ONLINE
+  HYBRID
+}
+
+// ============ PRODUCTS ============
+
+model Category {
+  id        String    @id @default(cuid())
+  slug      String
+  nameKey   String
+  image     String?
+  sortOrder Int       @default(0)
+  storeId   String
+  store     Store     @relation(fields: [storeId], references: [id])
+  products  Product[]
+
+  @@unique([storeId, slug])
+}
+
+model Product {
+  id          String  @id @default(cuid())
+  slug        String
+  nameKey     String
+  description String?
+  brand       String?
+  image       String?
+  images      String[]
+  price       Float
+  oldPrice    Float?
+  currency    String  @default("UAH")
+  inStock     Boolean @default(true)
+  isHit       Boolean @default(false)
+  isNew       Boolean @default(false)
+  rating      Float   @default(0)
+  reviewCount Int     @default(0)
+
+  // Flexible per-vertical: { sku, stockQty, specs, description (localized), weight, etc. }
+  metadata Json?
+
+  // pgvector column added via custom migration after enabling the extension:
+  // ALTER TABLE "Product" ADD COLUMN embedding vector(1536);
+
+  categoryId String?
+  category   Category?   @relation(fields: [categoryId], references: [id])
+  storeId    String
+  store      Store       @relation(fields: [storeId], references: [id])
+  orderItems OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([storeId, slug])
+  @@index([storeId, inStock])
+  @@index([storeId, categoryId])
+}
+
+// ============ CUSTOMERS ============
+
+model Customer {
+  id           String  @id @default(cuid())
+  email        String
+  name         String?
+  phone        String?
+  passwordHash String?
+  isVerified   Boolean @default(false)
+  companyName  String?
+  taxId        String?
+
+  // pgvector: ALTER TABLE "Customer" ADD COLUMN embedding vector(1536);
+
+  storeId      String
+  store        Store         @relation(fields: [storeId], references: [id])
+  orders       Order[]
+  testimonials Testimonial[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([storeId, email])
+  @@index([storeId])
+}
+
+// ============ ORDERS ============
+
+model Order {
+  id          String      @id @default(cuid())
+  orderNumber String
+  status      OrderStatus @default(PENDING)
+
+  customerId String?
+  customer   Customer? @relation(fields: [customerId], references: [id])
+  guestEmail String?
+  guestName  String?
+  guestPhone String?
+
+  deliveryMode    DeliveryMode  @default(SHIPPING)
+  deliveryAddress Json?
+  deliveryZoneId  String?
+  deliveryZone    DeliveryZone? @relation(fields: [deliveryZoneId], references: [id])
+  trackingNumber  String?
+
+  paymentMethod String?
+  paymentStatus PaymentStatus @default(UNPAID)
+  paymentId     String?
+
+  subtotal    Float
+  deliveryFee Float  @default(0)
+  discount    Float  @default(0)
+  total       Float
+  currency    String @default("UAH")
+
+  customerNote String?
+  internalNote String?
+
+  storeId String
+  store   Store       @relation(fields: [storeId], references: [id])
+  items   OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId, status])
+  @@index([storeId, createdAt])
+  @@index([customerId])
+}
+
+model OrderItem {
+  id       String @id @default(cuid())
+  quantity Int
+  price    Float
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  REFUNDED
+  FAILED
+}
+
+enum DeliveryMode {
+  SHIPPING
+  COURIER
+  PICKUP
+  DINE_IN
+}
+
+// ============ DELIVERY ============
+
+model DeliveryZone {
+  id           String  @id @default(cuid())
+  name         String
+  polygon      Json?
+  fee          Float   @default(0)
+  minOrder     Float   @default(0)
+  estimatedMin Int     @default(30)
+  estimatedMax Int     @default(60)
+  active       Boolean @default(true)
+
+  storeId String
+  store   Store   @relation(fields: [storeId], references: [id])
+  orders  Order[]
+
+  @@index([storeId, active])
+}
+
+// ============ PROMOTIONS ============
+
+model Promotion {
+  id          String    @id @default(cuid())
+  type        PromoType
+  title       String
+  description String?
+
+  discountPercent Float?
+  discountAmount  Float?
+  productIds      String[]
+  categoryIds     String[]
+  bannerImage     String?
+
+  startsAt DateTime
+  endsAt   DateTime?
+  active   Boolean   @default(true)
+
+  storeId String
+  store   Store  @relation(fields: [storeId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([storeId, active])
+}
+
+enum PromoType {
+  DISCOUNT
+  PRODUCT_OF_DAY
+  BANNER
+  FREE_DELIVERY
+}
+
+// ============ KNOWLEDGE BASE (for RAG / AI assistant) ============
+
+model KnowledgeEntry {
+  id       String  @id @default(cuid())
+  title    String
+  content  String
+  category String?
+
+  // pgvector: ALTER TABLE "KnowledgeEntry" ADD COLUMN embedding vector(1536);
+
+  storeId String
+  store   Store  @relation(fields: [storeId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId, category])
+}
+
+// ============ RESERVATIONS (RESTAURANT only) ============
+
+model Reservation {
+  id      String @id @default(cuid())
+  storeId String
+  store   Store  @relation(fields: [storeId], references: [id])
+
+  date    DateTime
+  time    String
+  guests  Int
+  tableId String?
+  table   RestaurantTable? @relation(fields: [tableId], references: [id])
+
+  name            String
+  phone           String
+  email           String
+  specialRequests String?
+
+  status ReservationStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId, date])
+  @@index([storeId, status])
+}
+
+enum TestimonialStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+model RestaurantTable {
+  id      String @id @default(cuid())
+  storeId String
+  store   Store  @relation(fields: [storeId], references: [id])
+
+  number String
+  seats  Int
+  zone   String
+  x      Int
+  y      Int
+  type   String
+  active Boolean @default(true)
+
+  reservations Reservation[]
+
+  @@unique([storeId, number])
+  @@index([storeId, zone])
+}
+
+// ============ GALLERY (RESTAURANT) ============
+
+model GalleryImage {
+  id      String @id @default(cuid())
+  storeId String
+  store   Store  @relation(fields: [storeId], references: [id])
+
+  url       String
+  alt       String  @default("")
+  sortOrder Int     @default(0)
+  active    Boolean @default(true)
+
+  createdAt DateTime @default(now())
+
+  @@index([storeId, sortOrder])
+}
+
+// ============ TESTIMONIALS ============
+
+model Testimonial {
+  id     String @id @default(cuid())
+
+  text   String
+  rating Int    @default(5)
+
+  status     TestimonialStatus @default(PENDING)
+  locale     String?
+  adminReply String?
+
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  storeId String
+  store   Store @relation(fields: [storeId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId, status])
+  @@index([storeId, createdAt])
+  @@index([customerId])
+}
+
+// ============ ADMIN AUTH ============
+
+model AdminUser {
+  id           String  @id @default(cuid())
+  email        String  @unique
+  passwordHash String
+  name         String?
+  role         String  @default("admin")
+  storeId      String
+
+  createdAt DateTime @default(now())
+}

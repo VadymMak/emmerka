@@ -1,0 +1,309 @@
+/* Catalog page wrapper. */
+.cat {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px 24px 56px;
+}
+
+.h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── Content top bar ──────────────────────────────── */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.found {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+/* ── Sort dropdown ────────────────────────────────── */
+.sort {
+  position: relative;
+}
+
+.sortBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 42px;
+  padding: 0 14px;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--color-text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+
+.sortBtn:hover {
+  border-color: var(--color-primary);
+}
+
+.sortCur {
+  font-weight: 700;
+}
+
+.sortBtn svg {
+  color: var(--color-text-muted);
+  transition: transform 150ms ease;
+}
+
+.sortOpen .sortBtn svg {
+  transform: rotate(180deg);
+}
+
+.sortMenu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 14px 34px rgba(17, 24, 39, 0.14);
+  padding: 6px;
+  min-width: 230px;
+}
+
+.sortOpt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  padding: 9px 12px;
+  border-radius: 7px;
+  transition:
+    background 120ms ease,
+    color 120ms ease;
+}
+
+.sortOpt:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-text);
+}
+
+.sortOptSel {
+  color: var(--color-primary);
+  font-weight: 700;
+  background: var(--color-primary-light);
+}
+
+/* ── Product grid ─────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.gridLoading {
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+/* ── Pagination ───────────────────────────────────── */
+.pag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.pagBtn {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 8px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg);
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition:
+    border-color 150ms ease,
+    color 150ms ease,
+    background 150ms ease;
+}
+
+.pagBtn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.pagBtnActive {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.pagBtnActive:hover {
+  color: var(--color-bg);
+}
+
+.pagBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagDots {
+  color: var(--color-text-secondary);
+  padding: 0 2px;
+}
+
+.pagStatus {
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 14px 0 0;
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 980px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Restaurant dark theme ── */
+.catDark {
+  background: var(--color-bg);
+  min-height: 100vh;
+  padding-top: 90px;
+  padding-bottom: 60px;
+}
+
+.h1Dark {
+  color: var(--color-text);
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+/* Category tabs */
+.categoryTabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 24px;
+  margin: 0 auto 32px;
+  max-width: 1400px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.categoryTabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  padding: 10px 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.tab:hover {
+  border-color: rgba(212, 168, 83, 0.3);
+  color: var(--color-primary);
+}
+.tabActive {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border-color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Full-width body — replaces 2-col sidebar layout for restaurant */
+.bodyFull {
+  display: block;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Full-width content when no sidebar */
+.contentFull {
+  width: 100%;
+}
+
+/* Menu-style grid: 3 cols, full-width cards */
+.gridMenu {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px;
+}
+
+/* Sort button dark */
+.foundDark {
+  color: var(--color-text-muted);
+}
+.sortBtnDark {
+  color: var(--color-text-muted);
+  border-color: rgba(255, 255, 255, 0.12);
+  background: var(--color-bg-subtle);
+}
+.sortMenuDark {
+  background: var(--color-bg-subtle);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 1024px) {
+  .gridMenu {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .gridMenu {
+    grid-template-columns: 1fr !important;
+  }
+  .bodyFull {
+    padding: 0 16px;
+  }
+  .categoryTabs {
+    padding: 0 16px;
+  }
+}

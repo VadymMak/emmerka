@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#f0fdf4"/>
+  <rect x="80" y="80" width="640" height="440" rx="24" fill="#dcfce7" opacity="0.7"/>
+  <!-- Decorative circles -->
+  <circle cx="200" cy="220" r="80" fill="#bbf7d0" opacity="0.6"/>
+  <circle cx="580" cy="340" r="100" fill="#86efac" opacity="0.4"/>
+  <circle cx="400" cy="160" r="50" fill="#4ade80" opacity="0.3"/>
+  <!-- Fruit icons (simple geometric) -->
+  <ellipse cx="280" cy="300" rx="45" ry="55" fill="#16a34a" opacity="0.8"/>
+  <rect x="278" y="240" width="4" height="20" fill="#15803d"/>
+  <ellipse cx="400" cy="320" rx="50" ry="42" fill="#ef4444" opacity="0.75"/>
+  <ellipse cx="520" cy="295" rx="40" ry="48" fill="#f59e0b" opacity="0.8"/>
+  <rect x="518" y="240" width="4" height="18" fill="#d97706"/>
+  <!-- Leaf decorations -->
+  <path d="M300 245 Q320 225 340 245" stroke="#15803d" stroke-width="2" fill="none"/>
+  <path d="M540 248 Q560 228 580 248" stroke="#15803d" stroke-width="2" fill="none"/>
+  <!-- Bottom text area -->
+  <rect x="200" y="400" width="400" height="60" rx="12" fill="white" opacity="0.8"/>
+  <text x="400" y="437" text-anchor="middle" fill="#16a34a" font-size="20" font-family="system-ui, sans-serif" font-weight="600">Fresh Market</text>
+</svg>

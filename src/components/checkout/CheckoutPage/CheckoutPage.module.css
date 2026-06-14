@@ -1,0 +1,39 @@
+.checkout {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px 24px 64px;
+}
+
+.h1 {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+.formCol {
+  min-width: 0;
+}
+
+@media (max-width: 960px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Restaurant dark ── */
+.pageDark {
+  background: var(--color-bg);
+  min-height: 100vh;
+  padding-top: 90px;
+}
+.pageDark .h1 {
+  color: var(--color-text);
+}

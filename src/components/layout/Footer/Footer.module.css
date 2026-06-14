@@ -1,0 +1,274 @@
+/* Site footer — dark navy band with four columns + bottom bar. */
+.footer {
+  background: var(--color-bg-dark);
+  color: var(--color-bg-subtle);
+}
+
+.wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 24px 40px;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+  gap: 40px;
+}
+
+/* ── Brand column ─────────────────────────────────── */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logoIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-lg);
+  background: var(--color-primary);
+  color: var(--color-contrast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-contrast);
+  letter-spacing: -0.01em;
+}
+
+.aboutDesc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 320px;
+}
+
+.schedule {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.schedule svg {
+  color: var(--color-primary);
+  flex: 0 0 auto;
+}
+
+/* ── Link columns ─────────────────────────────────── */
+.col {
+  min-width: 0;
+}
+
+.colTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-contrast);
+  margin: 0 0 18px;
+  letter-spacing: -0.01em;
+}
+
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.link:hover {
+  color: var(--color-primary);
+}
+
+/* ── Contacts column ──────────────────────────────── */
+.contacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contactLink,
+.contactItem {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.contactLink {
+  transition: color 150ms ease;
+}
+
+.contactLink:hover {
+  color: var(--color-primary);
+}
+
+.contactLink svg,
+.contactItem svg {
+  color: var(--color-primary);
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.contactItem {
+  color: var(--color-text-muted);
+}
+
+/* ── Bottom bar ───────────────────────────────────── */
+.bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bottomInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.rights {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.bottomLinks {
+  display: inline-flex;
+  gap: 24px;
+}
+
+.bottomLink {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.bottomLink:hover {
+  color: var(--color-primary);
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 900px) {
+  .wrap {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 520px) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Opening hours — shown for RESTAURANT / FOOD_MARKET verticals */
+.hours {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.hoursTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-contrast);
+  margin: 16px 0 6px;
+}
+.hoursLine {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ── Restaurant / dark variant ── */
+.footerDark {
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footerDark .colTitle {
+  color: var(--color-primary);
+}
+
+.footerDark .link {
+  color: var(--color-text-muted);
+}
+
+.footerDark .link:hover {
+  color: var(--color-primary);
+}
+
+.footerDark .contactLink {
+  color: var(--color-text-muted);
+}
+
+.footerDark .contactLink:hover {
+  color: var(--color-primary);
+}
+
+.footerDark .contactItem {
+  color: var(--color-text-muted);
+}
+
+.footerDark .aboutDesc {
+  color: var(--color-text-muted);
+}
+
+.footerDark .schedule {
+  color: var(--color-text-muted);
+}
+
+.footerDark .bottom {
+  background: var(--color-bg);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footerDark .rights {
+  color: var(--color-text-muted);
+}
+
+.footerDark .bottomLink {
+  color: var(--color-text-muted);
+}
+
+.footerDark .bottomLink:hover {
+  color: var(--color-primary);
+}
