@@ -183,8 +183,8 @@ export default function AdminSettingsPage() {
                 <span>Nahrať logotyp</span>
               </div>
 
-              {/* Store Mode selector */}
-              <div className={styles.block}>
+              {/* Store Mode selector — hidden for restaurant (always PHYSICAL) */}
+              {vertical !== 'RESTAURANT' && (<div className={styles.block}>
                 <span className={styles.blockTitle}>Typ prevádzky</span>
                 <p className={styles.modeHint}>Určuje, ktoré polia sú dostupné a ako web zobrazuje prevádzku</p>
                 <div className={styles.modeCards}>
@@ -205,7 +205,7 @@ export default function AdminSettingsPage() {
                     </button>
                   ))}
                 </div>
-              </div>
+              </div>)}
 
               <Field label="Názov prevádzky">
                 <input className={styles.input} value={store.name} onChange={(e) => sStore('name', e.target.value)} />
@@ -218,8 +218,8 @@ export default function AdminSettingsPage() {
                 <Field label="Email"><input className={styles.input} type="email" value={store.email} onChange={(e) => sStore('email', e.target.value)} /></Field>
               </div>
 
-              {/* Address fields — only for PHYSICAL / HYBRID */}
-              {store.primaryMode !== 'ONLINE' && (
+              {/* Address fields — always for RESTAURANT, or for PHYSICAL/HYBRID */}
+              {(vertical === 'RESTAURANT' || store.primaryMode !== 'ONLINE') && (
                 <>
                   <Field label="Adresa prevádzky">
                     <input className={styles.input} value={store.address} onChange={(e) => sStore('address', e.target.value)} placeholder="Marktstraße 15" />
