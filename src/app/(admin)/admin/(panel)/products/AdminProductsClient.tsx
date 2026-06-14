@@ -83,10 +83,8 @@ function mapApiProduct(p: Record<string, unknown>, cats: CategoryItem[] = []): A
   };
 }
 
-const fmtPrice = (price: number, currency: string) => {
-  if (currency === 'EUR') return `€${price.toFixed(2)}`;
-  return `${new Intl.NumberFormat('uk-UA').format(price)} грн`;
-};
+const fmtPrice = (price: number, currency: string) =>
+  new Intl.NumberFormat('sk-SK', { style: 'currency', currency: currency || 'EUR', minimumFractionDigits: 2 }).format(price);
 
 const stroke = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 
@@ -334,8 +332,8 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
         organic: false,
       };
 
-  const pageTitle = isRestaurant ? 'Страви / Меню' : isFood ? 'Продукти' : 'Товари';
-  const addLabel = isRestaurant ? 'Додати страву' : isFood ? 'Додати продукт' : 'Додати товар';
+  const pageTitle = isRestaurant ? 'Jedlá / Menu' : isFood ? 'Produkty' : 'Tovary';
+  const addLabel = isRestaurant ? 'Pridať jedlo' : isFood ? 'Pridať produkt' : 'Pridať tovar';
 
   return (
     <div className={styles.page}>
@@ -353,7 +351,7 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
         <input
           className={styles.search}
           type="search"
-          placeholder={isRestaurant ? 'Пошук страв...' : 'Пошук товарів...'}
+          placeholder={isRestaurant ? 'Hľadať jedlá...' : 'Hľadať tovary...'}
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
@@ -369,7 +367,7 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
           value={categoryFilter}
           onChange={(e) => { setCategoryFilter(e.target.value); setPage(1); }}
         >
-          <option value="all">Всі категорії</option>
+          <option value="all">Všetky kategórie</option>
           {categories.map((c) => (
             <option key={c.slug} value={c.slug}>{c.label}</option>
           ))}
@@ -381,7 +379,7 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
             value={brandFilter}
             onChange={(e) => { setBrandFilter(e.target.value); setPage(1); }}
           >
-            <option value="all">Всі бренди</option>
+            <option value="all">Všetky značky</option>
             {brands.map((b) => (
               <option key={b} value={b}>{b}</option>
             ))}
@@ -393,17 +391,17 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
             <input type="checkbox" checked={inStockOnly} onChange={(e) => { setInStockOnly(e.target.checked); setPage(1); }} />
             <span className={styles.track} />
           </span>
-          В наявності
+          Skladom
         </label>
       </div>
 
       {/* Bulk bar */}
       {checked.size > 0 && (
         <div className={styles.bulk}>
-          <span>Вибрано {checked.size} {isRestaurant ? 'страв' : 'товарів'}</span>
+          <span>Vybrané: {checked.size} {isRestaurant ? 'jedál' : 'položiek'}</span>
           <button type="button" className={styles.bulkDelete} onClick={() => void deleteSelected()}>
             <TrashIcon />
-            Видалити вибрані
+            Vymazať vybrané
           </button>
         </div>
       )}
@@ -419,14 +417,14 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
                   <span className={styles.chkBox}><CheckMini /></span>
                 </span>
               </th>
-              <th>Фото</th>
-              <th>Назва</th>
-              <th>Категорія</th>
-              {!isRestaurant && !isFood && <th>Бренд</th>}
-              {isRestaurant && <th>Порція</th>}
-              {isFood && <th>Вага / Зберігання</th>}
-              <th>Ціна</th>
-              <th>Наявність</th>
+              <th>Foto</th>
+              <th>Názov</th>
+              <th>Kategória</th>
+              {!isRestaurant && !isFood && <th>Značka</th>}
+              {isRestaurant && <th>Porcia</th>}
+              {isFood && <th>Hmotnosť / Skladovanie</th>}
+              <th>Cena</th>
+              <th>Dostupnosť</th>
               <th className={styles.colActions}>Дії</th>
             </tr>
           </thead>
@@ -483,7 +481,7 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
                     className={`${styles.stock} ${p.inStock ? styles.stockIn : styles.stockOut}`}
                     onClick={() => void toggleStock(p.id)}
                   >
-                    {p.inStock ? 'В наявності' : 'Немає'}
+                    {p.inStock ? 'Skladom' : 'Nie je'}
                   </button>
                 </td>
                 <td>
@@ -501,7 +499,7 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
             {paged.length === 0 && (
               <tr>
                 <td colSpan={8} className={styles.emptyRow}>
-                  {isRestaurant ? 'Страв не знайдено' : 'Товарів не знайдено'}
+                  {isRestaurant ? 'Žiadne jedlá' : 'Žiadne tovary'}
                 </td>
               </tr>
             )}

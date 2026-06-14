@@ -24,11 +24,11 @@ interface Props {
 type StatFilter = 'all' | OrderStatus;
 
 const STAT_FILTERS: { key: StatFilter; label: string }[] = [
-  { key: 'all', label: 'Всі' },
-  { key: 'PENDING', label: 'Нові' },
-  { key: 'PROCESSING', label: 'В обробці' },
-  { key: 'SHIPPED', label: 'Відправлено' },
-  { key: 'DELIVERED', label: 'Доставлено' },
+  { key: 'all', label: 'Všetky' },
+  { key: 'PENDING', label: 'Nové' },
+  { key: 'PROCESSING', label: 'V spracovaní' },
+  { key: 'SHIPPED', label: 'Odoslané' },
+  { key: 'DELIVERED', label: 'Doručené' },
 ];
 
 // Maps Prisma status → CSS class name (lowercase, matches existing .module.css)
@@ -118,10 +118,10 @@ export default function OrdersClient({ orders: initialOrders, vertical }: Props)
   return (
     <div className={styles.page}>
       <div className={styles.top}>
-        <h1 className={styles.h1}>Замовлення</h1>
+        <h1 className={styles.h1}>Objednávky</h1>
         <button type="button" className={styles.exportBtn} onClick={exportExcel}>
           <ExportIcon />
-          Експорт Excel
+          Export Excel
         </button>
       </div>
 
@@ -146,7 +146,7 @@ export default function OrdersClient({ orders: initialOrders, vertical }: Props)
         <input
           className={styles.search}
           type="search"
-          placeholder="Пошук по імені, телефону, №..."
+          placeholder="Hľadať podľa mena, telefónu, č..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -157,24 +157,24 @@ export default function OrdersClient({ orders: initialOrders, vertical }: Props)
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>№ замовлення</th>
-              <th>Покупець</th>
-              <th>Товари</th>
-              <th>Сума</th>
-              <th>Оплата</th>
-              {false && <th>Доставка</th>}
-              <th>Статус</th>
-              <th>Дата</th>
-              <th className={styles.colActions}>Дії</th>
+              <th>č. objednávky</th>
+              <th>Zákazník</th>
+              <th>Položky</th>
+              <th>Suma</th>
+              <th>Platba</th>
+              {false && <th>Doručenie</th>}
+              <th>Stav</th>
+              <th>Dátum</th>
+              <th className={styles.colActions}>Akcie</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((o) => {
-              const customerName = o.customer?.name ?? o.guestName ?? 'Гість';
+              const customerName = o.customer?.name ?? o.guestName ?? 'Hosť';
               const phone = o.customer?.phone ?? o.guestPhone ?? '';
               const itemCount = o.items.reduce((s, i) => s + i.quantity, 0);
-              const itemWord = isRestaurant ? 'страв' : 'товарів';
-              const dateStr = new Date(o.createdAt).toLocaleDateString('uk-UA');
+              const itemWord = isRestaurant ? 'jedál' : 'položiek';
+              const dateStr = new Date(o.createdAt).toLocaleDateString('sk-SK');
               const orderStatusLabels = getStatusLabels(vertical, o.deliveryMode);
 
               return (
@@ -223,7 +223,7 @@ export default function OrdersClient({ orders: initialOrders, vertical }: Props)
             {filtered.length === 0 && (
               <tr>
                 <td colSpan={false ? 9 : 8} className={styles.emptyRow}>
-                  Замовлень поки немає
+                  Žiadne objednávky
                 </td>
               </tr>
             )}

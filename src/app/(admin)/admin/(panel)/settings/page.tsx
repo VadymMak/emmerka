@@ -7,11 +7,11 @@ import styles from './settings.module.css';
 type Tab = 'store' | 'delivery' | 'payment' | 'notifications' | 'security' | 'schedule';
 
 const BASE_TABS: { key: Tab; label: string }[] = [
-  { key: 'store', label: 'Магазин' },
-  { key: 'delivery', label: 'Доставка' },
-  { key: 'payment', label: 'Оплата' },
-  { key: 'notifications', label: 'Сповіщення' },
-  { key: 'security', label: 'Безпека' },
+  { key: 'store', label: 'Obchod' },
+  { key: 'delivery', label: 'Doručenie' },
+  { key: 'payment', label: 'Platba' },
+  { key: 'notifications', label: 'Upozornenia' },
+  { key: 'security', label: 'Bezpečnosť' },
 ];
 
 const stroke = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
@@ -80,7 +80,7 @@ export default function AdminSettingsPage() {
 
   const tabs = [
     ...BASE_TABS,
-    ...(vertical === 'RESTAURANT' ? [{ key: 'schedule' as Tab, label: 'Розклад' }] : []),
+    ...(vertical === 'RESTAURANT' ? [{ key: 'schedule' as Tab, label: 'Rozvrh' }] : []),
   ];
 
   // Toast
@@ -161,7 +161,7 @@ export default function AdminSettingsPage() {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.h1}>Налаштування</h1>
+      <h1 className={styles.h1}>Nastavenia</h1>
 
       <div className={styles.tabs}>
         {tabs.map((t) => (
@@ -175,7 +175,7 @@ export default function AdminSettingsPage() {
       {tab === 'store' && (
         <div className={styles.card}>
           {loading ? (
-            <p style={{ color: '#6b7280', fontSize: 14 }}>Завантаження...</p>
+            <p style={{ color: '#6b7280', fontSize: 14 }}>Načítavanie...</p>
           ) : (
             <>
               <div className={styles.logoUpload} onClick={() => console.log('[admin logo upload]')}>
@@ -185,13 +185,13 @@ export default function AdminSettingsPage() {
 
               {/* Store Mode selector */}
               <div className={styles.block}>
-                <span className={styles.blockTitle}>Тип магазину</span>
-                <p className={styles.modeHint}>Визначає які поля доступні та як сайт відображає магазин</p>
+                <span className={styles.blockTitle}>Typ prevádzky</span>
+                <p className={styles.modeHint}>Určuje, ktoré polia sú dostupné a ako web zobrazuje prevádzku</p>
                 <div className={styles.modeCards}>
                   {([
-                    { mode: 'PHYSICAL' as const, icon: '🏪', title: 'Фізичний магазин', desc: 'Офлайн точка з адресою. Клієнти приходять в магазин.' },
-                    { mode: 'ONLINE' as const,   icon: '🛒', title: 'Онлайн магазин',   desc: 'Тільки онлайн. Доставка поштою або кур\'єром.' },
-                    { mode: 'HYBRID' as const,   icon: '🔄', title: 'Гібридний',        desc: 'Фізична точка + онлайн доставка.' },
+                    { mode: 'PHYSICAL' as const, icon: '🏪', title: 'Fyzická prevádzka', desc: 'Offline miesto s adresou. Zákazníci prichádzajú osobne.' },
+                    { mode: 'ONLINE' as const,   icon: '🛒', title: 'Online obchod',      desc: 'Iba online. Doručenie poštou alebo kuriérom.' },
+                    { mode: 'HYBRID' as const,   icon: '🔄', title: 'Hybridný',           desc: 'Fyzická prevádzka + online doručenie.' },
                   ]).map((opt) => (
                     <button
                       key={opt.mode}
@@ -207,36 +207,36 @@ export default function AdminSettingsPage() {
                 </div>
               </div>
 
-              <Field label="Назва магазину">
+              <Field label="Názov prevádzky">
                 <input className={styles.input} value={store.name} onChange={(e) => sStore('name', e.target.value)} />
               </Field>
-              <Field label="Опис">
+              <Field label="Popis">
                 <textarea className={styles.textarea} rows={3} value={store.description} onChange={(e) => sStore('description', e.target.value)} />
               </Field>
               <div className={styles.grid2}>
-                <Field label="Телефон"><input className={styles.input} value={store.phone} onChange={(e) => sStore('phone', e.target.value)} /></Field>
+                <Field label="Telefón"><input className={styles.input} value={store.phone} onChange={(e) => sStore('phone', e.target.value)} /></Field>
                 <Field label="Email"><input className={styles.input} type="email" value={store.email} onChange={(e) => sStore('email', e.target.value)} /></Field>
               </div>
 
               {/* Address fields — only for PHYSICAL / HYBRID */}
               {store.primaryMode !== 'ONLINE' && (
                 <>
-                  <Field label="Адреса магазину">
+                  <Field label="Adresa prevádzky">
                     <input className={styles.input} value={store.address} onChange={(e) => sStore('address', e.target.value)} placeholder="Marktstraße 15" />
                   </Field>
                   <div className={styles.grid2}>
-                    <Field label="Місто">
-                      <input className={styles.input} value={store.city} onChange={(e) => sStore('city', e.target.value)} placeholder="Berlin" />
+                    <Field label="Mesto">
+                      <input className={styles.input} value={store.city} onChange={(e) => sStore('city', e.target.value)} placeholder="Trnava" />
                     </Field>
-                    <Field label="Графік роботи">
+                    <Field label="Otváracie hodiny">
                       <input className={styles.input} value={store.openingHours} onChange={(e) => sStore('openingHours', e.target.value)} placeholder="Mon-Sat: 9:00-20:00" />
                     </Field>
                   </div>
                   <div className={styles.grid2}>
-                    <Field label="Широта (lat)">
-                      <input className={styles.input} type="number" step="any" value={store.mapLat} onChange={(e) => sStore('mapLat', e.target.value)} placeholder="52.5200" />
+                    <Field label="Zemepisná šírka (lat)">
+                      <input className={styles.input} type="number" step="any" value={store.mapLat} onChange={(e) => sStore('mapLat', e.target.value)} placeholder="48.3774" />
                     </Field>
-                    <Field label="Довгота (lng)">
+                    <Field label="Zemepisná dĺžka (lng)">
                       <input className={styles.input} type="number" step="any" value={store.mapLng} onChange={(e) => sStore('mapLng', e.target.value)} placeholder="13.4050" />
                     </Field>
                   </div>
@@ -250,7 +250,7 @@ export default function AdminSettingsPage() {
               <Field label="YouTube"><input className={styles.input} value={store.youtube} placeholder="https://youtube.com/..." onChange={(e) => sStore('youtube', e.target.value)} /></Field>
 
               <button type="button" className={styles.saveBtn} onClick={saveStore} disabled={saving}>
-                {saving ? 'Збереження...' : 'Зберегти зміни'}
+                {saving ? 'Ukladám...' : 'Uložiť zmeny'}
               </button>
             </>
           )}
@@ -262,28 +262,28 @@ export default function AdminSettingsPage() {
         <div className={styles.card}>
           <div className={styles.block}>
             <div className={styles.blockHead}>
-              <span className={styles.blockTitle}>Нова Пошта</span>
+              <span className={styles.blockTitle}>Slovenská pošta</span>
               <Toggle checked={delivery.novaPoshtaOn} onChange={(v) => sDel('novaPoshtaOn', v)} />
             </div>
             <Field label="API ключ">
               <MaskedInput value={delivery.novaPoshtaKey} onChange={(v) => sDel('novaPoshtaKey', v)} placeholder="••••••••••••" />
             </Field>
-            <button type="button" className={styles.testBtn} onClick={() => console.log('[test novaposhta]')}>Перевірити підключення</button>
+            <button type="button" className={styles.testBtn} onClick={() => console.log('[test novaposhta]')}>Overiť spojenie</button>
           </div>
 
           <div className={styles.block}>
             <div className={styles.blockHead}>
-              <span className={styles.blockTitle}>Самовивіз</span>
+              <span className={styles.blockTitle}>Osobný odber</span>
               <Toggle checked={delivery.pickupOn} onChange={(v) => sDel('pickupOn', v)} />
             </div>
-            <Field label="Адреса магазину"><input className={styles.input} value={delivery.pickupAddress} onChange={(e) => sDel('pickupAddress', e.target.value)} /></Field>
+            <Field label="Adresa prevádzky"><input className={styles.input} value={delivery.pickupAddress} onChange={(e) => sDel('pickupAddress', e.target.value)} /></Field>
           </div>
 
-          <Field label="Безкоштовна доставка від, грн">
+          <Field label="Bezplatné doručenie od (€)">
             <input className={styles.input} type="number" value={delivery.freeFrom} onChange={(e) => sDel('freeFrom', e.target.value)} />
           </Field>
 
-          <button type="button" className={styles.saveBtn} onClick={() => save('delivery', delivery)}>Зберегти</button>
+          <button type="button" className={styles.saveBtn} onClick={() => save('delivery', delivery)}>Uložiť</button>
         </div>
       )}
 
@@ -298,10 +298,10 @@ export default function AdminSettingsPage() {
             <Field label="Merchant Account"><input className={styles.input} value={payment.wfpMerchant} onChange={(e) => sPay('wfpMerchant', e.target.value)} /></Field>
             <Field label="Secret Key"><MaskedInput value={payment.wfpSecret} onChange={(v) => sPay('wfpSecret', v)} placeholder="••••••••••••" /></Field>
             <div className={styles.settingRow}>
-              <span>Тестовий режим</span>
+              <span>Testovací režim</span>
               <Toggle checked={payment.wfpTest} onChange={(v) => sPay('wfpTest', v)} />
             </div>
-            <button type="button" className={styles.testBtn} onClick={() => console.log('[test wayforpay]')}>Перевірити підключення</button>
+            <button type="button" className={styles.testBtn} onClick={() => console.log('[test wayforpay]')}>Overiť spojenie</button>
           </div>
 
           <div className={styles.block}>
@@ -315,13 +315,13 @@ export default function AdminSettingsPage() {
 
           <div className={styles.block}>
             <div className={styles.blockHead}>
-              <span className={styles.blockTitle}>Наложений платіж</span>
+              <span className={styles.blockTitle}>Dobierka</span>
               <Toggle checked={payment.codOn} onChange={(v) => sPay('codOn', v)} />
             </div>
-            <Field label="Комісія, %"><input className={styles.input} type="number" value={payment.codFee} onChange={(e) => sPay('codFee', e.target.value)} /></Field>
+            <Field label="Poplatok, %"><input className={styles.input} type="number" value={payment.codFee} onChange={(e) => sPay('codFee', e.target.value)} /></Field>
           </div>
 
-          <button type="button" className={styles.saveBtn} onClick={() => save('payment', payment)}>Зберегти</button>
+          <button type="button" className={styles.saveBtn} onClick={() => save('payment', payment)}>Uložiť</button>
         </div>
       )}
 
@@ -333,13 +333,13 @@ export default function AdminSettingsPage() {
               <span className={styles.blockTitle}>Email</span>
               <Toggle checked={notif.emailOn} onChange={(v) => sNotif('emailOn', v)} />
             </div>
-            <Field label="Email для сповіщень"><input className={styles.input} type="email" value={notif.email} onChange={(e) => sNotif('email', e.target.value)} /></Field>
+            <Field label="Email pre upozornenia"><input className={styles.input} type="email" value={notif.email} onChange={(e) => sNotif('email', e.target.value)} /></Field>
             <div className={styles.settingRow}>
-              <span>Сповіщення про нові відгуки</span>
+              <span>Upozornenia na nové recenzie</span>
               <Toggle checked={notif.reviewsOn} onChange={(v) => sNotif('reviewsOn', v)} />
             </div>
             <div className={styles.settingRow}>
-              <span>Сповіщення про низькі залишки</span>
+              <span>Upozornenia na nízky stav skladu</span>
               <Toggle checked={notif.lowStockOn} onChange={(v) => sNotif('lowStockOn', v)} />
             </div>
           </div>
@@ -351,10 +351,10 @@ export default function AdminSettingsPage() {
             </div>
             <Field label="Bot Token"><MaskedInput value={notif.botToken} onChange={(v) => sNotif('botToken', v)} placeholder="••••••••••••" /></Field>
             <Field label="Chat ID"><input className={styles.input} value={notif.chatId} onChange={(e) => sNotif('chatId', e.target.value)} /></Field>
-            <button type="button" className={styles.testBtn} onClick={() => console.log('[test telegram]')}>Тест</button>
+            <button type="button" className={styles.testBtn} onClick={() => console.log('[test telegram]')}>Test</button>
           </div>
 
-          <button type="button" className={styles.saveBtn} onClick={() => save('notifications', notif)}>Зберегти</button>
+          <button type="button" className={styles.saveBtn} onClick={() => save('notifications', notif)}>Uložiť</button>
         </div>
       )}
 
@@ -362,25 +362,25 @@ export default function AdminSettingsPage() {
       {tab === 'security' && (
         <div className={styles.card}>
           <div className={styles.block}>
-            <span className={styles.blockTitle}>Зміна паролю</span>
-            <Field label="Поточний пароль"><MaskedInput value={security.currentPw} onChange={(v) => sSec('currentPw', v)} /></Field>
-            <Field label="Новий пароль"><MaskedInput value={security.newPw} onChange={(v) => sSec('newPw', v)} /></Field>
-            <Field label="Підтвердіть пароль"><MaskedInput value={security.confirmPw} onChange={(v) => sSec('confirmPw', v)} /></Field>
-            <button type="button" className={styles.saveBtn} onClick={() => save('security', { changed: true })}>Змінити пароль</button>
+            <span className={styles.blockTitle}>Zmena hesla</span>
+            <Field label="Aktuálne heslo"><MaskedInput value={security.currentPw} onChange={(v) => sSec('currentPw', v)} /></Field>
+            <Field label="Nové heslo"><MaskedInput value={security.newPw} onChange={(v) => sSec('newPw', v)} /></Field>
+            <Field label="Potvrdiť heslo"><MaskedInput value={security.confirmPw} onChange={(v) => sSec('confirmPw', v)} /></Field>
+            <button type="button" className={styles.saveBtn} onClick={() => save('security', { changed: true })}>Zmeniť heslo</button>
           </div>
 
           <div className={styles.block}>
             <div className={styles.settingRow}>
-              <span>Активних сесій: <b>2</b></span>
-              <button type="button" className={styles.dangerBtn} onClick={() => console.log('[terminate all sessions]')}>Завершити всі сесії</button>
+              <span>Aktívnych relácií: <b>2</b></span>
+              <button type="button" className={styles.dangerBtn} onClick={() => console.log('[terminate all sessions]')}>Ukončiť všetky relácie</button>
             </div>
           </div>
 
           <div className={styles.block}>
             <div className={styles.settingRow}>
               <span className={styles.twoFa}>
-                Двофакторна автентифікація
-                <span className={styles.soon}>Незабаром</span>
+                Dvojfaktorové overenie
+                <span className={styles.soon}>Čoskoro</span>
               </span>
               <Toggle checked={security.twoFactor} onChange={(v) => sSec('twoFactor', v)} disabled />
             </div>
@@ -399,7 +399,7 @@ export default function AdminSettingsPage() {
       {toast && (
         <div className={styles.toast} role="status">
           <svg width="18" height="18" viewBox="0 0 24 24" {...stroke} aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
-          Налаштування збережено
+          Nastavenia uložené
         </div>
       )}
     </div>

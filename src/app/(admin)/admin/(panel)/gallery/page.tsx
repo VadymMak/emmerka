@@ -96,7 +96,7 @@ export default function GalleryPage() {
   return (
     <div className={styles.page}>
       <div className={styles.topBar}>
-        <h1 className={styles.h1}>Галерея</h1>
+        <h1 className={styles.h1}>Galéria</h1>
         <div className={styles.uploadArea}>
           <input
             ref={fileRef}
@@ -108,20 +108,20 @@ export default function GalleryPage() {
             id="gallery-upload"
           />
           <label htmlFor="gallery-upload" className={styles.uploadBtn}>
-            {uploading ? 'Завантажую...' : '↑ Завантажити файл'}
+            {uploading ? 'Nahrávam...' : '↑ Nahrať súbor'}
           </label>
         </div>
       </div>
 
       <p className={styles.hint}>
-        Фото автоматично оптимізуються (WebP, макс. 1200×800). Підтримувані формати: JPEG, PNG, WebP, GIF, AVIF. Макс. 10MB.
+        Fotky sú automaticky optimalizované (WebP, max. 1200×800). Podporované formáty: JPEG, PNG, WebP, GIF, AVIF. Max. 10MB.
       </p>
 
       {loading ? (
-        <div className={styles.loading}>Завантаження...</div>
+        <div className={styles.loading}>Načítavanie...</div>
       ) : images.length === 0 ? (
         <div className={styles.empty}>
-          Галерея порожня — завантажте перше фото
+          Galéria je prázdna — nahrajte prvú fotku
         </div>
       ) : (
         <div className={styles.grid}>
@@ -136,14 +136,14 @@ export default function GalleryPage() {
                     className={styles.overlayBtn}
                     onClick={() => void toggleActive(img)}
                   >
-                    {img.active ? 'Сховати' : 'Показати'}
+                    {img.active ? 'Skryť' : 'Zobraziť'}
                   </button>
                   <button
                     type="button"
                     className={`${styles.overlayBtn} ${styles.overlayDelete}`}
                     onClick={() => void deleteImage(img)}
                   >
-                    Видалити
+                    Vymazať
                   </button>
                 </div>
               </div>
@@ -151,7 +151,7 @@ export default function GalleryPage() {
                 type="text"
                 className={styles.altInput}
                 defaultValue={img.alt}
-                placeholder="Опис фото..."
+                placeholder="Popis fotky..."
                 onBlur={(e) => void updateAlt(img, e.target.value)}
               />
               <span className={styles.order}>#{img.sortOrder + 1}</span>

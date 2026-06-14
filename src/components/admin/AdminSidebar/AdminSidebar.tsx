@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import StoreLogo from '@/components/ui/StoreLogo';
 import styles from './AdminSidebar.module.css';
 
-// Admin is a standalone Ukrainian-only owner tool — strings are hardcoded by
+// Admin is a standalone Slovak-only owner tool — strings are hardcoded by
 // design (the storefront's i18n rule does not apply here).
 
 const ico = {
@@ -33,7 +33,7 @@ interface AdminSidebarProps {
 const NAV_SHARED_TOP: NavItem[] = [
   {
     href: '/admin',
-    label: 'Дашборд',
+    label: 'Prehľad',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <rect x="3" y="3" width="7" height="9" rx="1.5" />
@@ -49,7 +49,7 @@ const NAV_SHARED_TOP: NavItem[] = [
 const NAV_ECOMMERCE: NavItem[] = [
   {
     href: '/admin/products',
-    label: 'Товари',
+    label: 'Tovary',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <path d="M21 8 12 3 3 8v8l9 5 9-5V8Z" />
@@ -59,7 +59,7 @@ const NAV_ECOMMERCE: NavItem[] = [
   },
   {
     href: '/admin/orders',
-    label: 'Замовлення',
+    label: 'Objednávky',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <circle cx="9" cy="20" r="1.5" />
@@ -79,7 +79,7 @@ const NAV_ECOMMERCE: NavItem[] = [
   },
   {
     href: '/admin/promotions',
-    label: 'Акції',
+    label: 'Akcie',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <path d="M3 11V6.5A1.5 1.5 0 0 1 4.5 5H11l9 9-6.5 6.5-9-9Z" />
@@ -93,7 +93,7 @@ const NAV_ECOMMERCE: NavItem[] = [
 const NAV_RESTAURANT: NavItem[] = [
   {
     href: '/admin/reservations',
-    label: 'Бронювання',
+    label: 'Rezervácie',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -104,7 +104,7 @@ const NAV_RESTAURANT: NavItem[] = [
   },
   {
     href: '/admin/products',
-    label: 'Меню (страви)',
+    label: 'Jedálny lístok',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <path d="M21 8 12 3 3 8v8l9 5 9-5V8Z" />
@@ -114,7 +114,7 @@ const NAV_RESTAURANT: NavItem[] = [
   },
   {
     href: '/admin/tables',
-    label: 'Столи',
+    label: 'Stoly',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <rect x="4" y="8" width="16" height="8" rx="2" />
@@ -124,7 +124,7 @@ const NAV_RESTAURANT: NavItem[] = [
   },
   {
     href: '/admin/gallery',
-    label: 'Галерея',
+    label: 'Galéria',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -135,7 +135,7 @@ const NAV_RESTAURANT: NavItem[] = [
   },
   {
     href: '/admin/orders',
-    label: 'Замовлення',
+    label: 'Objednávky',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <circle cx="9" cy="20" r="1.5" />
@@ -159,7 +159,7 @@ const NAV_RESTAURANT: NavItem[] = [
 const NAV_FOOD_MARKET: NavItem[] = [
   {
     href: '/admin/products',
-    label: 'Продукти',
+    label: 'Produkty',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <path d="M21 8 12 3 3 8v8l9 5 9-5V8Z" />
@@ -169,7 +169,7 @@ const NAV_FOOD_MARKET: NavItem[] = [
   },
   {
     href: '/admin/orders',
-    label: 'Замовлення',
+    label: 'Objednávky',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <circle cx="9" cy="20" r="1.5" />
@@ -180,7 +180,7 @@ const NAV_FOOD_MARKET: NavItem[] = [
   },
   {
     href: '/admin/delivery-zones',
-    label: 'Зони доставки',
+    label: 'Doručovacie zóny',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <path d="M3 6.5h11v9H3zM14 9.5h4l3 3v3h-7z" />
@@ -204,7 +204,7 @@ const NAV_FOOD_MARKET: NavItem[] = [
 const NAV_SHARED_BOTTOM: NavItem[] = [
   {
     href: '/admin/theme',
-    label: 'Тема',
+    label: 'Téma',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <circle cx="13.5" cy="6.5" r="2" />
@@ -217,7 +217,7 @@ const NAV_SHARED_BOTTOM: NavItem[] = [
   },
   {
     href: '/admin/ai',
-    label: 'AI керування',
+    label: 'AI správa',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <rect x="5" y="7" width="14" height="12" rx="3" />
@@ -228,7 +228,7 @@ const NAV_SHARED_BOTTOM: NavItem[] = [
   },
   {
     href: '/admin/settings',
-    label: 'Налаштування',
+    label: 'Nastavenia',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
         <circle cx="12" cy="12" r="3" />
@@ -293,7 +293,7 @@ export default function AdminSidebar({ storeName, vertical }: AdminSidebarProps)
       <div className={styles.footer}>
         <button type="button" className={styles.logout} onClick={handleLogout}>
           <LogoutIcon />
-          Вийти
+          Odhlásiť sa
         </button>
         <span className={styles.store}>{storeName}</span>
       </div>

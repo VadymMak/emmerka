@@ -28,20 +28,20 @@ interface Reservation {
 }
 
 const STATUS_LABELS: Record<ReservationStatus, string> = {
-  PENDING: 'Очікує',
-  CONFIRMED: 'Підтверджено',
-  CANCELLED: 'Скасовано',
-  COMPLETED: 'Завершено',
-  NO_SHOW: 'Не прийшов',
+  PENDING: 'Čaká',
+  CONFIRMED: 'Potvrdené',
+  CANCELLED: 'Zrušené',
+  COMPLETED: 'Dokončené',
+  NO_SHOW: 'Neprišiel',
 };
 
 const STATUS_FILTERS: { label: string; value: string }[] = [
-  { label: 'Всі', value: '' },
-  { label: 'Очікують', value: 'PENDING' },
-  { label: 'Підтверджено', value: 'CONFIRMED' },
-  { label: 'Завершено', value: 'COMPLETED' },
-  { label: 'Скасовано', value: 'CANCELLED' },
-  { label: 'Не прийшов', value: 'NO_SHOW' },
+  { label: 'Všetky', value: '' },
+  { label: 'Čakajú', value: 'PENDING' },
+  { label: 'Potvrdené', value: 'CONFIRMED' },
+  { label: 'Dokončené', value: 'COMPLETED' },
+  { label: 'Zrušené', value: 'CANCELLED' },
+  { label: 'Neprišiel', value: 'NO_SHOW' },
 ];
 
 function toDateStr(d: Date): string {
@@ -105,7 +105,7 @@ export default function ReservationsPage() {
   return (
     <div className={styles.page}>
       <div className={styles.topBar}>
-        <h1 className={styles.h1}>Бронювання</h1>
+        <h1 className={styles.h1}>Rezervácie</h1>
         <input
           type="date"
           className={styles.datePicker}
@@ -118,19 +118,19 @@ export default function ReservationsPage() {
       <div className={styles.stats}>
         <div className={styles.statCard}>
           <span className={styles.statValue}>{stats.total}</span>
-          <span className={styles.statLabel}>Всього</span>
+          <span className={styles.statLabel}>Celkom</span>
         </div>
         <div className={`${styles.statCard} ${styles.statPending}`}>
           <span className={styles.statValue}>{stats.pending}</span>
-          <span className={styles.statLabel}>Очікують</span>
+          <span className={styles.statLabel}>Čakajú</span>
         </div>
         <div className={`${styles.statCard} ${styles.statConfirmed}`}>
           <span className={styles.statValue}>{stats.confirmed}</span>
-          <span className={styles.statLabel}>Підтверджено</span>
+          <span className={styles.statLabel}>Potvrdené</span>
         </div>
         <div className={`${styles.statCard} ${styles.statCompleted}`}>
           <span className={styles.statValue}>{stats.completed}</span>
-          <span className={styles.statLabel}>Завершено</span>
+          <span className={styles.statLabel}>Dokončené</span>
         </div>
       </div>
 
@@ -151,21 +151,21 @@ export default function ReservationsPage() {
       {/* Reservations table */}
       <div className={styles.tableWrap}>
         {loading ? (
-          <div className={styles.loading}>Завантаження...</div>
+          <div className={styles.loading}>Načítavanie...</div>
         ) : reservations.length === 0 ? (
-          <div className={styles.empty}>Немає бронювань на {date}</div>
+          <div className={styles.empty}>Žiadne rezervácie na {date}</div>
         ) : (
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Час</th>
-                <th>Гість</th>
-                <th>Телефон</th>
-                <th>Гості</th>
-                <th>Стіл</th>
-                <th>Побажання</th>
-                <th>Статус</th>
-                <th>Дії</th>
+                <th>Čas</th>
+                <th>Hosť</th>
+                <th>Telefón</th>
+                <th>Hostia</th>
+                <th>Stôl</th>
+                <th>Požiadavky</th>
+                <th>Stav</th>
+                <th>Akcie</th>
               </tr>
             </thead>
             <tbody>
@@ -200,7 +200,7 @@ export default function ReservationsPage() {
                           disabled={updating === r.id}
                           onClick={() => updateStatus(r.id, 'CONFIRMED')}
                         >
-                          Підтвердити
+                          Potvrdiť
                         </button>
                         <button
                           type="button"
@@ -208,7 +208,7 @@ export default function ReservationsPage() {
                           disabled={updating === r.id}
                           onClick={() => updateStatus(r.id, 'CANCELLED')}
                         >
-                          Скасувати
+                          Zrušiť
                         </button>
                       </>
                     )}
@@ -220,7 +220,7 @@ export default function ReservationsPage() {
                           disabled={updating === r.id}
                           onClick={() => updateStatus(r.id, 'COMPLETED')}
                         >
-                          Завершити
+                          Dokončiť
                         </button>
                         <button
                           type="button"
@@ -228,7 +228,7 @@ export default function ReservationsPage() {
                           disabled={updating === r.id}
                           onClick={() => updateStatus(r.id, 'NO_SHOW')}
                         >
-                          Не прийшов
+                          Neprišiel
                         </button>
                       </>
                     )}

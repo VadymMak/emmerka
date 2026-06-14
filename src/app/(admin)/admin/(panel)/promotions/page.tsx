@@ -27,11 +27,11 @@ interface Promo {
 
 const BRANDS = ['MAKITA', 'BOSCH', 'DEWALT', 'MILWAUKEE', 'METABO'];
 const CATEGORIES = [
-  { slug: 'drills', label: 'Дрелі' },
-  { slug: 'grinders', label: 'Болгарки' },
-  { slug: 'perforators', label: 'Перфоратори' },
-  { slug: 'jigsaws', label: 'Лобзики' },
-  { slug: 'sanders', label: 'Шліфмашини' },
+  { slug: 'drills', label: 'Vŕtačky' },
+  { slug: 'grinders', label: 'Brúsky' },
+  { slug: 'perforators', label: 'Vŕtacie kladivá' },
+  { slug: 'jigsaws', label: 'Priamočiare píly' },
+  { slug: 'sanders', label: 'Brúsičky' },
 ];
 
 const INITIAL_PROMOS: Promo[] = [
@@ -47,11 +47,8 @@ const fmtDate = (iso: string) => {
 };
 
 const pluralRaz = (n: number) => {
-  const m10 = n % 10;
-  const m100 = n % 100;
-  if (m10 === 1 && m100 !== 11) return 'раз';
-  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return 'рази';
-  return 'разів';
+  if (n === 1) return 'krát';
+  return 'krát';
 };
 
 const discountLabel = (p: Promo) => (p.type === 'freeDelivery' ? 'Безкоштовно' : `-${p.discount}%`);
@@ -141,15 +138,15 @@ export default function AdminPromotionsPage() {
   return (
     <div className={styles.page}>
       <div className={styles.top}>
-        <h1 className={styles.h1}>Акції та оголошення</h1>
+        <h1 className={styles.h1}>Akcie a oznámenia</h1>
         <button type="button" className={styles.createBtn} onClick={() => setModal({ mode: 'add' })}>
           <PlusIcon />
-          Створити акцію
+          Vytvoriť akciu
         </button>
       </div>
 
       {/* Section 1 — active promos */}
-      <h2 className={styles.sectionTitle}>Активні акції</h2>
+      <h2 className={styles.sectionTitle}>Aktívne akcie</h2>
       <div className={styles.grid}>
         {promos.map((p) => (
           <article key={p.id} className={styles.card}>
@@ -159,34 +156,34 @@ export default function AdminPromotionsPage() {
             </div>
             <div className={styles.body}>
               <div className={styles.row}>
-                <span className={styles.rowLabel}>Тип</span>
+                <span className={styles.rowLabel}>Typ</span>
                 <span className={styles.rowValue}>{PROMO_TYPE_LABEL[p.type]}</span>
               </div>
               <div className={styles.row}>
-                <span className={styles.rowLabel}>Знижка</span>
+                <span className={styles.rowLabel}>Zľava</span>
                 <span className={styles.discount}>{discountLabel(p)}</span>
               </div>
               <div className={styles.row}>
-                <span className={styles.rowLabel}>Період</span>
+                <span className={styles.rowLabel}>Obdobie</span>
                 <span className={styles.rowValue}>{fmtDate(p.startDate)} — {fmtDate(p.endDate)}</span>
               </div>
               <div className={styles.row}>
-                <span className={styles.rowLabel}>Застосовано</span>
+                <span className={styles.rowLabel}>Použité</span>
                 <span className={styles.rowValue}>{p.applied} {pluralRaz(p.applied)}</span>
               </div>
             </div>
             <div className={styles.footer}>
               <button type="button" className={styles.action} onClick={() => setModal({ mode: 'edit', id: p.id })}>
                 <EditIcon />
-                Редагувати
+                Upraviť
               </button>
               <button type="button" className={styles.action} onClick={() => togglePause(p.id)}>
                 {p.status === 'active' ? <PauseIcon /> : <PlayIcon />}
-                {p.status === 'active' ? 'Призупинити' : 'Відновити'}
+                {p.status === 'active' ? 'Pozastaviť' : 'Obnoviť'}
               </button>
               <button type="button" className={`${styles.action} ${styles.delete}`} onClick={() => setDeletingId(p.id)}>
                 <TrashIcon />
-                Видалити
+                Vymazať
               </button>
             </div>
           </article>
@@ -194,7 +191,7 @@ export default function AdminPromotionsPage() {
       </div>
 
       {/* Section 2 — announcement strip */}
-      <h2 className={styles.sectionTitle}>Рядок оголошень</h2>
+      <h2 className={styles.sectionTitle}>Oznamovací pruh</h2>
       <div className={styles.announceCard}>
         <div className={styles.preview} data-hidden={!announcementVisible}>
           <span className={styles.previewLabel}>Прев&apos;ю:</span>
@@ -215,10 +212,10 @@ export default function AdminPromotionsPage() {
               <input type="checkbox" checked={announcementVisible} onChange={(e) => setAnnouncementVisible(e.target.checked)} />
               <span className={styles.track} />
             </span>
-            {announcementVisible ? 'Показувати на сайті' : 'Приховано'}
+            {announcementVisible ? 'Zobraziť na webe' : 'Skryté'}
           </label>
           <button type="button" className={styles.announceSave} onClick={saveAnnouncement}>
-            Зберегти
+            Uložiť
           </button>
         </div>
       </div>
@@ -235,7 +232,7 @@ export default function AdminPromotionsPage() {
       )}
 
       {deletingId && (
-        <ConfirmDialog message="Видалити цю акцію?" onConfirm={doDelete} onCancel={() => setDeletingId(null)} />
+        <ConfirmDialog message="Vymazať túto akciu?" onConfirm={doDelete} onCancel={() => setDeletingId(null)} />
       )}
     </div>
   );

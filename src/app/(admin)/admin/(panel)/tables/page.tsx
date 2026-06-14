@@ -33,15 +33,15 @@ const ZONE_COLORS: Record<string, string> = {
 };
 
 const ZONE_LABELS: Record<string, string> = {
-  terrace: 'Тераса',
-  main: 'Основний зал',
-  private: 'Приватна кімната',
+  terrace: 'Terasa',
+  main: 'Hlavná sála',
+  private: 'Súkromná miestnosť',
 };
 
 const ZONE_OPTIONS = ['terrace', 'main', 'private'];
 const TYPE_OPTIONS: { value: TableType; label: string }[] = [
-  { value: 'round', label: 'Круглий' },
-  { value: 'rect', label: 'Прямокутний' },
+  { value: 'round', label: 'Okrúhly' },
+  { value: 'rect', label: 'Obdĺžnikový' },
 ];
 
 const DEFAULT_FORM: TableForm = {
@@ -105,7 +105,7 @@ export default function TablesPage() {
   const closeModal = () => { setShowModal(false); setError(null); };
 
   const handleSave = async () => {
-    if (!form.number.trim()) { setError('Введіть номер столу'); return; }
+    if (!form.number.trim()) { setError('Zadajte číslo stola'); return; }
     if (form.seats < 1 || form.seats > 20) { setError('Місць: 1–20'); return; }
     setSaving(true);
     setError(null);
@@ -124,7 +124,7 @@ export default function TablesPage() {
       setShowModal(false);
       await fetchTables();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Помилка збереження');
+      setError(err instanceof Error ? err.message : 'Chyba uloženia');
     } finally {
       setSaving(false);
     }
@@ -145,7 +145,7 @@ export default function TablesPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Видалити цей стіл? Всі пов\'язані бронювання збережуться.')) return;
+    if (!confirm('Vymazať tento stôl? Všetky súvisiace rezervácie zostanú zachované.')) return;
     setDeletingId(id);
     try {
       const res = await fetch(`/api/admin/tables?id=${id}`, { method: 'DELETE' });
@@ -178,9 +178,9 @@ export default function TablesPage() {
         <svg viewBox="0 0 640 320" className={styles.floorSvg}>
           <line x1="230" y1="20" x2="230" y2="300" stroke="#e2e8f0" strokeWidth="1" strokeDasharray="4 4" />
           <line x1="490" y1="20" x2="490" y2="300" stroke="#e2e8f0" strokeWidth="1" strokeDasharray="4 4" />
-          <text x="115" y="14" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit">Тераса</text>
-          <text x="360" y="14" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit">Основний зал</text>
-          <text x="565" y="14" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit">Приватна кімната</text>
+          <text x="115" y="14" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit">Terasa</text>
+          <text x="360" y="14" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit">Hlavná sála</text>
+          <text x="565" y="14" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit">Súkromná miestnosť</text>
           {tables.map((table) => {
             const color = ZONE_COLORS[table.zone] ?? '#64748b';
             const r = table.type === 'round' ? (table.seats <= 2 ? 22 : 28) : 0;
@@ -210,20 +210,20 @@ export default function TablesPage() {
       {/* Table list */}
       <div className={styles.tableWrap}>
         {loading ? (
-          <div className={styles.loading}>Завантаження...</div>
+          <div className={styles.loading}>Načítavanie...</div>
         ) : tables.length === 0 ? (
-          <div className={styles.empty}>Столів не знайдено</div>
+          <div className={styles.empty}>Stoly nenájdené</div>
         ) : (
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>№</th>
-                <th>Зона</th>
-                <th>Місць</th>
-                <th>Тип</th>
-                <th>Позиція (x, y)</th>
-                <th>Активний</th>
-                <th>Дії</th>
+                <th>č.</th>
+                <th>Zóna</th>
+                <th>Miest</th>
+                <th>Typ</th>
+                <th>Pozícia (x, y)</th>
+                <th>Aktívny</th>
+                <th>Akcie</th>
               </tr>
             </thead>
             <tbody>
@@ -239,7 +239,7 @@ export default function TablesPage() {
                     </span>
                   </td>
                   <td>{t.seats}</td>
-                  <td>{t.type === 'round' ? 'Круглий' : 'Прямокутний'}</td>
+                  <td>{t.type === 'round' ? 'Okrúhly' : 'Obdĺžnikový'}</td>
                   <td className={styles.pos}>{t.x}, {t.y}</td>
                   <td>
                     <button

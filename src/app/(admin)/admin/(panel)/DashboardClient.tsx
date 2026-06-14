@@ -36,14 +36,14 @@ interface DashboardProps {
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  PENDING: 'Очікує',
-  CONFIRMED: 'Підтверджено',
-  COMPLETED: 'Завершено',
-  CANCELLED: 'Скасовано',
-  NO_SHOW: 'Не прийшов',
-  PROCESSING: 'Обробляється',
-  SHIPPED: 'Відправлено',
-  DELIVERED: 'Доставлено',
+  PENDING: 'Čaká',
+  CONFIRMED: 'Potvrdené',
+  COMPLETED: 'Dokončené',
+  CANCELLED: 'Zrušené',
+  NO_SHOW: 'Neprišiel',
+  PROCESSING: 'Spracováva sa',
+  SHIPPED: 'Odoslané',
+  DELIVERED: 'Doručené',
 };
 
 export default function DashboardClient({
@@ -57,23 +57,23 @@ export default function DashboardClient({
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.h1}>Дашборд</h1>
+      <h1 className={styles.h1}>Prehľad</h1>
 
       {/* Stat cards */}
       <div className={styles.stats}>
         {isRestaurant ? (
           <>
-            <StatCard label="Страв у меню" value={stats.products} />
-            <StatCard label="Бронювань сьогодні" value={stats.todayReservations} />
-            <StatCard label="Очікують підтвердження" value={stats.pendingReservations} />
-            <StatCard label="За тиждень" value={stats.weekReservations} />
+            <StatCard label="Jedál v menu" value={stats.products} />
+            <StatCard label="Rezervácií dnes" value={stats.todayReservations} />
+            <StatCard label="Čaká na potvrdenie" value={stats.pendingReservations} />
+            <StatCard label="Za týždeň" value={stats.weekReservations} />
           </>
         ) : (
           <>
-            <StatCard label="Товарів" value={stats.products} />
-            <StatCard label="Замовлень" value={stats.orders} />
-            <StatCard label="Відгуків" value={stats.reviews} />
-            <StatCard label="Виручка" value={0} />
+            <StatCard label="Produktov" value={stats.products} />
+            <StatCard label="Objednávok" value={stats.orders} />
+            <StatCard label="Recenzií" value={stats.reviews} />
+            <StatCard label="Tržby" value={0} />
           </>
         )}
       </div>
@@ -82,7 +82,7 @@ export default function DashboardClient({
         {/* Recent reservations / orders */}
         <section className={styles.panel}>
           <h2 className={styles.panelTitle}>
-            {isRestaurant ? 'Найближчі бронювання' : 'Останні замовлення'}
+            {isRestaurant ? 'Najbližšie rezervácie' : 'Posledné objednávky'}
           </h2>
           <div className={styles.tableWrap}>
             <table className={styles.table}>
@@ -90,19 +90,19 @@ export default function DashboardClient({
                 <tr>
                   {isRestaurant ? (
                     <>
-                      <th>Дата</th>
-                      <th>Час</th>
-                      <th>Гість</th>
-                      <th>Осіб</th>
-                      <th>Статус</th>
+                      <th>Dátum</th>
+                      <th>Čas</th>
+                      <th>Hosť</th>
+                      <th>Osôb</th>
+                      <th>Stav</th>
                     </>
                   ) : (
                     <>
-                      <th>№</th>
-                      <th>Покупець</th>
-                      <th>Сума</th>
-                      <th>Статус</th>
-                      <th>Дата</th>
+                      <th>č.</th>
+                      <th>Zákazník</th>
+                      <th>Suma</th>
+                      <th>Stav</th>
+                      <th>Dátum</th>
                     </>
                   )}
                 </tr>
@@ -138,7 +138,7 @@ export default function DashboardClient({
                 {(isRestaurant ? recentReservations : recentOrders).length === 0 && (
                   <tr>
                     <td colSpan={5} className={styles.emptyCell}>
-                      {isRestaurant ? 'Немає бронювань' : 'Немає замовлень'}
+                      {isRestaurant ? 'Žiadne rezervácie' : 'Žiadne objednávky'}
                     </td>
                   </tr>
                 )}
@@ -150,7 +150,7 @@ export default function DashboardClient({
         {/* Top products */}
         <section className={styles.panel}>
           <h2 className={styles.panelTitle}>
-            {isRestaurant ? 'Топ страви' : 'Топ товари'}
+            {isRestaurant ? 'Top jedlá' : 'Top produkty'}
           </h2>
           <ul className={styles.top}>
             {topProducts.map((p, i) => (
@@ -162,12 +162,12 @@ export default function DashboardClient({
                 </span>
                 <span className={styles.topName}>{p.name}</span>
                 <span className={styles.topSales}>
-                  {p.sales} {isRestaurant ? 'відгуків' : 'продажів'}
+                  {p.sales} {isRestaurant ? 'recenzií' : 'predajov'}
                 </span>
               </li>
             ))}
             {topProducts.length === 0 && (
-              <li className={styles.emptyCell}>Немає даних</li>
+              <li className={styles.emptyCell}>Žiadne údaje</li>
             )}
           </ul>
         </section>

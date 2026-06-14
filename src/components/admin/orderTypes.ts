@@ -53,40 +53,40 @@ export const STATUS_ORDER: OrderStatus[] = [
 ];
 
 export const STATUS_LABELS_ECOMMERCE: Record<OrderStatus, string> = {
-  PENDING: 'Новий',
-  CONFIRMED: 'Підтверджений',
-  PROCESSING: 'В обробці',
-  SHIPPED: 'Відправлений',
-  DELIVERED: 'Доставлений',
-  CANCELLED: 'Скасований',
-  REFUNDED: 'Повернення',
+  PENDING: 'Nový',
+  CONFIRMED: 'Potvrdený',
+  PROCESSING: 'V spracovaní',
+  SHIPPED: 'Odoslaný',
+  DELIVERED: 'Doručený',
+  CANCELLED: 'Zrušený',
+  REFUNDED: 'Vrátenie',
 };
 
 export const STATUS_LABELS_FOOD: Record<OrderStatus, string> = {
-  PENDING: 'Новий',
-  CONFIRMED: 'Підтверджений',
-  PROCESSING: 'Збирається',
-  SHIPPED: 'Доставляється',
-  DELIVERED: 'Доставлений',
-  CANCELLED: 'Скасований',
-  REFUNDED: 'Повернення',
+  PENDING: 'Nový',
+  CONFIRMED: 'Potvrdený',
+  PROCESSING: 'Pripravuje sa',
+  SHIPPED: 'Doručuje sa',
+  DELIVERED: 'Doručený',
+  CANCELLED: 'Zrušený',
+  REFUNDED: 'Vrátenie',
 };
 
 export const STATUS_LABELS_FOOD_PICKUP: Record<OrderStatus, string> = {
-  PENDING: 'Новий',
-  CONFIRMED: 'Підтверджений',
-  PROCESSING: 'Пакується',
-  SHIPPED: 'Готовий до видачі',
-  DELIVERED: 'Видано',
-  CANCELLED: 'Скасований',
-  REFUNDED: 'Повернення',
+  PENDING: 'Nový',
+  CONFIRMED: 'Potvrdený',
+  PROCESSING: 'Balí sa',
+  SHIPPED: 'Pripravený na výdaj',
+  DELIVERED: 'Vydané',
+  CANCELLED: 'Zrušený',
+  REFUNDED: 'Vrátenie',
 };
 
 export const DELIVERY_MODE_LABELS: Record<DeliveryMode, string> = {
-  SHIPPING: 'Пошта',
-  COURIER: 'Кур\'єр',
-  PICKUP: 'Самовивіз',
-  DINE_IN: 'В закладі',
+  SHIPPING: 'Pošta',
+  COURIER: 'Kuriér',
+  PICKUP: 'Vyzdvihnutie',
+  DINE_IN: 'V reštaurácii',
 };
 
 export function getStatusLabels(
@@ -99,7 +99,5 @@ export function getStatusLabels(
   return STATUS_LABELS_ECOMMERCE;
 }
 
-export const fmtPrice = (amount: number, currency: string) => {
-  if (currency === 'EUR') return `€${amount.toFixed(2)}`;
-  return `${new Intl.NumberFormat('uk-UA').format(amount)} грн`;
-};
+export const fmtPrice = (amount: number, currency: string) =>
+  new Intl.NumberFormat('sk-SK', { style: 'currency', currency: currency || 'EUR', minimumFractionDigits: 2 }).format(amount);

@@ -50,11 +50,11 @@ export default function OrderDetailModal({
 
   const statusLabels = getStatusLabels(vertical ?? 'RESTAURANT', order.deliveryMode);
 
-  const customerName = order.customer?.name ?? order.guestName ?? 'Гість';
+  const customerName = order.customer?.name ?? order.guestName ?? 'Hosť';
   const customerPhone = order.customer?.phone ?? order.guestPhone ?? '—';
   const customerEmail = order.customer?.email ?? order.guestEmail ?? '—';
   const itemCount = order.items.reduce((s, i) => s + i.quantity, 0);
-  const dateStr = new Date(order.createdAt).toLocaleDateString('uk-UA', {
+  const dateStr = new Date(order.createdAt).toLocaleDateString('sk-SK', {
     day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit',
   });
 
@@ -62,8 +62,8 @@ export default function OrderDetailModal({
     <div className={styles.overlay} onClick={onClose} role="presentation">
       <div className={styles.dialog} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
         <div className={styles.head}>
-          <h2 className={styles.title}>Замовлення {order.orderNumber}</h2>
-          <button type="button" className={styles.close} onClick={onClose} aria-label="Закрити">
+          <h2 className={styles.title}>Objednávka {order.orderNumber}</h2>
+          <button type="button" className={styles.close} onClick={onClose} aria-label="Zatvoriť">
             <CloseIcon />
           </button>
         </div>
@@ -72,19 +72,19 @@ export default function OrderDetailModal({
           {/* Info grid */}
           <div className={styles.info}>
             <div className={styles.infoBlock}>
-              <span className={styles.infoLabel}>Дата</span>
+              <span className={styles.infoLabel}>Dátum</span>
               <span className={styles.infoValue}>{dateStr}</span>
             </div>
 
             <div className={styles.infoBlock}>
-              <span className={styles.infoLabel}>Покупець</span>
+              <span className={styles.infoLabel}>Zákazník</span>
               <span className={styles.infoValue}>{customerName}</span>
               <span className={styles.infoSub}>{customerPhone}</span>
               <span className={styles.infoSub}>{customerEmail}</span>
             </div>
 
             <div className={styles.infoBlock}>
-              <span className={styles.infoLabel}>Доставка</span>
+              <span className={styles.infoLabel}>Doručenie</span>
               <span className={styles.infoValue}>{DELIVERY_MODE_LABELS[order.deliveryMode]}</span>
               {order.deliveryAddress && (
                 <span className={styles.infoSub}>
@@ -94,7 +94,7 @@ export default function OrderDetailModal({
             </div>
 
             <div className={styles.infoBlock}>
-              <span className={styles.infoLabel}>Оплата</span>
+              <span className={styles.infoLabel}>Platba</span>
               <span className={styles.infoValue}>{order.paymentMethod ?? '—'}</span>
               <span className={styles.infoSub}>{statusLabels[order.status]}</span>
             </div>
@@ -102,7 +102,7 @@ export default function OrderDetailModal({
 
           {/* Items */}
           <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Товари ({itemCount})</h3>
+            <h3 className={styles.sectionTitle}>Položky ({itemCount})</h3>
             <ul className={styles.items}>
               {order.items.map((it) => (
                 <li key={it.id} className={styles.item}>
@@ -117,7 +117,7 @@ export default function OrderDetailModal({
               ))}
             </ul>
             <div className={styles.total}>
-              <span>До сплати</span>
+              <span>Na zaplatenie</span>
               <span className={styles.totalVal}>{fmtPrice(order.total, order.currency)}</span>
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function OrderDetailModal({
           {/* Status + Tracking */}
           <div className={styles.controls}>
             <label className={styles.control}>
-              <span className={styles.controlLabel}>Статус</span>
+              <span className={styles.controlLabel}>Stav</span>
               <select
                 className={styles.select}
                 value={order.status}
@@ -140,17 +140,17 @@ export default function OrderDetailModal({
             </label>
 
             <div className={styles.control}>
-                <span className={styles.controlLabel}>Номер ТТН</span>
+                <span className={styles.controlLabel}>Číslo sledovania</span>
                 <div className={styles.ttnRow}>
                   <input
                     className={styles.input}
                     type="text"
                     value={tracking}
-                    placeholder="Введіть номер ТТН"
+                    placeholder="Zadajte číslo sledovania"
                     onChange={(e) => setTracking(e.target.value)}
                   />
                   <button type="button" className={styles.ttnSave} onClick={() => onSaveTracking(order.id, tracking)}>
-                    Зберегти ТТН
+                    Uložiť
                   </button>
                 </div>
             </div>
@@ -158,14 +158,14 @@ export default function OrderDetailModal({
 
           {order.customerNote && (
             <div className={styles.noteBlock}>
-              <span className={styles.noteLabel}>Коментар покупця</span>
+              <span className={styles.noteLabel}>Poznámka zákazníka</span>
               <span className={styles.noteText}>{order.customerNote}</span>
             </div>
           )}
 
           <button type="button" className={styles.notify} onClick={() => onNotify(order.id)}>
             <BellIcon />
-            Надіслати повідомлення покупцю
+            Odoslať správu zákazníkovi
           </button>
         </div>
       </div>

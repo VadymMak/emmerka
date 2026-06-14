@@ -79,22 +79,22 @@ export default function DeliveryZonesClient({ zones: initial }: Props) {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Зони доставки</h1>
-        <p className={styles.subtitle}>Управління зонами, тарифами та часом доставки</p>
+        <h1 className={styles.title}>Doručovacie zóny</h1>
+        <p className={styles.subtitle}>Správa zón, taríf a času doručenia</p>
       </div>
 
       <div className={styles.form}>
-        <h2 className={styles.formTitle}>{editing ? 'Редагувати зону' : 'Нова зона'}</h2>
+        <h2 className={styles.formTitle}>{editing ? 'Upraviť zónu' : 'Nová zóna'}</h2>
         <div className={styles.fields}>
           <input
             className={styles.input}
-            placeholder="Назва зони"
+            placeholder="Názov zóny"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
           <input
             className={styles.input}
-            placeholder="Вартість (€)"
+            placeholder="Cena (€)"
             type="number"
             step="0.01"
             value={formData.fee}
@@ -102,7 +102,7 @@ export default function DeliveryZonesClient({ zones: initial }: Props) {
           />
           <input
             className={styles.input}
-            placeholder="Мін. замовлення (€)"
+            placeholder="Min. objednávka (€)"
             type="number"
             step="0.01"
             value={formData.minOrder}
@@ -110,14 +110,14 @@ export default function DeliveryZonesClient({ zones: initial }: Props) {
           />
           <input
             className={styles.input}
-            placeholder="Мін. час доставки (хв)"
+            placeholder="Min. čas doručenia (min)"
             type="number"
             value={formData.estimatedMin}
             onChange={(e) => setFormData({ ...formData, estimatedMin: e.target.value })}
           />
           <input
             className={styles.input}
-            placeholder="Макс. час доставки (хв)"
+            placeholder="Max. čas doručenia (min)"
             type="number"
             value={formData.estimatedMax}
             onChange={(e) => setFormData({ ...formData, estimatedMax: e.target.value })}
@@ -128,22 +128,22 @@ export default function DeliveryZonesClient({ zones: initial }: Props) {
               checked={formData.active}
               onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
             />
-            Активна
+            Aktívna
           </label>
         </div>
         <div className={styles.actions}>
           {editing ? (
             <>
               <button className={styles.btnSave} onClick={() => handleUpdate(editing)}>
-                Зберегти
+                Uložiť
               </button>
               <button className={styles.btnCancel} onClick={() => { setEditing(null); resetForm(); }}>
-                Скасувати
+                Zrušiť
               </button>
             </>
           ) : (
             <button className={styles.btnCreate} onClick={handleCreate}>
-              Додати зону
+              Pridať zónu
             </button>
           )}
         </div>
@@ -151,29 +151,29 @@ export default function DeliveryZonesClient({ zones: initial }: Props) {
 
       <div className={styles.list}>
         {zones.length === 0 ? (
-          <p className={styles.empty}>Зони ще не створені</p>
+          <p className={styles.empty}>Žiadne zóny ešte neboli vytvorené</p>
         ) : (
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Назва</th>
-                <th>Вартість</th>
-                <th>Мін. замовлення</th>
-                <th>Час доставки</th>
-                <th>Статус</th>
-                <th>Дії</th>
+                <th>Názov</th>
+                <th>Cena</th>
+                <th>Min. objednávka</th>
+                <th>Čas doručenia</th>
+                <th>Stav</th>
+                <th>Akcie</th>
               </tr>
             </thead>
             <tbody>
               {zones.map((zone) => (
                 <tr key={zone.id} className={!zone.active ? styles.inactive : ''}>
                   <td>{zone.name}</td>
-                  <td>{zone.fee === 0 ? 'Безкоштовно' : `€${zone.fee.toFixed(2)}`}</td>
+                  <td>{zone.fee === 0 ? 'Zadarmo' : `€${zone.fee.toFixed(2)}`}</td>
                   <td>{zone.minOrder ? `€${zone.minOrder.toFixed(2)}` : '—'}</td>
-                  <td>{zone.estimatedMin}–{zone.estimatedMax} хв</td>
+                  <td>{zone.estimatedMin}–{zone.estimatedMax} min</td>
                   <td>
                     <span className={zone.active ? styles.badgeActive : styles.badgeInactive}>
-                      {zone.active ? 'Активна' : 'Вимкнена'}
+                      {zone.active ? 'Aktívna' : 'Vypnutá'}
                     </span>
                   </td>
                   <td className={styles.rowActions}>

@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
     select: { name: true },
   });
   return {
-    title: `Вхід — Admin ${store?.name ?? 'Store'}`,
+    title: `Prihlásenie — Admin ${store?.name ?? 'Store'}`,
     robots: { index: false, follow: false },
   };
 }
