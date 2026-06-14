@@ -98,7 +98,7 @@ async function main() {
     vertical: Vertical.RESTAURANT,
     regionBundle: 'EU',
     primaryMode: StoreMode.PHYSICAL,
-    address: 'Emmerova Vila, Hlavná ulica, Trnava',
+    address: 'Emmerova Vila, Hlavná ulica',
     city: 'Trnava',
     openingHours: JSON.stringify({
       mon: { open: '08:00', close: '22:00' },
