@@ -406,6 +406,7 @@
     "optional": "nepovinné",
     "specialRequestsPlaceholder": "Alergie, oslavy, preferencie sedenia...",
     "confirm": "Potvrdiť rezerváciu",
+    "successMessage": "Rezervácia prijatá! Čoskoro vás budeme kontaktovať.",
     "formNote": "Potvrdenie dostanete e-mailom do 30 minút",
     "selectTable": "Vyberte stôl",
     "tapToSelect": "Kliknite na stôl pre výber",

@@ -136,7 +136,7 @@ export default function ReservationSection() {
         <div className={styles.formCard}>
           {submitted && (
             <div className={styles.successToast}>
-              ✓ {t('confirm')} — we&apos;ll contact you shortly!
+              ✓ {t('successMessage')}
             </div>
           )}
           {error && (
