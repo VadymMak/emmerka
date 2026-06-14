@@ -121,6 +121,10 @@
   object-position: center;
 }
 
+/* Art direction: show desktop image, hide mobile by default */
+.imageDesktop { display: block; }
+.imageMobile  { display: none; }
+
 .imageOverlay {
   position: absolute;
   inset: 0;
@@ -199,15 +203,11 @@
     align-items: flex-start;
   }
 
-  /* Frosted glass card — effective bg ≈ #ece7df → all text ≥5:1 WCAG AA */
   .content {
     flex: none;
     width: 100%;
     max-width: none;
-    padding: 6rem 1.5rem 2rem;
-    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    padding: 5rem 1.5rem 2rem;
   }
 
   .imageWrap {
@@ -216,12 +216,16 @@
     left: 0;
   }
 
-  /* Lighter overlay — frosted glass handles text contrast, let image breathe */
+  /* Art direction: swap to light mobile image */
+  .imageDesktop { display: none; }
+  .imageMobile  { display: block; }
+
+  /* Minimal overlay — light image provides natural contrast */
   .imageOverlay {
     background: linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--color-overlay) 40%, transparent) 0%,
-      color-mix(in srgb, var(--color-overlay) 60%, transparent) 40%,
+      transparent 0%,
+      color-mix(in srgb, var(--color-bg) 30%, transparent) 60%,
       var(--color-bg) 90%
     );
   }
@@ -234,32 +238,6 @@
 
   .title {
     font-size: 2.25rem;
-  }
-
-  /* Tagline: primary (#C68A6F, 2.64:1) → primary-dark (#5C4638, ~6.5:1) */
-  .tagline {
-    color: var(--color-primary-dark, var(--color-text));
-  }
-
-  .taglineLine {
-    background: var(--color-primary-dark, var(--color-text));
-  }
-
-  /* Subtitle + trust: textSecondary (#7a6b5e, 4.1:1) → text @ 0.75 opacity (~6:1) */
-  .subtitle {
-    color: var(--color-text);
-    opacity: 0.75;
-  }
-
-  .trustLine {
-    color: var(--color-text);
-    opacity: 0.7;
-  }
-
-  /* Secondary button: ensure visible border and text on frosted bg */
-  .btnSecondary {
-    border-color: color-mix(in srgb, var(--color-text) 60%, transparent);
-    color: var(--color-text);
   }
 }
 

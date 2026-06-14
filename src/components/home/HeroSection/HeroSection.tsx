@@ -25,6 +25,7 @@ interface FeaturedProduct {
 interface HeroSectionProps {
   storeName: string;
   heroImage?: string;
+  heroImageMobile?: string;
   dailySpecial?: DailySpecial;
   productCount?: number;
   avgDeliveryMin?: number;
@@ -36,6 +37,7 @@ interface HeroSectionProps {
 export default function HeroSection({
   storeName,
   heroImage,
+  heroImageMobile,
   dailySpecial,
   avgDeliveryMin,
   reviewCount,
@@ -221,16 +223,26 @@ export default function HeroSection({
         </p>
       </div>
 
-      {/* Right — image */}
+      {/* Right — image (art-directed: desktop dark / mobile light) */}
       <div className={styles.imageWrap}>
         <Image
           src={heroImage ?? '/placeholder-product.svg'}
           alt={storeName}
           fill
-          className={styles.image}
+          className={`${styles.image} ${styles.imageDesktop}`}
           priority
           unoptimized
         />
+        {heroImageMobile && (
+          <Image
+            src={heroImageMobile}
+            alt={storeName}
+            fill
+            className={`${styles.image} ${styles.imageMobile}`}
+            priority
+            unoptimized
+          />
+        )}
         <div className={styles.imageOverlay} />
       </div>
 

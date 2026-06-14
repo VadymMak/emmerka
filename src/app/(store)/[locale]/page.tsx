@@ -120,6 +120,7 @@ export default async function HomePage({
         dailySpecials={dailySpecials.length > 0 ? dailySpecials : undefined}
         testimonials={testimonialItems}
         testimonialsCount={testimonialsCount}
+        heroImageMobile="/hero-emmerka-mobile.webp"
       />
     </>
   );

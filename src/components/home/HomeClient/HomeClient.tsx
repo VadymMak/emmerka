@@ -56,6 +56,7 @@ interface HomeClientProps {
   dailySpecials?: DailySpecialItem[];
   testimonials?: TestimonialItem[];
   testimonialsCount?: number;
+  heroImageMobile?: string;
 }
 
 const noop = (_id: string) => {};
@@ -67,6 +68,7 @@ export default function HomeClient({
   dailySpecials,
   testimonials,
   testimonialsCount,
+  heroImageMobile,
 }: HomeClientProps) {
   const vConfig = useVerticalConfig();
   const sections = vConfig.ui.homeSections;
@@ -88,6 +90,7 @@ export default function HomeClient({
                 key={section}
                 storeName={storeName}
                 heroImage="/hero-emmerka.webp"
+                heroImageMobile={heroImageMobile}
                 dailySpecial={
                   fullProducts[0]
                     ? {
