@@ -1,0 +1,62 @@
+
+> vendshop-template-ecommerce@0.1.0 dev F:\projects\emarket
+> next dev
+
+   ▲ Next.js 15.5.18
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.106:3000
+
+ ✓ Starting...
+ ✓ Ready in 12s
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 1019ms (146 modules)
+ ○ Compiling /[locale] ...
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled /[locale] in 4.9s (795 modules)
+ ✓ Compiled /_not-found in 296ms (725 modules)
+ ⨯ [Error: ENOENT: no such file or directory, open 'F:\projects\emarket\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\projects\\emarket\\.next\\routes-manifest.json'
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ○ Compiling /_error ...
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled /_error in 1999ms (1072 modules)
+ ⨯ [Error: ENOENT: no such file or directory, open 'F:\projects\emarket\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\projects\\emarket\\.next\\routes-manifest.json'
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ⨯ [Error: ENOENT: no such file or directory, open 'F:\projects\emarket\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\projects\\emarket\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'F:\projects\emarket\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\projects\\emarket\\.next\\routes-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'F:\projects\emarket\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\projects\\emarket\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'F:\projects\emarket\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\projects\\emarket\\.next\\routes-manifest.json'
+}
+ GET /en 500 in 11723ms
+ GET /en 500 in 293ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
