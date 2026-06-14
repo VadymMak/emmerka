@@ -31,7 +31,7 @@
   font-family: var(--font-playfair), Georgia, serif;
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 700;
-  color: var(--color-contrast);
+  color: var(--color-text);
   margin: 0;
   line-height: 1.15;
 }
