@@ -28,7 +28,7 @@ interface TableDef {
 
 const TIME_SLOTS = ['12:00', '13:00', '14:00', '18:00', '19:00', '20:00', '21:00'];
 
-const IS_LOGGED_IN = false;
+const SHOW_TABLE_MAP = true;
 
 export default function ReservationSection() {
   const t = useTranslations('reservation');
@@ -131,7 +131,7 @@ export default function ReservationSection() {
         <p className={styles.subtitle}>{t('subtitle')}</p>
       </div>
 
-      <div className={`${styles.container} ${!IS_LOGGED_IN ? styles.containerSingle : ''}`}>
+      <div className={`${styles.container} ${!SHOW_TABLE_MAP ? styles.containerSingle : ''}`}>
         {/* ── Left: Form ── */}
         <div className={styles.formCard}>
           {submitted && (
@@ -254,7 +254,7 @@ export default function ReservationSection() {
         </div>
 
         {/* ── Right: Table map (only when logged in) ── */}
-        {IS_LOGGED_IN && <div className={styles.mapCard}>
+        {SHOW_TABLE_MAP && <div className={styles.mapCard}>
           <p className={styles.mapTitle}>{t('selectTable')}</p>
           <p className={styles.mapSubtitle}>{t('tapToSelect')}</p>
 
@@ -262,8 +262,7 @@ export default function ReservationSection() {
             <svg
               viewBox="0 0 640 320"
               className={styles.mapSvg}
-              style={IS_LOGGED_IN ? {} : { filter: 'blur(6px)' }}
-              aria-hidden={!IS_LOGGED_IN}
+              aria-label="Mapa stolov"
             >
               {/* Zone dividers */}
               <line x1="230" y1="20" x2="230" y2="300" stroke="#2a2a2a" strokeWidth="1" strokeDasharray="4 4" />
@@ -283,8 +282,8 @@ export default function ReservationSection() {
                 return (
                   <g
                     key={table.id}
-                    onClick={() => IS_LOGGED_IN && handleTableClick(table)}
-                    style={{ cursor: IS_LOGGED_IN && !isOccupied ? 'pointer' : 'default' }}
+                    onClick={() => handleTableClick(table)}
+                    style={{ cursor: !isOccupied ? 'pointer' : 'default' }}
                   >
                     {table.type === 'round' ? (
                       <circle cx={table.x} cy={table.y} r={r} stroke={stroke} strokeWidth="2" fill={fill} />
@@ -302,23 +301,6 @@ export default function ReservationSection() {
               })}
             </svg>
 
-            {/* Locked overlay */}
-            {!IS_LOGGED_IN && (
-              <div className={styles.mapOverlay}>
-                <svg className={styles.lockIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                </svg>
-                <p className={styles.lockText}>{t('signInToChoose')}</p>
-                <button type="button" className={styles.createAccountBtn}>
-                  {t('createAccount')}
-                </button>
-                <p className={styles.signInLink}>
-                  {t('alreadyHaveAccount')}{' '}
-                  <a href="/login">{t('signIn')}</a>
-                </p>
-              </div>
-            )}
           </div>
 
           {/* Legend */}

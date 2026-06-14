@@ -27,7 +27,7 @@ const RESTAURANT_SPECIALS: SpecialItem[] = [
     name: 'Spaghetti Carbonara',
     description: 'Classic Roman pasta with guanciale, egg, pecorino, and black pepper',
     price: 12.90,
-    currency: '€',
+    currency: 'EUR',
     badge: 'chef',
   },
   {
@@ -36,7 +36,7 @@ const RESTAURANT_SPECIALS: SpecialItem[] = [
     name: 'Osso Buco',
     description: 'Slow-braised veal shank with gremolata and saffron risotto',
     price: 24.50,
-    currency: '€',
+    currency: 'EUR',
     badge: 'popular',
   },
   {
@@ -45,7 +45,7 @@ const RESTAURANT_SPECIALS: SpecialItem[] = [
     name: 'Tiramisù',
     description: 'Our signature dessert — mascarpone, espresso, and cocoa',
     price: 8.90,
-    currency: '€',
+    currency: 'EUR',
     badge: 'new',
   },
 ];
@@ -57,7 +57,7 @@ const FOOD_MARKET_SPECIALS: SpecialItem[] = [
     name: 'Fresh Strawberries',
     description: 'Organic, hand-picked this morning — limited daily supply',
     price: 3.49,
-    currency: '€',
+    currency: 'EUR',
     badge: 'new',
   },
   {
@@ -66,7 +66,7 @@ const FOOD_MARKET_SPECIALS: SpecialItem[] = [
     name: 'Sourdough Bread',
     description: 'Freshly baked today — artisan recipe with 48h fermentation',
     price: 3.49,
-    currency: '€',
+    currency: 'EUR',
     badge: 'popular',
   },
   {
@@ -75,7 +75,7 @@ const FOOD_MARKET_SPECIALS: SpecialItem[] = [
     name: 'Greek Yogurt',
     description: 'Organic, high-protein — perfect for breakfast',
     price: 2.29,
-    currency: '€',
+    currency: 'EUR',
     badge: 'new',
   },
 ];
@@ -135,7 +135,7 @@ export default function DailySpecials({ items }: DailySpecialsProps) {
               <p className={styles.dishDesc}>{item.description}</p>
               <div className={styles.cardFooter}>
                 <span className={styles.price}>
-                  {item.currency}{item.price.toFixed(2)}
+                  {new Intl.NumberFormat('sk-SK', { style: 'currency', currency: item.currency, minimumFractionDigits: 2 }).format(item.price)}
                 </span>
                 <button
                   type="button"

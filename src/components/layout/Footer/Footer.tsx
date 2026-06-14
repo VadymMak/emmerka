@@ -31,12 +31,12 @@ const CATALOG_CATEGORIES = [
 ] as const;
 
 const RESTAURANT_CATEGORIES = [
-  'antipasti',
-  'primi',
-  'secondi',
-  'pizza',
-  'dolci',
-  'bevande',
+  'kava',
+  'napoje',
+  'ranajky',
+  'obedy',
+  'dezerty',
+  'vino',
 ] as const;
 
 const FOOD_MARKET_CATEGORIES = [
@@ -69,6 +69,29 @@ const B2B_CATEGORIES = [
   'packaging',
   'services',
 ] as const;
+
+function formatOpeningHours(raw: string): string {
+  try {
+    const h = JSON.parse(raw) as Record<string, { open: string; close: string }>;
+    const dayNames: Record<string, string> = {
+      mon: 'Po', tue: 'Ut', wed: 'St', thu: 'Št', fri: 'Pi', sat: 'So', sun: 'Ne',
+    };
+    const lines: string[] = [];
+    const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri'];
+    const weekend = [{ key: 'sat', label: 'So' }, { key: 'sun', label: 'Ne' }];
+    const wd = h['mon'];
+    if (wd) {
+      const allSame = weekdays.every((d) => h[d]?.open === wd.open && h[d]?.close === wd.close);
+      lines.push(allSame ? `Po–Pi: ${wd.open} – ${wd.close}` : weekdays.filter((d) => h[d]).map((d) => `${dayNames[d]}: ${h[d].open} – ${h[d].close}`).join('\n'));
+    }
+    for (const { key, label } of weekend) {
+      if (h[key]) lines.push(`${label}: ${h[key].open} – ${h[key].close}`);
+    }
+    return lines.join('\n');
+  } catch {
+    return raw;
+  }
+}
 
 const strokeProps = {
   fill: 'none',
@@ -136,6 +159,7 @@ export default function Footer({
   const presence = useStorePresence();
   const displayPhone = presence.phone ?? phone;
   const displayEmail = presence.email ?? email;
+  const displayHours = presence.openingHours ? formatOpeningHours(presence.openingHours) : null;
   const telHref = `tel:${displayPhone.replace(/[^+\d]/g, '')}`;
   const effectiveVertical = vertical ?? vConfig.vertical;
   const isRestaurant = effectiveVertical === 'RESTAURANT';
@@ -166,10 +190,10 @@ export default function Footer({
                     ? t('aboutDescB2B')
                     : t('aboutDesc')}
           </p>
-          {(presence.openingHours || (!isRestaurant && !isFoodMarket)) && (
-            <p className={styles.schedule}>
+          {(displayHours || (!isRestaurant && !isFoodMarket)) && (
+            <p className={styles.schedule} style={{ whiteSpace: 'pre-line' }}>
               <ClockIcon />
-              {presence.openingHours ?? t('schedule')}
+              {displayHours ?? t('schedule')}
             </p>
           )}
         </div>
@@ -316,9 +340,9 @@ export default function Footer({
                 {presence.address}{presence.city ? `, ${presence.city}` : ''}
               </li>
             )}
-            <li className={styles.contactItem}>
+            <li className={styles.contactItem} style={{ whiteSpace: 'pre-line' }}>
               <ClockIcon />
-              {presence.openingHours ?? t('schedule')}
+              {displayHours ?? t('schedule')}
             </li>
             {!isRestaurant && !isFoodMarket && !presence.hasPhysicalLocation && (
               <li className={styles.contactItem}>
@@ -334,10 +358,10 @@ export default function Footer({
         </div>
       </div>
 
-      {!isRestaurant && vConfig.store.showHours && presence.openingHours && (
+      {!isRestaurant && vConfig.store.showHours && displayHours && (
         <div className={styles.hours}>
           <h4 className={styles.hoursTitle}>{t('openingHours')}</h4>
-          <p className={styles.hoursLine}>{presence.openingHours}</p>
+          <p className={styles.hoursLine} style={{ whiteSpace: 'pre-line' }}>{displayHours}</p>
         </div>
       )}
 

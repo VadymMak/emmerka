@@ -171,7 +171,7 @@ export default function HeroSection({
                 <strong className={styles.foodFloatProductName}>{featuredProduct.name}</strong>
                 <span className={styles.foodFloatProductMeta}>{featuredProduct.weight}</span>
                 <span className={styles.foodFloatProductPrice}>
-                  {featuredProduct.currency} {featuredProduct.price.toFixed(2)}
+                  {new Intl.NumberFormat('sk-SK', { style: 'currency', currency: featuredProduct.currency, minimumFractionDigits: 2 }).format(featuredProduct.price)}
                 </span>
               </div>
               {featuredProduct.badge && (
@@ -203,16 +203,21 @@ export default function HeroSection({
         <p className={styles.subtitle}>{t('subtitle')}</p>
 
         <div className={styles.buttons}>
-          <Link href="/reservations" className={styles.btnPrimary}>
+          <button
+            type="button"
+            className={styles.btnPrimary}
+            onClick={() => document.getElementById('reservation')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             {t('bookTable')}
-          </Link>
+          </button>
           <Link href="/catalog" className={styles.btnSecondary}>
             {t('viewMenu')}
           </Link>
         </div>
 
         <p className={styles.trustLine}>
-          ⭐ {t('googleRating')} &nbsp;·&nbsp; 🕐 {t('openUntil')} &nbsp;·&nbsp; 📍 Rome, Italy
+          ⭐ {t('googleRating')} &nbsp;·&nbsp; 🕐 {t('openUntil')} &nbsp;·&nbsp;
+          📍 {presence.address ?? 'Emmerova Vila'}{presence.city ? `, ${presence.city}` : ''}
         </p>
       </div>
 
@@ -235,7 +240,7 @@ export default function HeroSection({
           <p className={styles.promoTitle}>{t('todaysSpecial')}</p>
           <p className={styles.promoName}>{dailySpecial.name}</p>
           <p className={styles.promoPrice}>
-            {dailySpecial.currency}{dailySpecial.price}
+            {new Intl.NumberFormat('sk-SK', { style: 'currency', currency: dailySpecial.currency, minimumFractionDigits: 2 }).format(dailySpecial.price)}
           </p>
           <Link href="/catalog" className={styles.promoBtn}>
             {t('orderNow')}

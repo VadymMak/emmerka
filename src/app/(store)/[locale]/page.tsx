@@ -5,7 +5,7 @@ import { db } from '@/lib/db';
 import JsonLd from '@/components/seo/JsonLd';
 import { getBaseUrl } from '@/lib/url';
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
 const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 

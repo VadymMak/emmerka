@@ -66,9 +66,14 @@
 }
 
 .imageWrap {
+  position: relative;
   aspect-ratio: 4 / 5;
   border-radius: 16px;
   overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
 }
 
 .placeholder {
