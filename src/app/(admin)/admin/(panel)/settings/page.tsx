@@ -41,7 +41,7 @@ function MaskedInput({ value, onChange, placeholder }: { value: string; onChange
   return (
     <div className={styles.masked}>
       <input className={styles.input} type={show ? 'text' : 'password'} value={value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />
-      <button type="button" className={styles.eye} onClick={() => setShow((s) => !s)} aria-label="Показати або приховати">
+      <button type="button" className={styles.eye} onClick={() => setShow((s) => !s)} aria-label="Zobraziť alebo skryť">
         <EyeIcon off={show} />
       </button>
     </div>
@@ -145,11 +145,11 @@ export default function AdminSettingsPage() {
     youtube: '',
   });
   // Delivery
-  const [delivery, setDelivery] = useState({ novaPoshtaOn: true, novaPoshtaKey: '', pickupOn: true, pickupAddress: 'м. Київ, вул. Хрещатик, 1', freeFrom: '2000' });
+  const [delivery, setDelivery] = useState({ novaPoshtaOn: false, novaPoshtaKey: '', pickupOn: true, pickupAddress: '', freeFrom: '0' });
   // Payment
-  const [payment, setPayment] = useState({ wayforpayOn: true, wfpMerchant: '', wfpSecret: '', wfpTest: false, liqpayOn: true, liqPublic: '', liqPrivate: '', codOn: true, codFee: '0' });
+  const [payment, setPayment] = useState({ wayforpayOn: false, wfpMerchant: '', wfpSecret: '', wfpTest: false, liqpayOn: false, liqPublic: '', liqPrivate: '', codOn: true, codFee: '0' });
   // Notifications
-  const [notif, setNotif] = useState({ emailOn: true, email: 'orders@electromarket.ua', reviewsOn: true, lowStockOn: true, telegramOn: false, botToken: '', chatId: '' });
+  const [notif, setNotif] = useState({ emailOn: true, email: 'info@emmerka.sk', reviewsOn: true, lowStockOn: true, telegramOn: false, botToken: '', chatId: '' });
   // Security
   const [security, setSecurity] = useState({ currentPw: '', newPw: '', confirmPw: '', twoFactor: false });
 
@@ -180,7 +180,7 @@ export default function AdminSettingsPage() {
             <>
               <div className={styles.logoUpload} onClick={() => console.log('[admin logo upload]')}>
                 <UploadIcon />
-                <span>Завантажити логотип</span>
+                <span>Nahrať logotyp</span>
               </div>
 
               {/* Store Mode selector */}
@@ -265,7 +265,7 @@ export default function AdminSettingsPage() {
               <span className={styles.blockTitle}>Slovenská pošta</span>
               <Toggle checked={delivery.novaPoshtaOn} onChange={(v) => sDel('novaPoshtaOn', v)} />
             </div>
-            <Field label="API ключ">
+            <Field label="API kľúč">
               <MaskedInput value={delivery.novaPoshtaKey} onChange={(v) => sDel('novaPoshtaKey', v)} placeholder="••••••••••••" />
             </Field>
             <button type="button" className={styles.testBtn} onClick={() => console.log('[test novaposhta]')}>Overiť spojenie</button>
@@ -315,7 +315,7 @@ export default function AdminSettingsPage() {
 
           <div className={styles.block}>
             <div className={styles.blockHead}>
-              <span className={styles.blockTitle}>Dobierka</span>
+              <span className={styles.blockTitle}>Hotovosť</span>
               <Toggle checked={payment.codOn} onChange={(v) => sPay('codOn', v)} />
             </div>
             <Field label="Poplatok, %"><input className={styles.input} type="number" value={payment.codFee} onChange={(e) => sPay('codFee', e.target.value)} /></Field>

@@ -110,7 +110,7 @@ export default function OrderDetailModal({
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={it.product?.image ?? '/placeholder-product.svg'} alt="" />
                   </span>
-                  <span className={styles.itemName}>{it.product?.nameKey ?? 'Продукт'}</span>
+                  <span className={styles.itemName}>{it.product?.nameKey ?? 'Položka'}</span>
                   <span className={styles.itemQty}>× {it.quantity}</span>
                   <span className={styles.itemPrice}>{fmtPrice(it.price * it.quantity, order.currency)}</span>
                 </li>

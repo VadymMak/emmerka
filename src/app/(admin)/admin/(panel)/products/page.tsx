@@ -10,7 +10,7 @@ export default async function AdminProductsPage() {
   });
 
   if (!store) {
-    return <p style={{ padding: '2rem' }}>Магазин «{STORE_SLUG}» не знайдено</p>;
+    return <p style={{ padding: '2rem' }}>Prevádzka nenájdená</p>;
   }
 
   const [products, categories] = await Promise.all([

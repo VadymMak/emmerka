@@ -12,13 +12,13 @@ interface DaySchedule {
 type WeekSchedule = Record<string, DaySchedule>;
 
 const DAYS = [
-  { key: 'mon', label: 'Понеділок' },
-  { key: 'tue', label: 'Вівторок' },
-  { key: 'wed', label: 'Середа' },
-  { key: 'thu', label: 'Четвер' },
-  { key: 'fri', label: "П'ятниця" },
-  { key: 'sat', label: 'Субота' },
-  { key: 'sun', label: 'Неділя' },
+  { key: 'mon', label: 'Pondelok' },
+  { key: 'tue', label: 'Utorok' },
+  { key: 'wed', label: 'Streda' },
+  { key: 'thu', label: 'Štvrtok' },
+  { key: 'fri', label: 'Piatok' },
+  { key: 'sat', label: 'Sobota' },
+  { key: 'sun', label: 'Nedeľa' },
 ];
 
 const DEFAULT_SCHEDULE: WeekSchedule = Object.fromEntries(
@@ -67,18 +67,18 @@ export default function WorkingHours() {
       });
       if (res.ok) setSaved(true);
     } catch {
-      alert('Помилка збереження');
+      alert('Chyba uloženia');
     } finally {
       setSaving(false);
     }
   };
 
-  if (loading) return <div className={styles.loading}>Завантаження...</div>;
+  if (loading) return <div className={styles.loading}>Načítavanie...</div>;
 
   return (
     <div className={styles.hours}>
-      <h3 className={styles.title}>Розклад роботи</h3>
-      <p className={styles.hint}>Вкажіть години роботи ресторану для кожного дня тижня</p>
+      <h3 className={styles.title}>Otváracie hodiny</h3>
+      <p className={styles.hint}>Zadajte otváracie hodiny reštaurácie pre každý deň v týždni</p>
 
       <div className={styles.grid}>
         {DAYS.map((d) => {
@@ -117,7 +117,7 @@ export default function WorkingHours() {
                   checked={day.closed}
                   onChange={(e) => updateDay(d.key, 'closed', e.target.checked)}
                 />
-                Зачинено
+                Zatvorené
               </label>
             </div>
           );
@@ -131,9 +131,9 @@ export default function WorkingHours() {
           disabled={saving}
           onClick={handleSave}
         >
-          {saving ? 'Зберігаю...' : 'Зберегти розклад'}
+          {saving ? 'Ukladám...' : 'Uložiť rozvrh'}
         </button>
-        {saved && <span className={styles.savedMsg}>✓ Збережено</span>}
+        {saved && <span className={styles.savedMsg}>✓ Uložené</span>}
       </div>
     </div>
   );

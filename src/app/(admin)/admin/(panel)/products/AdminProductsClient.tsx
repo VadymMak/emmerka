@@ -413,7 +413,7 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
             <tr>
               <th className={styles.colChk}>
                 <span className={styles.chk}>
-                  <input type="checkbox" checked={allFilteredChecked} onChange={toggleAll} aria-label="Вибрати всі" />
+                  <input type="checkbox" checked={allFilteredChecked} onChange={toggleAll} aria-label="Vybrať všetky" />
                   <span className={styles.chkBox}><CheckMini /></span>
                 </span>
               </th>
@@ -425,7 +425,7 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
               {isFood && <th>Hmotnosť / Skladovanie</th>}
               <th>Cena</th>
               <th>Dostupnosť</th>
-              <th className={styles.colActions}>Дії</th>
+              <th className={styles.colActions}>Akcie</th>
             </tr>
           </thead>
           <tbody>
@@ -486,10 +486,10 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
                 </td>
                 <td>
                   <div className={styles.actions}>
-                    <button type="button" className={styles.editBtn} onClick={() => setModal({ mode: 'edit', id: p.id })} aria-label="Редагувати">
+                    <button type="button" className={styles.editBtn} onClick={() => setModal({ mode: 'edit', id: p.id })} aria-label="Upraviť">
                       <EditIcon />
                     </button>
-                    <button type="button" className={styles.delBtn} onClick={() => setDeletingId(p.id)} aria-label="Видалити">
+                    <button type="button" className={styles.delBtn} onClick={() => setDeletingId(p.id)} aria-label="Vymazať">
                       <TrashIcon />
                     </button>
                   </div>
@@ -543,7 +543,7 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
 
       {deletingId && (
         <ConfirmDialog
-          message={isRestaurant ? 'Видалити цю страву?' : 'Видалити цей товар?'}
+          message={isRestaurant ? 'Vymazať toto jedlo?' : 'Vymazať tento tovar?'}
           onConfirm={() => void doDelete()}
           onCancel={() => setDeletingId(null)}
         />

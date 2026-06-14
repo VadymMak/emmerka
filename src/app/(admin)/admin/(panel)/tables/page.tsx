@@ -106,7 +106,7 @@ export default function TablesPage() {
 
   const handleSave = async () => {
     if (!form.number.trim()) { setError('Zadajte číslo stola'); return; }
-    if (form.seats < 1 || form.seats > 20) { setError('Місць: 1–20'); return; }
+    if (form.seats < 1 || form.seats > 20) { setError('Počet miest: 1–20'); return; }
     setSaving(true);
     setError(null);
     try {
@@ -167,9 +167,9 @@ export default function TablesPage() {
   return (
     <div className={styles.page}>
       <div className={styles.topBar}>
-        <h1 className={styles.h1}>Столи</h1>
+        <h1 className={styles.h1}>Stoly</h1>
         <button type="button" className={styles.addBtn} onClick={openAdd}>
-          + Додати стіл
+          + Pridať stôl
         </button>
       </div>
 
@@ -247,7 +247,7 @@ export default function TablesPage() {
                       className={`${styles.toggleBtn} ${t.active ? styles.toggleActive : styles.toggleInactive}`}
                       onClick={() => toggleActive(t)}
                     >
-                      {t.active ? 'Активний' : 'Неактивний'}
+                      {t.active ? 'Aktívny' : 'Neaktívny'}
                     </button>
                   </td>
                   <td className={styles.actions}>
@@ -256,7 +256,7 @@ export default function TablesPage() {
                       className={styles.editBtn}
                       onClick={() => openEdit(t)}
                     >
-                      Редагувати
+                      Upraviť
                     </button>
                     <button
                       type="button"
@@ -264,7 +264,7 @@ export default function TablesPage() {
                       disabled={deletingId === t.id}
                       onClick={() => handleDelete(t.id)}
                     >
-                      Видалити
+                      Vymazať
                     </button>
                   </td>
                 </tr>
@@ -279,14 +279,14 @@ export default function TablesPage() {
         <div className={styles.modal} onClick={closeModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <h2 className={styles.modalTitle}>
-              {editingId ? 'Редагувати стіл' : 'Додати стіл'}
+              {editingId ? 'Upraviť stôl' : 'Pridať stôl'}
             </h2>
 
             {error && <div className={styles.error}>{error}</div>}
 
             <div className={styles.formGrid}>
               <label className={styles.formLabel}>
-                Номер столу
+                Číslo stola
                 <input
                   className={styles.input}
                   type="text"
@@ -297,7 +297,7 @@ export default function TablesPage() {
               </label>
 
               <label className={styles.formLabel}>
-                Місць
+                Miest
                 <input
                   className={styles.input}
                   type="number"
@@ -309,7 +309,7 @@ export default function TablesPage() {
               </label>
 
               <label className={styles.formLabel}>
-                Зона
+                Zóna
                 <select
                   className={styles.input}
                   value={form.zone}
@@ -322,7 +322,7 @@ export default function TablesPage() {
               </label>
 
               <label className={styles.formLabel}>
-                Тип столу
+                Typ stola
                 <select
                   className={styles.input}
                   value={form.type}
@@ -335,7 +335,7 @@ export default function TablesPage() {
               </label>
 
               <label className={styles.formLabel}>
-                Позиція X (0–640)
+                Pozícia X (0–640)
                 <input
                   className={styles.input}
                   type="number"
@@ -347,7 +347,7 @@ export default function TablesPage() {
               </label>
 
               <label className={styles.formLabel}>
-                Позиція Y (0–320)
+                Pozícia Y (0–320)
                 <input
                   className={styles.input}
                   type="number"
@@ -365,12 +365,12 @@ export default function TablesPage() {
                 checked={form.active}
                 onChange={(e) => set('active', e.target.checked)}
               />
-              Активний (відображається на карті бронювань)
+              Aktívny (zobrazuje sa na mape rezervácií)
             </label>
 
             <div className={styles.modalActions}>
               <button type="button" className={styles.cancelModalBtn} onClick={closeModal}>
-                Скасувати
+                Zrušiť
               </button>
               <button
                 type="button"
@@ -378,7 +378,7 @@ export default function TablesPage() {
                 disabled={saving}
                 onClick={handleSave}
               >
-                {saving ? 'Збереження...' : 'Зберегти'}
+                {saving ? 'Ukladám...' : 'Uložiť'}
               </button>
             </div>
           </div>

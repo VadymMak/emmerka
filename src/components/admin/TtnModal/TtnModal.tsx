@@ -30,8 +30,8 @@ export default function TtnModal({ orderId, initialTtn = '', onSave, onClose }: 
     <div className={styles.overlay} onClick={onClose} role="presentation">
       <div className={styles.dialog} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
         <div className={styles.head}>
-          <h2 className={styles.title}>ТТН — замовлення #{orderId}</h2>
-          <button type="button" className={styles.close} onClick={onClose} aria-label="Закрити">
+          <h2 className={styles.title}>Sledovacie číslo — objednávka #{orderId}</h2>
+          <button type="button" className={styles.close} onClick={onClose} aria-label="Zatvoriť">
             <CloseIcon />
           </button>
         </div>
@@ -40,12 +40,12 @@ export default function TtnModal({ orderId, initialTtn = '', onSave, onClose }: 
             className={styles.input}
             type="text"
             value={ttn}
-            placeholder="Введіть номер ТТН"
+            placeholder="Zadajte číslo sledovania"
             onChange={(e) => setTtn(e.target.value)}
             autoFocus
           />
           <button type="submit" className={styles.save}>
-            Зберегти
+            Uložiť
           </button>
         </form>
       </div>

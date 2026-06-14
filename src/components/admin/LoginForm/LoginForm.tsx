@@ -59,7 +59,7 @@ export default function LoginForm({ storeName, vertical }: LoginFormProps) {
           </span>
           <span className={styles.logoText}>{storeName}</span>
         </div>
-        <h1 className={styles.title}>Адмін панель</h1>
+        <h1 className={styles.title}>Administrácia</h1>
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
           <label className={styles.field}>
@@ -75,7 +75,7 @@ export default function LoginForm({ storeName, vertical }: LoginFormProps) {
           </label>
 
           <label className={styles.field}>
-            <span className={styles.label}>Пароль</span>
+            <span className={styles.label}>Heslo</span>
             <div className={styles.masked}>
               <input
                 className={`${styles.input} ${error ? styles.inputError : ''}`}
@@ -85,16 +85,16 @@ export default function LoginForm({ storeName, vertical }: LoginFormProps) {
                 autoComplete="current-password"
                 required
               />
-              <button type="button" className={styles.eye} onClick={() => setShowPw((s) => !s)} aria-label="Показати або приховати пароль">
+              <button type="button" className={styles.eye} onClick={() => setShowPw((s) => !s)} aria-label="Zobraziť alebo skryť heslo">
                 <EyeIcon off={showPw} />
               </button>
             </div>
           </label>
 
-          {error && <p className={styles.error}>Невірний email або пароль</p>}
+          {error && <p className={styles.error}>Nesprávny email alebo heslo</p>}
 
           <button type="submit" className={styles.submit} disabled={loading}>
-            {loading ? 'Вхід…' : 'Увійти'}
+            {loading ? 'Prihlasovanie…' : 'Prihlásiť sa'}
           </button>
         </form>
       </div>

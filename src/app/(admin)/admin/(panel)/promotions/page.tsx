@@ -35,10 +35,10 @@ const CATEGORIES = [
 ];
 
 const INITIAL_PROMOS: Promo[] = [
-  { id: 'p1', title: 'Літній розпродаж Makita', type: 'brand', discount: '15', target: 'MAKITA', startDate: '2026-06-01', endDate: '2026-06-30', applied: 234, status: 'active', announcement: 'Знижка -15% на весь асортимент Makita до кінця червня!' },
-  { id: 'p2', title: 'Знижки на болгарки', type: 'category', discount: '20', target: 'Болгарки', startDate: '2026-06-15', endDate: '2026-07-15', applied: 0, status: 'scheduled', announcement: '' },
-  { id: 'p3', title: 'Промокод SUMMER10', type: 'promocode', discount: '10', target: 'SUMMER10', startDate: '2026-05-01', endDate: '2026-05-31', applied: 512, status: 'finished', announcement: '' },
-  { id: 'p4', title: 'Безкоштовна доставка', type: 'freeDelivery', discount: '', target: '', startDate: '2026-06-01', endDate: '2026-08-31', applied: 1203, status: 'active', announcement: 'Безкоштовна доставка від 2000 грн!' },
+  { id: 'p1', title: 'Letný špeciál', type: 'brand', discount: '15', target: 'MAKITA', startDate: '2026-06-01', endDate: '2026-06-30', applied: 234, status: 'active', announcement: 'Zľava -15% na celé letné menu!' },
+  { id: 'p2', title: 'Zľavy na nápoje', type: 'category', discount: '20', target: 'Nápoje', startDate: '2026-06-15', endDate: '2026-07-15', applied: 0, status: 'scheduled', announcement: '' },
+  { id: 'p3', title: 'Promokód SUMMER10', type: 'promocode', discount: '10', target: 'SUMMER10', startDate: '2026-05-01', endDate: '2026-05-31', applied: 512, status: 'finished', announcement: '' },
+  { id: 'p4', title: 'Bezplatné doručenie', type: 'freeDelivery', discount: '', target: '', startDate: '2026-06-01', endDate: '2026-08-31', applied: 1203, status: 'active', announcement: 'Bezplatné doručenie od 30 €!' },
 ];
 
 const fmtDate = (iso: string) => {
@@ -51,7 +51,7 @@ const pluralRaz = (n: number) => {
   return 'krát';
 };
 
-const discountLabel = (p: Promo) => (p.type === 'freeDelivery' ? 'Безкоштовно' : `-${p.discount}%`);
+const discountLabel = (p: Promo) => (p.type === 'freeDelivery' ? 'Zadarmo' : `-${p.discount}%`);
 
 const stroke = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 
@@ -78,7 +78,7 @@ export default function AdminPromotionsPage() {
   const [modal, setModal] = useState<ModalState>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const [announcement, setAnnouncement] = useState('Безкоштовна доставка від 1000 грн');
+  const [announcement, setAnnouncement] = useState('Bezplatné doručenie od 20 €');
   const [announcementDraft, setAnnouncementDraft] = useState(announcement);
   const [announcementVisible, setAnnouncementVisible] = useState(true);
 
@@ -194,7 +194,7 @@ export default function AdminPromotionsPage() {
       <h2 className={styles.sectionTitle}>Oznamovací pruh</h2>
       <div className={styles.announceCard}>
         <div className={styles.preview} data-hidden={!announcementVisible}>
-          <span className={styles.previewLabel}>Прев&apos;ю:</span>
+          <span className={styles.previewLabel}>Náhľad:</span>
           <span className={styles.previewText}>{announcement}</span>
         </div>
 
@@ -203,7 +203,7 @@ export default function AdminPromotionsPage() {
           rows={2}
           value={announcementDraft}
           onChange={(e) => setAnnouncementDraft(e.target.value)}
-          placeholder="Текст для announcement strip"
+          placeholder="Text oznámenia..."
         />
 
         <div className={styles.announceControls}>

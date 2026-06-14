@@ -79,13 +79,13 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
       const res = await fetch('/api/admin/upload', { method: 'POST', body: formData });
       if (!res.ok) {
         const err = await res.json() as { error?: string };
-        alert(err.error ?? 'Помилка завантаження');
+        alert(err.error ?? 'Chyba nahrávania');
         return;
       }
       const uploadData = await res.json() as { url: string };
       setImageUrl(uploadData.url);
     } catch {
-      alert('Помилка завантаження');
+      alert('Chyba nahrávania');
     } finally {
       setImageUploading(false);
       if (imageInputRef.current) imageInputRef.current.value = '';
@@ -99,7 +99,7 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
 
   const isRestaurant = vertical === 'RESTAURANT';
   const isFood = false;
-  const currencyLabel = currency === 'EUR' ? '€' : 'грн';
+  const currencyLabel = currency === 'EUR' ? '€' : currency;
 
   const [foodWeight, setFoodWeight] = useState(initial.weight ?? '');
   const [foodExpiryDays, setFoodExpiryDays] = useState(initial.expiryDays ?? '');
@@ -122,10 +122,10 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
         <div className={styles.head}>
           <h2 className={styles.title}>
             {mode === 'add'
-              ? (isRestaurant ? 'Додати страву' : isFood ? 'Додати продукт' : 'Додати товар')
-              : (isRestaurant ? 'Редагувати страву' : isFood ? 'Редагувати продукт' : 'Редагувати товар')}
+              ? (isRestaurant ? 'Pridať jedlo' : isFood ? 'Pridať produkt' : 'Pridať tovar')
+              : (isRestaurant ? 'Upraviť jedlo' : isFood ? 'Upraviť produkt' : 'Upraviť tovar')}
           </h2>
-          <button type="button" className={styles.close} onClick={onClose} aria-label="Закрити">
+          <button type="button" className={styles.close} onClick={onClose} aria-label="Zatvoriť">
             <CloseIcon />
           </button>
         </div>
@@ -147,12 +147,12 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
               id="product-image-upload"
             />
             <label htmlFor="product-image-upload" className={styles.uploadLabel}>
-              {imageUploading ? 'Завантажую...' : (imageUrl ? 'Змінити фото' : 'Завантажити фото')}
+              {imageUploading ? 'Nahrávam...' : (imageUrl ? 'Zmeniť foto' : 'Nahrať foto')}
             </label>
           </div>
 
           <label className={styles.field}>
-            <span className={styles.label}>Назва</span>
+            <span className={styles.label}>Názov</span>
             <input
               className={styles.input}
               type="text"
@@ -164,7 +164,7 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
 
           <div className={styles.grid2}>
             <label className={styles.field}>
-              <span className={styles.label}>Бренд</span>
+              <span className={styles.label}>Značka</span>
               <input
                 className={styles.input}
                 type="text"
@@ -174,7 +174,7 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
             </label>
 
             <label className={styles.field}>
-              <span className={styles.label}>Категорія</span>
+              <span className={styles.label}>Kategória</span>
               <select
                 className={styles.input}
                 value={data.category}
@@ -189,7 +189,7 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
             </label>
 
             <label className={styles.field}>
-              <span className={styles.label}>Ціна, {currencyLabel}</span>
+              <span className={styles.label}>Cena, {currencyLabel}</span>
               <input
                 className={styles.input}
                 type="number"
@@ -201,7 +201,7 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
             </label>
 
             <label className={styles.field}>
-              <span className={styles.label}>Стара ціна, {currencyLabel}</span>
+              <span className={styles.label}>Pôvodná cena, {currencyLabel}</span>
               <input
                 className={styles.input}
                 type="number"
@@ -213,7 +213,7 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
           </div>
 
           <label className={styles.toggleRow}>
-            <span className={styles.label}>Наявність</span>
+            <span className={styles.label}>Dostupnosť</span>
             <span className={styles.toggle}>
               <input
                 type="checkbox"
@@ -226,10 +226,10 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
 
           {isFood && (
             <div className={styles.foodFields}>
-              <h3 className={styles.fieldGroupTitle}>Характеристики продукту</h3>
+              <h3 className={styles.fieldGroupTitle}>Charakteristiky produktu</h3>
               <div className={styles.grid2}>
                 <label className={styles.field}>
-                  <span className={styles.label}>Вага / Об&#39;єм</span>
+                  <span className={styles.label}>Hmotnosť / Objem</span>
                   <input
                     className={styles.input}
                     type="text"
@@ -239,7 +239,7 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
                   />
                 </label>
                 <label className={styles.field}>
-                  <span className={styles.label}>Термін зберігання (днів)</span>
+                  <span className={styles.label}>Doba trvanlivosti (dní)</span>
                   <input
                     className={styles.input}
                     type="number"
@@ -250,19 +250,19 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
                   />
                 </label>
                 <label className={styles.field}>
-                  <span className={styles.label}>Зберігання</span>
+                  <span className={styles.label}>Skladovanie</span>
                   <select
                     className={styles.input}
                     value={foodTemperature}
                     onChange={(e) => setFoodTemperature(e.target.value)}
                   >
-                    <option value="room">Кімнатне</option>
-                    <option value="refrigerated">Холодильник</option>
-                    <option value="frozen">Заморожене</option>
+                    <option value="room">Izbová teplota</option>
+                    <option value="refrigerated">Chladnička</option>
+                    <option value="frozen">Mrazené</option>
                   </select>
                 </label>
                 <label className={styles.field}>
-                  <span className={styles.label}>Калорії / 100г</span>
+                  <span className={styles.label}>Kalórie / 100g</span>
                   <input
                     className={styles.input}
                     type="number"
@@ -279,16 +279,16 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
                   checked={foodOrganic}
                   onChange={(e) => setFoodOrganic(e.target.checked)}
                 />
-                <span>🌿 Органічний продукт</span>
+                <span>🌿 Organický produkt</span>
               </label>
             </div>
           )}
 
           {isRestaurant && (
             <div className={styles.restaurantFields}>
-              <h3 className={styles.fieldGroupTitle}>Деталі страви</h3>
+              <h3 className={styles.fieldGroupTitle}>Detaily jedla</h3>
               <div>
-                <span className={styles.label}>Дієтичні мітки</span>
+                <span className={styles.label}>Diétne označenia</span>
                 <div className={styles.checkboxGroup}>
                   {DIETARY_TAGS.map((tag) => (
                     <label key={tag} className={styles.checkbox}>
@@ -303,28 +303,28 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
                 </div>
               </div>
               <label className={styles.field}>
-                <span className={styles.label}>Алергени (через кому)</span>
+                <span className={styles.label}>Alergény (oddelené čiarkou)</span>
                 <input
                   className={styles.input}
                   type="text"
                   value={allergens}
                   onChange={(e) => setAllergens(e.target.value)}
-                  placeholder="горіхи, молоко, глютен..."
+                  placeholder="orechy, mlieko, glutén..."
                 />
               </label>
               <div className={styles.grid2}>
                 <label className={styles.field}>
-                  <span className={styles.label}>Порція</span>
+                  <span className={styles.label}>Porcia</span>
                   <input
                     className={styles.input}
                     type="text"
                     value={portion}
                     onChange={(e) => setPortion(e.target.value)}
-                    placeholder="350г"
+                    placeholder="350g"
                   />
                 </label>
                 <label className={styles.field}>
-                  <span className={styles.label}>Час приготування (хв)</span>
+                  <span className={styles.label}>Čas prípravy (min)</span>
                   <input
                     className={styles.input}
                     type="number"
@@ -339,10 +339,10 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
 
           <div className={styles.actions}>
             <button type="button" className={styles.cancel} onClick={onClose}>
-              Скасувати
+              Zrušiť
             </button>
             <button type="submit" className={styles.save}>
-              Зберегти
+              Uložiť
             </button>
           </div>
         </form>

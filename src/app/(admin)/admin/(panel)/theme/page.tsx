@@ -81,8 +81,8 @@ export default function ThemeEditorPage() {
       {toast && <div className={styles.toast}>{toast}</div>}
 
       <section className={styles.section} style={{ marginBottom: '24px' }}>
-        <h2 className={styles.h2}>Готові теми</h2>
-        <p className={styles.presetsHint}>Оберіть тему як основу, потім налаштуйте кольори нижче</p>
+        <h2 className={styles.h2}>Pripravené témy</h2>
+        <p className={styles.presetsHint}>Vyberte tému ako základ, potom upravte farby nižšie</p>
         <div className={styles.presetsGrid}>
           {THEME_PRESETS.map((preset) => (
             <button

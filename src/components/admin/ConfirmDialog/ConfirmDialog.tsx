@@ -12,8 +12,8 @@ export interface ConfirmDialogProps {
 
 export default function ConfirmDialog({
   message,
-  confirmLabel = 'Видалити',
-  cancelLabel = 'Скасувати',
+  confirmLabel = 'Vymazať',
+  cancelLabel = 'Zrušiť',
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {

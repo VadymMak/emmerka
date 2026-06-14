@@ -10,7 +10,7 @@ export default async function OrdersPage() {
     select: { id: true, vertical: true },
   });
 
-  if (!store) return <p style={{ padding: '2rem' }}>Магазин не знайдено</p>;
+  if (!store) return <p style={{ padding: '2rem' }}>Prevádzka nenájdená</p>;
 
   const dbOrders = await db.order.findMany({
     where: { storeId: store.id },

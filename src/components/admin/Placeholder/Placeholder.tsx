@@ -13,7 +13,7 @@ export default function Placeholder({ title }: { title: string }) {
             <circle cx="12" cy="12" r="9" />
           </svg>
         </span>
-        <p className={styles.text}>Розділ у розробці</p>
+        <p className={styles.text}>Sekcia v príprave</p>
       </div>
     </div>
   );

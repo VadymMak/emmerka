@@ -207,11 +207,11 @@ export default function OrdersClient({ orders: initialOrders, vertical }: Props)
                   <td className={styles.date}>{dateStr}</td>
                   <td>
                     <div className={styles.actions}>
-                      <button type="button" className={styles.iconBtn} onClick={() => setDetailId(o.id)} aria-label="Переглянути">
+                      <button type="button" className={styles.iconBtn} onClick={() => setDetailId(o.id)} aria-label="Zobraziť">
                         <EyeIcon />
                       </button>
                       {!false && (
-                        <button type="button" className={styles.iconBtn} onClick={() => setTtnId(o.id)} aria-label="ТТН">
+                        <button type="button" className={styles.iconBtn} onClick={() => setTtnId(o.id)} aria-label="Sledovanie">
                           <BoxIcon />
                         </button>
                       )}

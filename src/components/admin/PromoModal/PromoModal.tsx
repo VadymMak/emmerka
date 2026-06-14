@@ -47,20 +47,20 @@ export default function PromoModal({ mode, initial, brands, categories, onSave, 
     <div className={styles.overlay} onClick={onClose} role="presentation">
       <div className={styles.dialog} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
         <div className={styles.head}>
-          <h2 className={styles.title}>{mode === 'add' ? 'Створити акцію' : 'Редагувати акцію'}</h2>
-          <button type="button" className={styles.close} onClick={onClose} aria-label="Закрити">
+          <h2 className={styles.title}>{mode === 'add' ? 'Vytvoriť akciu' : 'Upraviť akciu'}</h2>
+          <button type="button" className={styles.close} onClick={onClose} aria-label="Zatvoriť">
             <CloseIcon />
           </button>
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <label className={styles.field}>
-            <span className={styles.label}>Назва акції</span>
+            <span className={styles.label}>Názov akcie</span>
             <input className={styles.input} type="text" value={data.title} onChange={(e) => set('title', e.target.value)} required />
           </label>
 
           <label className={styles.field}>
-            <span className={styles.label}>Тип</span>
+            <span className={styles.label}>Typ</span>
             <select className={styles.input} value={data.type} onChange={(e) => onTypeChange(e.target.value as PromoType)}>
               {PROMO_TYPES.map((t) => (
                 <option key={t} value={t}>{PROMO_TYPE_LABEL[t]}</option>
@@ -70,16 +70,16 @@ export default function PromoModal({ mode, initial, brands, categories, onSave, 
 
           {showDiscount && (
             <label className={styles.field}>
-              <span className={styles.label}>Розмір знижки, %</span>
+              <span className={styles.label}>Výška zľavy, %</span>
               <input className={styles.input} type="number" min={0} max={100} value={data.discount} onChange={(e) => set('discount', e.target.value)} />
             </label>
           )}
 
           {data.type === 'brand' && (
             <label className={styles.field}>
-              <span className={styles.label}>Застосувати до бренду</span>
+              <span className={styles.label}>Aplikovať na značku</span>
               <select className={styles.input} value={data.target} onChange={(e) => set('target', e.target.value)}>
-                <option value="">Оберіть бренд</option>
+                <option value="">Vyberte značku</option>
                 {brands.map((b) => (
                   <option key={b} value={b}>{b}</option>
                 ))}
@@ -89,9 +89,9 @@ export default function PromoModal({ mode, initial, brands, categories, onSave, 
 
           {data.type === 'category' && (
             <label className={styles.field}>
-              <span className={styles.label}>Застосувати до категорії</span>
+              <span className={styles.label}>Aplikovať na kategóriu</span>
               <select className={styles.input} value={data.target} onChange={(e) => set('target', e.target.value)}>
-                <option value="">Оберіть категорію</option>
+                <option value="">Vyberte kategóriu</option>
                 {categories.map((c) => (
                   <option key={c.slug} value={c.label}>{c.label}</option>
                 ))}
@@ -101,30 +101,30 @@ export default function PromoModal({ mode, initial, brands, categories, onSave, 
 
           {data.type === 'promocode' && (
             <label className={styles.field}>
-              <span className={styles.label}>Промокод</span>
+              <span className={styles.label}>Promokód</span>
               <input className={styles.input} type="text" value={data.target} onChange={(e) => set('target', e.target.value)} placeholder="SUMMER10" />
             </label>
           )}
 
           <div className={styles.grid2}>
             <label className={styles.field}>
-              <span className={styles.label}>Дата початку</span>
+              <span className={styles.label}>Dátum začiatku</span>
               <input className={styles.input} type="date" value={data.startDate} onChange={(e) => set('startDate', e.target.value)} />
             </label>
             <label className={styles.field}>
-              <span className={styles.label}>Дата кінця</span>
+              <span className={styles.label}>Dátum konca</span>
               <input className={styles.input} type="date" value={data.endDate} onChange={(e) => set('endDate', e.target.value)} />
             </label>
           </div>
 
           <label className={styles.field}>
-            <span className={styles.label}>Текст для announcement strip</span>
-            <textarea className={styles.textarea} rows={2} value={data.announcement} onChange={(e) => set('announcement', e.target.value)} placeholder="Текст оголошення..." />
+            <span className={styles.label}>Text pre oznamovací pruh</span>
+            <textarea className={styles.textarea} rows={2} value={data.announcement} onChange={(e) => set('announcement', e.target.value)} placeholder="Text oznámenia..." />
           </label>
 
           <div className={styles.actions}>
-            <button type="button" className={styles.cancel} onClick={onClose}>Скасувати</button>
-            <button type="submit" className={styles.save}>Зберегти</button>
+            <button type="button" className={styles.cancel} onClick={onClose}>Zrušiť</button>
+            <button type="submit" className={styles.save}>Uložiť</button>
           </div>
         </form>
       </div>

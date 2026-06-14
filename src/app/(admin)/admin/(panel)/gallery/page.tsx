@@ -63,7 +63,7 @@ export default function GalleryPage() {
       }
       await fetchImages();
     } catch {
-      alert('Помилка завантаження');
+      alert('Chyba nahrávania');
     } finally {
       setUploading(false);
       if (fileRef.current) fileRef.current.value = '';
@@ -71,7 +71,7 @@ export default function GalleryPage() {
   };
 
   const deleteImage = async (img: GalleryImage) => {
-    if (!confirm('Видалити це фото?')) return;
+    if (!confirm('Vymazať túto fotku?')) return;
     await fetch(`/api/admin/gallery?id=${img.id}`, { method: 'DELETE' });
     await fetchImages();
   };
