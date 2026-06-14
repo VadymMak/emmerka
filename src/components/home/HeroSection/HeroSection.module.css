@@ -199,11 +199,15 @@
     align-items: flex-start;
   }
 
+  /* Frosted glass card — effective bg ≈ #ece7df → all text ≥5:1 WCAG AA */
   .content {
     flex: none;
     width: 100%;
-    padding: 5rem 1.5rem 2rem;
     max-width: none;
+    padding: 6rem 1.5rem 2rem;
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .imageWrap {
@@ -212,12 +216,13 @@
     left: 0;
   }
 
+  /* Lighter overlay — frosted glass handles text contrast, let image breathe */
   .imageOverlay {
     background: linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--color-overlay) 70%, transparent) 0%,
-      color-mix(in srgb, var(--color-overlay) 90%, transparent) 40%,
-      var(--color-bg) 85%
+      color-mix(in srgb, var(--color-overlay) 40%, transparent) 0%,
+      color-mix(in srgb, var(--color-overlay) 60%, transparent) 40%,
+      var(--color-bg) 90%
     );
   }
 
@@ -229,19 +234,32 @@
 
   .title {
     font-size: 2.25rem;
-    text-shadow: 0 2px 12px color-mix(in srgb, var(--color-bg) 60%, transparent);
   }
 
+  /* Tagline: primary (#C68A6F, 2.64:1) → primary-dark (#5C4638, ~6.5:1) */
   .tagline {
-    text-shadow: 0 1px 8px color-mix(in srgb, var(--color-bg) 50%, transparent);
+    color: var(--color-primary-dark, var(--color-text));
   }
 
+  .taglineLine {
+    background: var(--color-primary-dark, var(--color-text));
+  }
+
+  /* Subtitle + trust: textSecondary (#7a6b5e, 4.1:1) → text @ 0.75 opacity (~6:1) */
   .subtitle {
-    text-shadow: 0 1px 8px color-mix(in srgb, var(--color-bg) 50%, transparent);
+    color: var(--color-text);
+    opacity: 0.75;
   }
 
   .trustLine {
-    text-shadow: 0 1px 6px color-mix(in srgb, var(--color-bg) 40%, transparent);
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+
+  /* Secondary button: ensure visible border and text on frosted bg */
+  .btnSecondary {
+    border-color: color-mix(in srgb, var(--color-text) 60%, transparent);
+    color: var(--color-text);
   }
 }
 
