@@ -582,7 +582,7 @@
   background: var(--color-header-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--color-border) 20%, transparent);
+  box-shadow: 0 1px 8px rgba(92, 70, 56, 0.08);
 }
 
 .restaurantHidden {
@@ -614,10 +614,10 @@
 }
 
 .restaurantNav a {
-  color: var(--color-text-muted);
+  color: var(--color-text);
   text-decoration: none;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.3px;
   transition: color 0.2s ease;
 }
@@ -637,7 +637,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--color-text-muted);
+  color: var(--color-text);
   text-decoration: none;
   font-size: 14px;
   transition: color 0.2s ease;
