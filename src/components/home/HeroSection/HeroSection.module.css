@@ -215,9 +215,9 @@
   .imageOverlay {
     background: linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--color-overlay) 30%, transparent) 0%,
-      color-mix(in srgb, var(--color-overlay) 85%, transparent) 50%,
-      var(--color-bg) 100%
+      color-mix(in srgb, var(--color-overlay) 70%, transparent) 0%,
+      color-mix(in srgb, var(--color-overlay) 90%, transparent) 40%,
+      var(--color-bg) 85%
     );
   }
 
@@ -229,6 +229,19 @@
 
   .title {
     font-size: 2.25rem;
+    text-shadow: 0 2px 12px color-mix(in srgb, var(--color-bg) 60%, transparent);
+  }
+
+  .tagline {
+    text-shadow: 0 1px 8px color-mix(in srgb, var(--color-bg) 50%, transparent);
+  }
+
+  .subtitle {
+    text-shadow: 0 1px 8px color-mix(in srgb, var(--color-bg) 50%, transparent);
+  }
+
+  .trustLine {
+    text-shadow: 0 1px 6px color-mix(in srgb, var(--color-bg) 40%, transparent);
   }
 }
 
