@@ -213,14 +213,14 @@
 }
 .hoursLine {
   font-size: 13px;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.7);
   margin: 0;
 }
 
 /* ── Restaurant / dark variant ── */
 .footerDark {
   background: var(--color-bg-dark);
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -229,31 +229,31 @@
 }
 
 .footerDark .link {
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footerDark .link:hover {
-  color: var(--color-primary);
+  color: var(--color-contrast);
 }
 
 .footerDark .contactLink {
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footerDark .contactLink:hover {
-  color: var(--color-primary);
+  color: var(--color-contrast);
 }
 
 .footerDark .contactItem {
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footerDark .aboutDesc {
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footerDark .schedule {
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footerDark .bottom {
@@ -262,13 +262,13 @@
 }
 
 .footerDark .rights {
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footerDark .bottomLink {
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footerDark .bottomLink:hover {
-  color: var(--color-primary);
+  color: var(--color-contrast);
 }

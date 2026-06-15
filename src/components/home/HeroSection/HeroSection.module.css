@@ -26,7 +26,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 3px;
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
   text-transform: uppercase;
   margin: 0;
 }
@@ -35,7 +35,7 @@
   display: inline-block;
   width: 40px;
   height: 1px;
-  background: var(--color-primary);
+  background: var(--color-primary-dark);
   flex-shrink: 0;
 }
 
@@ -50,7 +50,7 @@
 
 .titleAccent {
   font-style: italic;
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
 }
 
 .subtitle {
@@ -310,7 +310,7 @@
   border-radius: 100px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
   width: fit-content;
 }
 
@@ -490,7 +490,7 @@
 .foodFloatLabel {
   display: block;
   font-size: 0.7rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
 }
 
 .foodFloatProductImg {
@@ -510,7 +510,7 @@
 .foodFloatProductMeta {
   display: block;
   font-size: 0.7rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
 }
 
 .foodFloatProductPrice {
