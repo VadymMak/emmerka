@@ -88,16 +88,21 @@ export default async function HomePage({
   }));
 
   const BADGE_MAP = ['chef', 'popular', 'new'] as const;
-  const dailySpecials = dbSpecials.map((p, i) => ({
-    id: p.id,
-    slug: p.slug,
-    name: p.nameKey,
-    description: ((p.metadata as Record<string, unknown> | null)?.description as string) ?? '',
-    price: p.price,
-    currency: p.currency,
-    image: p.image ?? undefined,
-    badge: BADGE_MAP[i % 3],
-  }));
+  const dailySpecials = dbSpecials.map((p, i) => {
+    const meta = (p.metadata as Record<string, unknown> | null) ?? {};
+    return {
+      id: p.id,
+      slug: p.slug,
+      name: p.nameKey,
+      description: (meta.description as Record<string, string> | undefined)?.en ?? '',
+      price: p.price,
+      oldPrice: p.oldPrice ?? undefined,
+      currency: p.currency,
+      image: p.image ?? undefined,
+      badge: BADGE_MAP[i % 3],
+      dietaryLabels: Array.isArray(meta.dietaryTags) ? (meta.dietaryTags as string[]) : undefined,
+    };
+  });
 
   const baseUrl = getBaseUrl();
   const localBusinessSchema = {

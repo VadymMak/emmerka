@@ -12,9 +12,11 @@ interface SpecialItem {
   name: string;
   description: string;
   price: number;
+  oldPrice?: number;
   currency: string;
   image?: string;
   badge?: 'chef' | 'popular' | 'new';
+  dietaryLabels?: string[];
 }
 
 interface DailySpecialsProps {
@@ -87,6 +89,24 @@ const BADGE_CLASS: Record<NonNullable<SpecialItem['badge']>, string> = {
   new:     styles.badgeNew,
 };
 
+const DIETARY_EMOJI: Record<string, string> = {
+  vegan:        '🌱',
+  vegetarian:   '🥬',
+  'gluten-free': '🌾',
+  'dairy-free':  '🥛',
+  'nut-free':    '🥜',
+  spicy:        '🌶️',
+};
+
+const DIETARY_SHORT: Record<string, string> = {
+  vegan:        'Vegan',
+  vegetarian:   'Veg',
+  'gluten-free': 'GF',
+  'dairy-free':  'DF',
+  'nut-free':    'NF',
+  spicy:        'Spicy',
+};
+
 export default function DailySpecials({ items }: DailySpecialsProps) {
   const t = useTranslations('dailySpecials');
   const addItem = useCartStore((s) => s.addItem);
@@ -144,10 +164,28 @@ export default function DailySpecials({ items }: DailySpecialsProps) {
             <div className={styles.cardBody}>
               <p className={styles.dishName}>{item.name}</p>
               <p className={styles.dishDesc}>{item.description}</p>
+
+              {item.dietaryLabels && item.dietaryLabels.length > 0 && (
+                <div className={styles.dietaryRow}>
+                  {item.dietaryLabels.map((tag) => (
+                    <span key={tag} className={styles.dietaryTag}>
+                      {DIETARY_EMOJI[tag] ?? ''} {DIETARY_SHORT[tag] ?? tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               <div className={styles.cardFooter}>
-                <span className={styles.price}>
-                  {new Intl.NumberFormat('sk-SK', { style: 'currency', currency: item.currency, minimumFractionDigits: 2 }).format(item.price)}
-                </span>
+                <div className={styles.priceBlock}>
+                  {item.oldPrice != null && item.oldPrice > item.price && (
+                    <span className={styles.oldPrice}>
+                      {new Intl.NumberFormat('sk-SK', { style: 'currency', currency: item.currency, minimumFractionDigits: 2 }).format(item.oldPrice)}
+                    </span>
+                  )}
+                  <span className={styles.price}>
+                    {new Intl.NumberFormat('sk-SK', { style: 'currency', currency: item.currency, minimumFractionDigits: 2 }).format(item.price)}
+                  </span>
+                </div>
                 <button
                   type="button"
                   className={styles.orderBtn}

@@ -133,12 +133,47 @@
   overflow: hidden;
 }
 
+/* ── Dietary labels ── */
+.dietaryRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.dietaryTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
 /* ── Card footer ── */
 .cardFooter {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 8px;
+}
+
+.priceBlock {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.oldPrice {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: line-through;
 }
 
 .price {
