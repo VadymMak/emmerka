@@ -33,11 +33,11 @@ export default function AboutSection() {
 
         <div className={styles.imageWrap}>
           <Image
-            src="/placeholder-hero.svg"
-            alt="Emmerka — interiér"
+            src="/about-emmerka.webp"
+            alt="Šéfkuchárka pripravuje tortu v kaviarni Emmerka"
             fill
-            className={styles.image}
-            unoptimized
+            className={styles.aboutImage}
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
       </div>
