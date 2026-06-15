@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/useCartStore';
 import { useVerticalConfig } from '@/lib/vertical-context';
@@ -121,7 +122,17 @@ export default function DailySpecials({ items }: DailySpecialsProps) {
           <div key={item.id} className={styles.card}>
             {/* Image area */}
             <div className={styles.imageWrap}>
-              <div className={styles.imagePlaceholder} />
+              {item.image && !item.image.endsWith('.svg') ? (
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  className={styles.dishImage}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              ) : (
+                <div className={styles.imagePlaceholder} />
+              )}
               {item.badge && (
                 <span className={`${styles.badge} ${BADGE_CLASS[item.badge]}`}>
                   {BADGE_LABEL[item.badge]}

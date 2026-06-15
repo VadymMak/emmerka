@@ -194,6 +194,7 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
                 className={styles.input}
                 type="number"
                 min={0}
+                step="0.01"
                 value={data.price}
                 onChange={(e) => set('price', e.target.value)}
                 required
@@ -206,6 +207,7 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
                 className={styles.input}
                 type="number"
                 min={0}
+                step="0.01"
                 value={data.oldPrice}
                 onChange={(e) => set('oldPrice', e.target.value)}
               />

@@ -77,6 +77,16 @@
   background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text) 100%);
 }
 
+.dishImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .dishImage {
+  transform: scale(1.05);
+}
+
 /* ── Badge ── */
 .badge {
   position: absolute;
