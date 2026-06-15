@@ -108,6 +108,7 @@
   font-size: 0.8rem;
   color: var(--color-text-secondary);
   margin: 0;
+  background-color: var(--color-bg);
 }
 
 /* ── Right image ── */
