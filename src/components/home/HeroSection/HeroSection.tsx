@@ -205,13 +205,9 @@ export default function HeroSection({
         <p className={styles.subtitle}>{t('subtitle')}</p>
 
         <div className={styles.buttons}>
-          <button
-            type="button"
-            className={styles.btnPrimary}
-            onClick={() => document.getElementById('reservation')?.scrollIntoView({ behavior: 'smooth' })}
-          >
+          <Link href="/#reservations" className={styles.btnPrimary}>
             {t('bookTable')}
-          </button>
+          </Link>
           <Link href="/catalog" className={styles.btnSecondary}>
             {t('viewMenu')}
           </Link>
