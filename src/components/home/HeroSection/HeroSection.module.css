@@ -5,6 +5,8 @@
   align-items: center;
   background: var(--color-bg);
   overflow: hidden;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 /* ── Left content ── */
@@ -296,6 +298,8 @@
   background: color-mix(in srgb, var(--color-bg) 95%, var(--color-primary) 5%);
   overflow: hidden;
   gap: 3rem;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 /* ── Left content ── */
