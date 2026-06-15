@@ -42,6 +42,7 @@ export default async function AdminProductsPage() {
       image: p.image ?? '/placeholder-product.svg',
       isHit: p.isHit,
       isNew: p.isNew,
+      badge: (meta.badge as string) ?? '',
       dietaryTags: (meta.dietaryTags as string[]) ?? [],
       allergens: (meta.allergens as string) ?? '',
       portion: (meta.portion as string) ?? '',

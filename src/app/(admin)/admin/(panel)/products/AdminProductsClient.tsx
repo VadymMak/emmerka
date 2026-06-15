@@ -23,6 +23,7 @@ interface AdminProduct {
   image: string;
   isHit: boolean;
   isNew: boolean;
+  badge: string;
   // RESTAURANT fields
   dietaryTags: string[];
   allergens: string;
@@ -71,6 +72,7 @@ function mapApiProduct(p: Record<string, unknown>, cats: CategoryItem[] = []): A
     image: (p.image as string) ?? '/placeholder-product.svg',
     isHit: (p.isHit as boolean) ?? false,
     isNew: (p.isNew as boolean) ?? false,
+    badge: (meta.badge as string) ?? '',
     dietaryTags: (meta.dietaryTags as string[]) ?? [],
     allergens: (meta.allergens as string) ?? '',
     portion: (meta.portion as string) ?? '',
@@ -175,22 +177,12 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
             inStock: data.inStock,
             image: data.image || null,
             categoryId: categories.find((c) => c.slug === data.category)?.id ?? null,
-            metadata: isRestaurant
-              ? {
-                  dietaryTags: data.dietaryTags ?? [],
-                  allergens: data.allergens ?? '',
-                  portion: data.portion ?? '',
-                  prepTime: data.prepTime ?? 0,
-                }
-              : isFood
-                ? {
-                    weight: data.weight || undefined,
-                    expiryDays: data.expiryDays ? Number(data.expiryDays) : undefined,
-                    temperature: data.temperature ?? 'room',
-                    calories: data.calories ? Number(data.calories) : undefined,
-                    organic: data.organic ?? false,
-                  }
-                : undefined,
+            metadata: (() => {
+              const base = { badge: data.badge || undefined };
+              if (isRestaurant) return { ...base, dietaryTags: data.dietaryTags ?? [], allergens: data.allergens ?? '', portion: data.portion ?? '', prepTime: data.prepTime ?? 0 };
+              if (isFood) return { ...base, weight: data.weight || undefined, expiryDays: data.expiryDays ? Number(data.expiryDays) : undefined, temperature: data.temperature ?? 'room', calories: data.calories ? Number(data.calories) : undefined, organic: data.organic ?? false };
+              return base;
+            })(),
           }),
         });
         if (res.ok) {
@@ -217,22 +209,12 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
             inStock: data.inStock,
             image: data.image || null,
             categoryId: categories.find((c) => c.slug === data.category)?.id ?? null,
-            metadata: isRestaurant
-              ? {
-                  dietaryTags: data.dietaryTags ?? [],
-                  allergens: data.allergens ?? '',
-                  portion: data.portion ?? '',
-                  prepTime: data.prepTime ?? 0,
-                }
-              : isFood
-                ? {
-                    weight: data.weight || undefined,
-                    expiryDays: data.expiryDays ? Number(data.expiryDays) : undefined,
-                    temperature: data.temperature ?? 'room',
-                    calories: data.calories ? Number(data.calories) : undefined,
-                    organic: data.organic ?? false,
-                  }
-                : { sku: `NEW-${Date.now().toString().slice(-5)}` },
+            metadata: (() => {
+              const base = { badge: data.badge || undefined };
+              if (isRestaurant) return { ...base, dietaryTags: data.dietaryTags ?? [], allergens: data.allergens ?? '', portion: data.portion ?? '', prepTime: data.prepTime ?? 0 };
+              if (isFood) return { ...base, weight: data.weight || undefined, expiryDays: data.expiryDays ? Number(data.expiryDays) : undefined, temperature: data.temperature ?? 'room', calories: data.calories ? Number(data.calories) : undefined, organic: data.organic ?? false };
+              return { ...base, sku: `NEW-${Date.now().toString().slice(-5)}` };
+            })(),
           }),
         });
         if (res.ok) {
@@ -308,6 +290,7 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
         oldPrice: editing.oldPrice != null ? String(editing.oldPrice) : '',
         inStock: editing.inStock,
         image: editing.image !== '/placeholder-product.svg' ? editing.image : undefined,
+        badge: editing.badge || undefined,
         dietaryTags: editing.dietaryTags,
         allergens: editing.allergens,
         portion: editing.portion,
@@ -325,6 +308,7 @@ export default function AdminProductsClient({ vertical, initialProducts, categor
         price: '',
         oldPrice: '',
         inStock: true,
+        badge: undefined,
         weight: '',
         expiryDays: '',
         temperature: 'room',

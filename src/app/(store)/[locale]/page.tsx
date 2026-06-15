@@ -87,9 +87,10 @@ export default async function HomePage({
     productCount: c._count.products,
   }));
 
-  const BADGE_MAP = ['chef', 'popular', 'new'] as const;
-  const dailySpecials = dbSpecials.map((p, i) => {
+  const VALID_BADGES = new Set(['chef', 'popular', 'new']);
+  const dailySpecials = dbSpecials.map((p) => {
     const meta = (p.metadata as Record<string, unknown> | null) ?? {};
+    const rawBadge = (meta.badge as string) ?? '';
     return {
       id: p.id,
       slug: p.slug,
@@ -99,7 +100,7 @@ export default async function HomePage({
       oldPrice: p.oldPrice ?? undefined,
       currency: p.currency,
       image: p.image ?? undefined,
-      badge: BADGE_MAP[i % 3],
+      badge: VALID_BADGES.has(rawBadge) ? (rawBadge as 'chef' | 'popular' | 'new') : undefined,
       dietaryLabels: Array.isArray(meta.dietaryTags) ? (meta.dietaryTags as string[]) : undefined,
     };
   });

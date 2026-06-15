@@ -12,6 +12,7 @@ export interface ProductFormData {
   oldPrice: string;
   inStock: boolean;
   image?: string;
+  badge?: string;
   // RESTAURANT fields
   dietaryTags?: string[];
   allergens?: string;
@@ -47,6 +48,13 @@ const DIETARY_LABELS: Record<DietaryTag, string> = {
   spicy: '🌶️ Spicy',
 };
 
+const BADGE_OPTIONS = [
+  { value: '', label: 'Bez označenia', emoji: '' },
+  { value: 'chef', label: 'Odporúčanie šéfkuchára', emoji: '⭐' },
+  { value: 'popular', label: 'Obľúbené', emoji: '🔥' },
+  { value: 'new', label: 'Novinka', emoji: '✨' },
+] as const;
+
 function CloseIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -57,6 +65,7 @@ function CloseIcon() {
 
 export default function ProductModal({ mode, initial, categories, vertical, currency, onSave, onClose }: ProductModalProps) {
   const [data, setData] = useState<ProductFormData>(initial);
+  const [badge, setBadge] = useState(initial.badge ?? '');
   const [dietaryTags, setDietaryTags] = useState<string[]>(initial.dietaryTags ?? []);
   const [allergens, setAllergens] = useState(initial.allergens ?? '');
   const [portion, setPortion] = useState(initial.portion ?? '');
@@ -112,6 +121,7 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
     onSave({
       ...data,
       image: imageUrl || undefined,
+      badge: badge || undefined,
       ...(isRestaurant && { dietaryTags, allergens, portion, prepTime }),
     });
   };
@@ -212,6 +222,25 @@ export default function ProductModal({ mode, initial, categories, vertical, curr
                 onChange={(e) => set('oldPrice', e.target.value)}
               />
             </label>
+          </div>
+
+          {/* Badge selector */}
+          <div className={styles.field}>
+            <span className={styles.label}>Označenie (badge)</span>
+            <div className={styles.badgeGroup}>
+              {BADGE_OPTIONS.map((opt) => (
+                <label key={opt.value} className={styles.badgeOption}>
+                  <input
+                    type="radio"
+                    name="badge"
+                    value={opt.value}
+                    checked={badge === opt.value}
+                    onChange={() => setBadge(opt.value)}
+                  />
+                  {opt.emoji ? `${opt.emoji} ${opt.label}` : opt.label}
+                </label>
+              ))}
+            </div>
           </div>
 
           <label className={styles.toggleRow}>

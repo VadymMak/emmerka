@@ -323,3 +323,38 @@
 .uploadLabel:hover {
   background: #f3f4f6;
 }
+
+/* ── Badge selector ──────────────────────────── */
+.badgeGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.badgeOption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4b5563;
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color 150ms ease, background 150ms ease;
+  user-select: none;
+}
+
+.badgeOption:has(input:checked) {
+  border-color: #f97316;
+  background: #fff7ed;
+  color: #ea580c;
+  font-weight: 600;
+}
+
+.badgeOption input {
+  display: none;
+}
