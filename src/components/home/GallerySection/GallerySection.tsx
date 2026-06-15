@@ -48,7 +48,7 @@ export default function GallerySection() {
                 className={styles.realImage}
                 fill
                 sizes="(max-width: 640px) 50vw, 33vw"
-                quality={70}
+                quality={60}
               />
             </div>
           ))}

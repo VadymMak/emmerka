@@ -244,7 +244,7 @@ export default function HeroSection({
             priority
             fetchPriority="high"
             sizes="100vw"
-            quality={75}
+            quality={70}
             unoptimized={heroImageMobile.endsWith('.svg')}
           />
         )}

@@ -55,7 +55,7 @@ export default function MenuCategories({ categories }: MenuCategoriesProps) {
                   fill
                   className={styles.cardImage}
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  quality={65}
+                  quality={60}
                 />
               ) : (
                 <div className={styles.cardPlaceholder} />
