@@ -150,7 +150,8 @@ export default function DailySpecials({ items }: DailySpecialsProps) {
                   alt={item.name}
                   fill
                   className={styles.dishImage}
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  quality={75}
                 />
               ) : (
                 <div className={styles.imagePlaceholder} />

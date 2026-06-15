@@ -54,6 +54,8 @@ export default function MenuCategories({ categories }: MenuCategoriesProps) {
                   alt={t.has(cat.nameKey as Parameters<typeof t>[0]) ? t(cat.nameKey as Parameters<typeof t>[0]) : cat.nameKey}
                   fill
                   className={styles.cardImage}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  quality={75}
                 />
               ) : (
                 <div className={styles.cardPlaceholder} />

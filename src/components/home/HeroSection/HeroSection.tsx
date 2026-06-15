@@ -130,6 +130,8 @@ export default function HeroSection({
               fill
               className={styles.foodImage}
               priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+              quality={80}
               unoptimized={(heroImage ?? '/food-hero-placeholder.svg').endsWith('.svg')}
             />
           </div>
@@ -227,7 +229,9 @@ export default function HeroSection({
           fill
           className={`${styles.image} ${styles.imageDesktop}`}
           priority
-          unoptimized
+          sizes="(max-width: 768px) 100vw, 55vw"
+          quality={80}
+          unoptimized={(heroImage ?? '/placeholder-product.svg').endsWith('.svg')}
         />
         {heroImageMobile && (
           <Image
@@ -236,7 +240,9 @@ export default function HeroSection({
             fill
             className={`${styles.image} ${styles.imageMobile}`}
             priority
-            unoptimized
+            sizes="100vw"
+            quality={80}
+            unoptimized={heroImageMobile.endsWith('.svg')}
           />
         )}
         <div className={styles.imageOverlay} />
