@@ -130,7 +130,8 @@ export default function HeroSection({
               fill
               className={styles.foodImage}
               priority
-              sizes="(max-width: 768px) 100vw, 50vw"
+              fetchPriority="high"
+              sizes="(max-width: 768px) 100vw, 45vw"
               quality={80}
               unoptimized={(heroImage ?? '/food-hero-placeholder.svg').endsWith('.svg')}
             />
@@ -229,7 +230,8 @@ export default function HeroSection({
           fill
           className={`${styles.image} ${styles.imageDesktop}`}
           priority
-          sizes="(max-width: 768px) 100vw, 55vw"
+          fetchPriority="high"
+          sizes="(max-width: 768px) 100vw, 40vw"
           quality={80}
           unoptimized={(heroImage ?? '/placeholder-product.svg').endsWith('.svg')}
         />
