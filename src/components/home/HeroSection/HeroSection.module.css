@@ -357,7 +357,7 @@
 .foodSubtitle {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   max-width: 500px;
   margin: 0;
 }
@@ -417,7 +417,7 @@
 
 .foodTrust {
   font-size: 0.85rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   margin: 0;
   margin-top: 0.25rem;
 }
