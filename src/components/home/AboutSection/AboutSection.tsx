@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import ScrollReveal from '@/components/ui/ScrollReveal/ScrollReveal';
 import styles from './AboutSection.module.css';
 
 export default function AboutSection() {
@@ -10,6 +11,7 @@ export default function AboutSection() {
   return (
     <div className={styles.about}>
       <div className={styles.inner}>
+        <ScrollReveal animation="fadeLeft">
         <div className={styles.content}>
           <span className={styles.label}>{t('label')}</span>
           <h2 className={styles.title}>{t('title')}</h2>
@@ -30,7 +32,9 @@ export default function AboutSection() {
             </div>
           </div>
         </div>
+        </ScrollReveal>
 
+        <ScrollReveal animation="fadeRight" delay={200}>
         <div className={styles.imageWrap}>
           <Image
             src="/about-emmerka.webp"
@@ -40,6 +44,7 @@ export default function AboutSection() {
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
+        </ScrollReveal>
       </div>
     </div>
   );

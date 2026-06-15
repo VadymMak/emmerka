@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import HeroSection from "@/components/home/HeroSection/HeroSection";
 import MenuCategories from "@/components/home/MenuCategories/MenuCategories";
+import ScrollReveal from "@/components/ui/ScrollReveal/ScrollReveal";
 
 const DailySpecials = dynamic(
   () => import("@/components/home/DailySpecials/DailySpecials"),
@@ -105,53 +106,66 @@ export default function HomeClient({
 
           case "menu-categories":
             return (
-              <section key={section} id="menu">
-                <MenuCategories categories={menuCategories} />
-              </section>
+              <ScrollReveal key={section} animation="fadeUp" as="section">
+                <div id="menu">
+                  <MenuCategories categories={menuCategories} />
+                </div>
+              </ScrollReveal>
             );
 
           case "daily-specials":
             return (
-              <section key={section} id="specials">
-                <DailySpecials items={dailySpecials} />
-              </section>
+              <ScrollReveal key={section} animation="fadeUp" delay={100} as="section">
+                <div id="specials">
+                  <DailySpecials items={dailySpecials} />
+                </div>
+              </ScrollReveal>
             );
 
           case "trust-strip":
             return (
-              <section key={section} id="contacts">
-                <TrustStrip />
-              </section>
+              <ScrollReveal key={section} animation="fadeIn" as="section">
+                <div id="contacts">
+                  <TrustStrip />
+                </div>
+              </ScrollReveal>
             );
 
           case "reservations":
             return (
-              <section key={section} id="reservations">
-                <ReservationSection />
-              </section>
+              <ScrollReveal key={section} animation="fadeUp" as="section">
+                <div id="reservations">
+                  <ReservationSection />
+                </div>
+              </ScrollReveal>
             );
 
           case "gallery":
             return (
-              <section key={section} id="gallery">
-                <GallerySection />
-              </section>
+              <ScrollReveal key={section} animation="scaleIn" as="section">
+                <div id="gallery">
+                  <GallerySection />
+                </div>
+              </ScrollReveal>
             );
 
           case "about":
             return (
-              <section key={section} id="about">
-                <AboutSection />
-              </section>
+              <ScrollReveal key={section} animation="fadeUp" delay={100} as="section">
+                <div id="about">
+                  <AboutSection />
+                </div>
+              </ScrollReveal>
             );
 
           case "testimonials":
             return (
-              <TestimonialsSection
-                key={section}
-                testimonials={testimonials ?? []}
-                totalCount={testimonialsCount ?? 0}
-              />
+              <ScrollReveal key={section} animation="fadeUp" as="section">
+                <TestimonialsSection
+                  testimonials={testimonials ?? []}
+                  totalCount={testimonialsCount ?? 0}
+                />
+              </ScrollReveal>
             );
 
           default:

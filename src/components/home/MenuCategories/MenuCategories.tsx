@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import ScrollReveal from '@/components/ui/ScrollReveal/ScrollReveal';
 import styles from './MenuCategories.module.css';
 
 interface CategoryItem {
@@ -41,9 +42,9 @@ export default function MenuCategories({ categories }: MenuCategoriesProps) {
 
         {/* Category grid */}
         <div className={styles.grid}>
-          {items.map((cat) => (
+          {items.map((cat, i) => (
+            <ScrollReveal key={cat.slug} animation="fadeUp" delay={i * 100}>
             <Link
-              key={cat.slug}
               href={`/catalog?category=${cat.slug}`}
               className={styles.card}
             >
@@ -67,6 +68,7 @@ export default function MenuCategories({ categories }: MenuCategoriesProps) {
                 </p>
               </div>
             </Link>
+            </ScrollReveal>
           ))}
         </div>
 

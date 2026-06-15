@@ -1,0 +1,49 @@
+/* ============================================
+   Scroll Reveal Animations — pure CSS
+   ============================================ */
+
+.reveal {
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+
+/* ====== Hidden states ====== */
+.fadeUp {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.fadeIn {
+  opacity: 0;
+  transform: none;
+}
+
+.fadeLeft {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.fadeRight {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.scaleIn {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* ====== Visible state ====== */
+.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ====== Respect reduced motion ====== */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}

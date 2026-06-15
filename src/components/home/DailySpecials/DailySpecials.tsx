@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/useCartStore';
 import { useVerticalConfig } from '@/lib/vertical-context';
+import ScrollReveal from '@/components/ui/ScrollReveal/ScrollReveal';
 import styles from './DailySpecials.module.css';
 
 interface SpecialItem {
@@ -138,8 +139,9 @@ export default function DailySpecials({ items }: DailySpecialsProps) {
 
       {/* Cards grid */}
       <div className={styles.grid}>
-        {specials.map((item) => (
-          <div key={item.id} className={styles.card}>
+        {specials.map((item, i) => (
+          <ScrollReveal key={item.id} animation="fadeUp" delay={i * 150}>
+          <div className={styles.card}>
             {/* Image area */}
             <div className={styles.imageWrap}>
               {item.image && !item.image.endsWith('.svg') ? (
@@ -206,6 +208,7 @@ export default function DailySpecials({ items }: DailySpecialsProps) {
               </div>
             </div>
           </div>
+          </ScrollReveal>
         ))}
       </div>
 
