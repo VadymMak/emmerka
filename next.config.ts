@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ['zustand', 'zod'],
+    optimizeCss: true,
   },
   images: {
     formats: ['image/avif', 'image/webp'],
