@@ -132,7 +132,7 @@ export default function HeroSection({
               priority
               fetchPriority="high"
               sizes="(max-width: 768px) 100vw, 45vw"
-              quality={80}
+              quality={70}
               unoptimized={(heroImage ?? '/food-hero-placeholder.svg').endsWith('.svg')}
             />
           </div>
@@ -232,7 +232,7 @@ export default function HeroSection({
           priority
           fetchPriority="high"
           sizes="(max-width: 768px) 100vw, 40vw"
-          quality={80}
+          quality={70}
           unoptimized={(heroImage ?? '/placeholder-product.svg').endsWith('.svg')}
         />
         {heroImageMobile && (
