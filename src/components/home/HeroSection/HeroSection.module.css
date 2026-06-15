@@ -71,7 +71,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0.875rem 2rem;
-  background: var(--color-primary);
+  background: var(--color-primary-dark);
   color: var(--color-contrast);
   font-size: 0.9rem;
   font-weight: 600;
@@ -81,7 +81,7 @@
 }
 
 .btnPrimary:hover {
-  background: var(--color-primary-dark);
+  background: color-mix(in srgb, var(--color-primary-dark) 85%, black);
 }
 
 .btnSecondary {
@@ -156,7 +156,7 @@
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 2px;
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
   text-transform: uppercase;
   margin: 0;
 }
@@ -171,7 +171,7 @@
 .promoPrice {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
   margin: 0;
 }
 
@@ -181,7 +181,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.5rem 1.25rem;
-  background: var(--color-primary);
+  background: var(--color-primary-dark);
   color: var(--color-contrast);
   font-size: 0.8rem;
   font-weight: 600;
@@ -192,7 +192,7 @@
 }
 
 .promoBtn:hover {
-  background: var(--color-primary-dark);
+  background: color-mix(in srgb, var(--color-primary-dark) 85%, black);
 }
 
 /* ── Responsive ── */
@@ -374,7 +374,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.9rem 2rem;
-  background: var(--color-primary);
+  background: var(--color-primary-dark);
   color: var(--color-contrast);
   font-size: 0.95rem;
   font-weight: 600;
@@ -384,7 +384,7 @@
 }
 
 .foodBtnPrimary:hover {
-  background: var(--color-primary-dark);
+  background: color-mix(in srgb, var(--color-primary-dark) 85%, black);
   transform: translateY(-1px);
 }
 
