@@ -284,7 +284,7 @@ export default function Footer({
           <h3 className={styles.colTitle}>{t('info')}</h3>
           {isRestaurant ? (
             <ul className={styles.links}>
-              <li><Link className={styles.link} href="/#menu">{t('menuLink')}</Link></li>
+              <li><Link className={styles.link} href="/catalog">{t('menuLink')}</Link></li>
               <li><Link className={styles.link} href="/#reservations">{t('reservationsLink')}</Link></li>
               <li><Link className={styles.link} href="/#menu">{t('deliveryLink')}</Link></li>
               <li><Link className={styles.link} href="/#contacts">{t('privacy')}</Link></li>
