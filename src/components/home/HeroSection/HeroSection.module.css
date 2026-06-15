@@ -11,6 +11,7 @@
 .content {
   position: relative;
   z-index: 2;
+  isolation: isolate;
   flex: 0 0 60%;
   max-width: 640px;
   padding: 6rem 3rem 14rem 5rem;
@@ -30,6 +31,9 @@
   color: var(--color-primary-dark);
   text-transform: uppercase;
   margin: 0;
+  background-color: var(--color-bg);
+  position: relative;
+  z-index: 1;
 }
 
 .taglineLine {
@@ -109,6 +113,8 @@
   color: var(--color-text-secondary);
   margin: 0;
   background-color: var(--color-bg);
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Right image ── */
