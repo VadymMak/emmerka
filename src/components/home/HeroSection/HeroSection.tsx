@@ -60,6 +60,7 @@ export default function HeroSection({
 
     return (
       <section className={styles.heroFood} aria-label={storeName}>
+        <div className={styles.heroFoodInner}>
         {/* Left content */}
         <div className={styles.foodContent}>
           <span className={styles.foodBadge}>
@@ -185,6 +186,7 @@ export default function HeroSection({
             </div>
           )}
         </div>
+        </div>
       </section>
     );
   }
@@ -192,6 +194,7 @@ export default function HeroSection({
   // ── Restaurant Hero (default, unchanged) ────────────────────────
   return (
     <section className={styles.hero} aria-label={storeName}>
+      <div className={styles.heroInner}>
       {/* Left — text content */}
       <div className={styles.content}>
         <p className={styles.tagline}>
@@ -264,6 +267,7 @@ export default function HeroSection({
           </Link>
         </div>
       )}
+      </div>
     </section>
   );
 }

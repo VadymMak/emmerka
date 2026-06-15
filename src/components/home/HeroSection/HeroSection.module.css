@@ -1,12 +1,15 @@
 .hero {
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.heroInner {
   position: relative;
+  max-width: 1600px;
+  margin: 0 auto;
   min-height: 90vh;
   display: flex;
   align-items: center;
-  background: var(--color-bg);
-  overflow: hidden;
-  max-width: 1600px;
-  margin: 0 auto;
 }
 
 /* ── Left content ── */
@@ -208,11 +211,10 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   /* Split layout: text above on solid bg, image below in normal flow */
-  .hero {
+  .heroInner {
     min-height: auto;
     flex-direction: column;
     align-items: stretch;
-    background: var(--color-bg);
   }
 
   /* Solid ivory — guaranteed WCAG contrast for all text */
@@ -290,16 +292,19 @@
    ══════════════════════════════════════════════════════════════════ */
 
 .heroFood {
+  background: color-mix(in srgb, var(--color-bg) 95%, var(--color-primary) 5%);
+  overflow: hidden;
+}
+
+.heroFoodInner {
   position: relative;
+  max-width: 1600px;
+  margin: 0 auto;
   min-height: 85vh;
   display: flex;
   align-items: center;
   padding: 5rem 4rem;
-  background: color-mix(in srgb, var(--color-bg) 95%, var(--color-primary) 5%);
-  overflow: hidden;
   gap: 3rem;
-  max-width: 1600px;
-  margin: 0 auto;
 }
 
 /* ── Left content ── */
@@ -547,7 +552,7 @@
 
 /* ── Food Hero responsive ── */
 @media (max-width: 1024px) {
-  .heroFood {
+  .heroFoodInner {
     padding: 4rem 2.5rem;
   }
 
@@ -557,7 +562,7 @@
 }
 
 @media (max-width: 768px) {
-  .heroFood {
+  .heroFoodInner {
     flex-direction: column;
     min-height: auto;
     padding: 4rem 1.5rem 3rem;

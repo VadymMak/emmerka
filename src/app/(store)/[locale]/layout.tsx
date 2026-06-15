@@ -107,10 +107,6 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} data-vertical={config.vertical.vertical} className={playfair.variable}>
-      <head>
-        <link rel="preconnect" href="https://conuflmgcnkfqjmncsth.public.blob.vercel-storage.com" />
-        <link rel="dns-prefetch" href="https://conuflmgcnkfqjmncsth.public.blob.vercel-storage.com" />
-      </head>
       <body style={cssVars as React.CSSProperties}>
         <NextIntlClientProvider messages={messages}>
           <CustomerProvider>

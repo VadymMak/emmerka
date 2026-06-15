@@ -2,12 +2,9 @@
 
 import dynamic from "next/dynamic";
 import HeroSection from "@/components/home/HeroSection/HeroSection";
+import MenuCategories from "@/components/home/MenuCategories/MenuCategories";
 import ScrollReveal from "@/components/ui/ScrollReveal/ScrollReveal";
 
-const MenuCategories = dynamic(
-  () => import("@/components/home/MenuCategories/MenuCategories"),
-  { loading: () => <div style={{ minHeight: '360px' }} /> },
-);
 const DailySpecials = dynamic(
   () => import("@/components/home/DailySpecials/DailySpecials"),
 );
