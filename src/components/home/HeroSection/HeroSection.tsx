@@ -242,6 +242,7 @@ export default function HeroSection({
             fill
             className={`${styles.image} ${styles.imageMobile}`}
             priority
+            fetchPriority="high"
             sizes="100vw"
             quality={80}
             unoptimized={heroImageMobile.endsWith('.svg')}
