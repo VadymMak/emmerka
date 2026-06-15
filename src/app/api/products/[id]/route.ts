@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client';
 import { db } from '@/lib/db';
 import { verifyAdminToken, getAdminSecret, ADMIN_COOKIE } from '@/lib/adminAuth';
 import { cookies } from 'next/headers';
+import { revalidateCatalog } from '@/lib/revalidate';
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -58,6 +59,7 @@ export async function PATCH(request: Request, { params }: Params) {
           : {}),
       },
     });
+    revalidateCatalog();
     return NextResponse.json(product);
   } catch (error) {
     console.error('[PATCH /api/products/[id]]', error);
@@ -75,6 +77,7 @@ export async function DELETE(_request: Request, { params }: Params) {
   const { id } = await params;
   try {
     await db.product.delete({ where: { id } });
+    revalidateCatalog();
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error('[DELETE /api/products/[id]]', error);

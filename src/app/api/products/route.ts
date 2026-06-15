@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client';
 import { db } from '@/lib/db';
 import { verifyAdminToken, getAdminSecret, ADMIN_COOKIE } from '@/lib/adminAuth';
 import { cookies } from 'next/headers';
+import { revalidateCatalog } from '@/lib/revalidate';
 
 const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
 
@@ -133,6 +134,7 @@ export async function POST(request: Request) {
       },
     });
 
+    revalidateCatalog();
     return NextResponse.json(product, { status: 201 });
   } catch (error) {
     console.error('[POST /api/products]', error);
