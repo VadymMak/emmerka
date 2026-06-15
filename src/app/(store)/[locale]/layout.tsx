@@ -7,6 +7,7 @@ import { routing, type Locale } from '@/i18n/routing';
 import Header from '@/components/layout/Header/Header';
 import Footer from '@/components/layout/Footer/Footer';
 import { getStoreConfig } from '@/lib/store-config';
+import { db } from '@/lib/db';
 import { themeToCssVars } from '@/lib/theme';
 import { VerticalProvider } from '@/lib/vertical-context';
 import { PresenceProvider } from '@/lib/presence-context';
@@ -96,6 +97,14 @@ export default async function LocaleLayout({
   const config = await getStoreConfig();
   const cssVars = themeToCssVars(config.theme);
 
+  const footerCategories = config.vertical.vertical === 'RESTAURANT'
+    ? await db.category.findMany({
+        where: { storeId: config.id },
+        select: { slug: true, nameKey: true },
+        orderBy: { sortOrder: 'asc' },
+      })
+    : undefined;
+
   return (
     <html lang={locale} data-vertical={config.vertical.vertical} className={playfair.variable}>
       <head>
@@ -109,7 +118,7 @@ export default async function LocaleLayout({
               <PresenceProvider presence={config.presence}>
                 <Header storeName={config.name} vertical={config.vertical.vertical} phone={config.presence.phone} />
                 <main>{children}</main>
-                <Footer storeName={config.name} vertical={config.vertical.vertical} />
+                <Footer storeName={config.name} vertical={config.vertical.vertical} menuCategories={footerCategories} />
               </PresenceProvider>
             </VerticalProvider>
           </CustomerProvider>

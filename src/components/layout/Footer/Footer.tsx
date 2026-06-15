@@ -17,6 +17,8 @@ export interface FooterProps {
   email?: string;
   /** Controls dark theme + restaurant-specific content. */
   vertical?: string;
+  /** Real menu categories from DB (restaurant only). Overrides hardcoded fallback. */
+  menuCategories?: { slug: string; nameKey: string }[];
 }
 
 // Catalog column reuses the existing `categories` namespace so the footer links
@@ -151,6 +153,7 @@ export default function Footer({
   phone = '+38 (097) 123-45-67',
   email,
   vertical,
+  menuCategories,
 }: FooterProps) {
   const t = useTranslations('footer');
   const tc = useTranslations('categories');
@@ -203,10 +206,12 @@ export default function Footer({
           <h3 className={styles.colTitle}>{isRestaurant ? t('menuTitle') : t('catalog')}</h3>
           <ul className={styles.links}>
             {isRestaurant ? (
-              RESTAURANT_CATEGORIES.map((cat) => (
-                <li key={cat}>
-                  <Link className={styles.link} href={`/catalog?category=${cat}`}>
-                    {tMenu(cat)}
+              (menuCategories ?? RESTAURANT_CATEGORIES.map((s) => ({ slug: s, nameKey: s }))).map((cat) => (
+                <li key={cat.slug}>
+                  <Link className={styles.link} href={`/catalog?category=${cat.slug}`}>
+                    {tMenu.has(cat.nameKey as Parameters<typeof tMenu>[0])
+                      ? tMenu(cat.nameKey as Parameters<typeof tMenu>[0])
+                      : cat.nameKey}
                   </Link>
                 </li>
               ))
@@ -279,10 +284,10 @@ export default function Footer({
           <h3 className={styles.colTitle}>{t('info')}</h3>
           {isRestaurant ? (
             <ul className={styles.links}>
-              <li><a className={styles.link} href="/#menu">{t('menuLink')}</a></li>
-              <li><a className={styles.link} href="/#reservations">{t('reservationsLink')}</a></li>
-              <li><a className={styles.link} href="/delivery">{t('deliveryLink')}</a></li>
-              <li><a className={styles.link} href="/privacy">{t('privacy')}</a></li>
+              <li><Link className={styles.link} href="/#menu">{t('menuLink')}</Link></li>
+              <li><Link className={styles.link} href="/#reservations">{t('reservationsLink')}</Link></li>
+              <li><Link className={styles.link} href="/#menu">{t('deliveryLink')}</Link></li>
+              <li><Link className={styles.link} href="/#contacts">{t('privacy')}</Link></li>
             </ul>
           ) : isFoodMarket ? (
             <ul className={styles.links}>

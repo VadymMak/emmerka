@@ -27,12 +27,14 @@ function RestaurantHeader({ storeName, phone, t }: { storeName: string; phone: s
   const { customer } = useCustomer();
 
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
     const el = document.getElementById(id);
     if (el) {
+      e.preventDefault();
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setIsMenuOpen(false);
+    } else {
+      setIsMenuOpen(false);
     }
-    setIsMenuOpen(false);
   };
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
