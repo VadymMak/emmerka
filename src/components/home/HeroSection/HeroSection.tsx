@@ -225,32 +225,19 @@ export default function HeroSection({
         </p>
       </div>
 
-      {/* Right — image (art-directed: desktop dark / mobile light) */}
+      {/* Right — hero image (single responsive image) */}
       <div className={styles.imageWrap}>
         <Image
           src={heroImage ?? '/placeholder-product.svg'}
           alt={storeName}
           fill
-          className={`${styles.image} ${styles.imageDesktop}`}
+          className={styles.image}
           priority
           fetchPriority="high"
-          sizes="(max-width: 768px) 100vw, 40vw"
-          quality={70}
+          sizes="(max-width: 768px) 100vw, 45vw"
+          quality={65}
           unoptimized={(heroImage ?? '/placeholder-product.svg').endsWith('.svg')}
         />
-        {heroImageMobile && (
-          <Image
-            src={heroImageMobile}
-            alt={storeName}
-            fill
-            className={`${styles.image} ${styles.imageMobile}`}
-            priority
-            fetchPriority="high"
-            sizes="100vw"
-            quality={70}
-            unoptimized={heroImageMobile.endsWith('.svg')}
-          />
-        )}
         <div className={styles.imageOverlay} />
       </div>
 
