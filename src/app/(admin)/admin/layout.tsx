@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { db } from '@/lib/db';
 import '../../globals.css';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 export async function generateMetadata(): Promise<Metadata> {
   const store = await db.store.findUnique({
@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 // that /admin/login can render without it.
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="uk">
+    <html lang="sk">
       <body>{children}</body>
     </html>
   );

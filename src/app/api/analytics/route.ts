@@ -4,7 +4,7 @@ import { verifyAdminToken, getAdminSecret, ADMIN_COOKIE } from '@/lib/adminAuth'
 import { cookies } from 'next/headers';
 import { OrderStatus } from '@prisma/client';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 // GET /api/analytics — dashboard metrics (admin only)
 export async function GET() {

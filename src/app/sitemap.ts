@@ -3,7 +3,7 @@ import { routing } from '@/i18n/routing';
 import { db } from '@/lib/db';
 import { getBaseUrl } from '@/lib/url';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getBaseUrl();

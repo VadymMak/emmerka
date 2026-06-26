@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 export async function GET() {
   try {

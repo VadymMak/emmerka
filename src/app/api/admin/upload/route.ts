@@ -11,7 +11,7 @@ import {
 import path from 'path';
 import fs from 'fs/promises';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 const PURPOSE_VARIANTS: Record<string, ImageVariant[]> = {
   gallery: GALLERY_VARIANTS,

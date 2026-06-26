@@ -4,7 +4,7 @@ import { db } from '@/lib/db';
 import { verifyAdminToken, getAdminSecret, ADMIN_COOKIE } from '@/lib/adminAuth';
 import { revalidateStorefront } from '@/lib/revalidate';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 export async function GET() {
   const cookieStore = await cookies();

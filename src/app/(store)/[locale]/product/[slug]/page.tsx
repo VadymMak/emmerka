@@ -11,7 +11,7 @@ import { buildBreadcrumbSchema } from '@/lib/breadcrumbs';
 
 export const revalidate = 60;
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 interface ProductMetadata {
   sku?: string;

@@ -2,7 +2,7 @@ import { db } from '@/lib/db';
 import { DEFAULT_THEME, type ThemeConfig } from '@/lib/theme';
 import { getVerticalConfig, type VerticalConfig } from '@/lib/verticals';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 export type StoreMode = 'PHYSICAL' | 'ONLINE' | 'HYBRID';
 

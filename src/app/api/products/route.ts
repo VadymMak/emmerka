@@ -5,7 +5,7 @@ import { verifyAdminToken, getAdminSecret, ADMIN_COOKIE } from '@/lib/adminAuth'
 import { cookies } from 'next/headers';
 import { revalidateCatalog } from '@/lib/revalidate';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 // GET /api/products — list with optional filters
 export async function GET(request: Request) {

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { db } from '@/lib/db';
 import LoginForm from '@/components/admin/LoginForm/LoginForm';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 export async function generateMetadata(): Promise<Metadata> {
   const store = await db.store.findUnique({

@@ -54,7 +54,7 @@ export default function GallerySection() {
           ))}
         </div>
       ) : (
-        <p className={styles.empty}>Галерея скоро буде наповнена</p>
+        <p className={styles.empty}>{t('empty')}</p>
       )}
     </div>
   );

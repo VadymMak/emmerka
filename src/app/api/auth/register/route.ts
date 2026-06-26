@@ -7,7 +7,7 @@ import {
   createCustomerToken,
 } from '@/lib/customerAuth';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 export async function POST(request: Request) {
   try {

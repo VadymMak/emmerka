@@ -1,12 +1,20 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { revalidateCatalog } from '@/lib/revalidate';
 import { db } from '@/lib/db';
 import { OrderStatus, PaymentStatus, PromoType } from '@prisma/client';
 import { DEFAULT_THEME, type ThemeConfig } from '@/lib/theme';
 import { getVerticalConfig } from '@/lib/verticals';
 import { THEME_PRESETS } from '@/lib/theme-presets';
+import { verifyAdminToken, getAdminSecret, ADMIN_COOKIE } from '@/lib/adminAuth';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
+
+async function requireAdmin() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(ADMIN_COOKIE)?.value;
+  return verifyAdminToken(token, getAdminSecret());
+}
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL ?? 'claude-haiku-4-5-20251001';
 const OPENAI_MODEL = process.env.OPENAI_MODEL ?? 'gpt-4o-mini';
 
@@ -690,6 +698,10 @@ async function handleAnthropic(
 
 // ─── POST /api/admin/chat ─────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
+  if (!(await requireAdmin())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const openaiKey    = process.env.OPENAI_API_KEY;
   const anthropicKey = process.env.ANTHROPIC_API_KEY;
 

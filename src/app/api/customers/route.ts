@@ -3,7 +3,7 @@ import { db } from '@/lib/db';
 import { verifyAdminToken, getAdminSecret, ADMIN_COOKIE } from '@/lib/adminAuth';
 import { cookies } from 'next/headers';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 // GET /api/customers — admin only list
 export async function GET(request: Request) {

@@ -8,7 +8,7 @@ import { DEFAULT_THEME, type ThemeConfig } from '@/lib/theme';
 import { getVerticalConfig } from '@/lib/verticals';
 import { THEME_PRESETS } from '@/lib/theme-presets';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 // ─── Tool result helper ────────────────────────────────────────────────────
 function text(content: unknown) {

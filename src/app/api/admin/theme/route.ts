@@ -1,9 +1,17 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
 import { db } from '@/lib/db';
 import { DEFAULT_THEME, type ThemeConfig } from '@/lib/theme';
+import { verifyAdminToken, getAdminSecret, ADMIN_COOKIE } from '@/lib/adminAuth';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
+
+async function requireAdmin() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(ADMIN_COOKIE)?.value;
+  return verifyAdminToken(token, getAdminSecret());
+}
 
 export async function GET() {
   const store = await db.store.findUnique({
@@ -21,6 +29,10 @@ export async function GET() {
 }
 
 export async function PUT(req: NextRequest) {
+  if (!(await requireAdmin())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const body = (await req.json()) as Partial<ThemeConfig>;
 
   const store = await db.store.findUniqueOrThrow({

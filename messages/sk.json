@@ -426,7 +426,8 @@
   "Gallery": {
     "label": "Galéria",
     "title": "Naša atmosféra",
-    "subtitle": "Historický interiér Emmerovej vily s originálnymi rokoko freskami"
+    "subtitle": "Historický interiér Emmerovej vily s originálnymi rokoko freskami",
+    "empty": "Galéria bude čoskoro doplnená"
   },
   "heroFood": {
     "badge": "Doručujeme po celej Európe",

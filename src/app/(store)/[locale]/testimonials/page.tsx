@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { db } from '@/lib/db';
 import TestimonialsPageClient from './TestimonialsPageClient';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 export const dynamic = 'force-dynamic';
 

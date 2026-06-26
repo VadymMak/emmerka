@@ -2,7 +2,7 @@ import { db } from '@/lib/db';
 import OrdersClient from './OrdersClient';
 import type { AdminOrder } from '@/components/admin/orderTypes';
 
-const STORE_SLUG = process.env.STORE_SLUG ?? 'electromarket';
+const STORE_SLUG = process.env.STORE_SLUG ?? 'emmerka';
 
 export default async function OrdersPage() {
   const store = await db.store.findUnique({
