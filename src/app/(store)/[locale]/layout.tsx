@@ -106,6 +106,11 @@ export default async function LocaleLayout({
       })
     : undefined;
 
+  const legalConfig = await db.legalConfig.findUnique({
+    where: { storeId: config.id },
+    select: { enabled: true },
+  });
+
   return (
     <html lang={locale} data-vertical={config.vertical.vertical} className={playfair.variable}>
       <body style={cssVars as React.CSSProperties}>
@@ -115,7 +120,7 @@ export default async function LocaleLayout({
               <PresenceProvider presence={config.presence}>
                 <Header storeName={config.name} vertical={config.vertical.vertical} phone={config.presence.phone} />
                 <main>{children}</main>
-                <Footer storeName={config.name} vertical={config.vertical.vertical} menuCategories={footerCategories} />
+                <Footer storeName={config.name} vertical={config.vertical.vertical} menuCategories={footerCategories} legalEnabled={legalConfig?.enabled ?? false} />
                 <CookieBanner />
               </PresenceProvider>
             </VerticalProvider>

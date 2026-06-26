@@ -203,6 +203,16 @@ const NAV_FOOD_MARKET: NavItem[] = [
 // ── Shared bottom ─────────────────────────────────────────────────────────
 const NAV_SHARED_BOTTOM: NavItem[] = [
   {
+    href: '/admin/legal',
+    label: 'Legal (DE)',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" {...ico}>
+        <path d="M12 2 3 6.5v5C3 16.5 7 21 12 22c5-1 9-5.5 9-10.5v-5L12 2Z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    ),
+  },
+  {
     href: '/admin/theme',
     label: 'Téma',
     icon: (

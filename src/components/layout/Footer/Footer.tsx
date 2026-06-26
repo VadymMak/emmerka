@@ -1,7 +1,7 @@
 'use client';
 
 import { Link } from '@/i18n/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useVerticalConfig } from '@/lib/vertical-context';
 import { useStorePresence } from '@/lib/presence-context';
 import type { Vertical } from '@prisma/client';
@@ -19,6 +19,8 @@ export interface FooterProps {
   vertical?: string;
   /** Real menu categories from DB (restaurant only). Overrides hardcoded fallback. */
   menuCategories?: { slug: string; nameKey: string }[];
+  /** Show Impressum + Datenschutz links for DE locale (DACH legal compliance). */
+  legalEnabled?: boolean;
 }
 
 // Catalog column reuses the existing `categories` namespace so the footer links
@@ -154,12 +156,14 @@ export default function Footer({
   email,
   vertical,
   menuCategories,
+  legalEnabled = false,
 }: FooterProps) {
   const t = useTranslations('footer');
   const tc = useTranslations('categories');
   const tMenu = useTranslations('menuCategories');
   const vConfig = useVerticalConfig();
   const presence = useStorePresence();
+  const locale = useLocale();
   const displayPhone = presence.phone ?? phone;
   const displayEmail = presence.email ?? email;
   const displayHours = presence.openingHours ? formatOpeningHours(presence.openingHours) : null;
@@ -383,6 +387,16 @@ export default function Footer({
             <a className={styles.bottomLink} href={isRestaurant ? '/terms' : '/offer'}>
               {isRestaurant ? t('termsLink') : t('offer')}
             </a>
+            {legalEnabled && locale === 'de' && (
+              <>
+                <Link className={styles.bottomLink} href="/impressum">
+                  {t('impressum')}
+                </Link>
+                <Link className={styles.bottomLink} href="/datenschutz">
+                  {t('datenschutz')}
+                </Link>
+              </>
+            )}
           </span>
         </div>
       </div>

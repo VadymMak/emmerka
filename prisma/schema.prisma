@@ -43,6 +43,7 @@ model Store {
   restaurantTables RestaurantTable[]
   galleryImages    GalleryImage[]
   testimonials     Testimonial[]
+  legalConfig      LegalConfig?
 }
 
 enum Vertical {
@@ -397,4 +398,22 @@ model AdminUser {
   storeId      String
 
   createdAt DateTime @default(now())
+}
+
+// ============ LEGAL CONFIG (DACH: Impressum + Datenschutz) ============
+
+model LegalConfig {
+  id          String  @id @default(cuid())
+  storeId     String  @unique
+  store       Store   @relation(fields: [storeId], references: [id])
+  enabled     Boolean @default(false)
+  companyName String  @default("")
+  street      String  @default("")
+  zip         String  @default("")
+  city        String  @default("")
+  country     String  @default("Deutschland")
+  email       String  @default("")
+  phone       String  @default("")
+  vatId       String  @default("")
+  updatedAt   DateTime @updatedAt
 }
